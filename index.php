@@ -548,7 +548,9 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
                              We offer <strong>NO GUARANTEE OF ANY KIND</strong>
                              about the stability, persistence, integrity or security of data which users choose to store on our server.
                              </p><p>
-                             <a href="mailto:pnp-software@pnp-software.com">Contact us</a> if you want a local installation of the FW Profile Editor.
+                             If you prefer a local installation of the editor, you can download a GPLv3 version
+                             from <a href="https://github.com/pnp-software/fwprofile-editor-pub">here</a>.     
+                             <a href="mailto:pnp-software@pnp-software.com">Contact us</a> if you want a local installation on a commercial license.
                              <div id=logorreg style='white-space: nowrap'><br>
                                  <button class='btn btn-success btn-large' id=loginbtn><i class='icon-user icon-white'></i> &nbsp;Sign in</button> &nbsp; &nbsp;
                                  -or- &nbsp; &nbsp; <button class='btn btn-large' id=registerbtn><i class='icon-pencil'></i> &nbsp;Register</button>
