@@ -1,0 +1,439 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head><title>FW Profile Editor documentation</title>
+<meta name="description" content="FW Profile Editor documentation">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Language" content="en">
+<link rel="shortcut icon" href="../favicon.ico">
+
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+
+<style>
+html, body { overflow-y: visible; }
+body { counter-reset:h2; }
+h2 {counter-reset:h3;}
+h3 {counter-reset:h4;}
+h4 {counter-reset:h5;}
+h2:before { counter-increment:h2; content:counter(h2) ". "; }
+h3:before { counter-increment:h3; content:counter(h2) "." counter(h3) ". "; }
+h4:before { counter-increment:h4; content:counter(h2) "." counter(h3) "." counter(h4) ". "; }
+h5:before { counter-increment:h5; content:counter(h2) "." counter(h3) "." counter(h4) "." counter(h5) ". "; }
+h1 { font-size: 36px; }
+h2 { font-size: 30px; }
+h3 { font-size: 24px; }
+h4 { font-size: 18px; }
+h1,h2,h3,h4 { padding-top: 20px; margin-top: 0px; margin-bottom: 10px;  font-family: inherit; font-weight: 500; line-height: 1.1; color: inherit; }
+.container-fluid { max-width: 900px; margin: auto; }
+p { text-align: justify; }
+li { font-size: 14px; line-height: 18px; }
+#toccontainer { margin-top: 20px; margin-bottom: 20px; }
+#toc { margin-bottom: 40px; }
+</style>
+
+
+<div class="container-fluid">
+
+<h1>FW Profile Editor Quick Guide</h1>
+
+<p>The FW Profile Editor is a web-based tool to create, edit, save and share UML models compliant with the
+FW Profile. The <strong>FW Profile</strong> is a UML Profile which uses State Machines and Activity Diagrams to model the 
+functional behaviour of software applications. A FW Profile Model therefore consists of a diagram 
+(either a state machine diagram or an activity diagram) and the properties associated to the diagram.
+The FW Profile uses the name <strong>Procedure</strong> to designate the entity represented by
+an activity diagrams.
+
+<p>The FW Profile is language-independent but a C-language implementation of its constructs is available 
+<a href="https://www.pnp-software.com/fwprofile/c-code-implementation.html">here</a>. The FW Profile Editor
+provides a code generator which targets this implementation. 
+
+<p>The FW Profile and its C-language implementation are defined 
+<a href="http://www.pnp-software.com/fwprofile/">here</a>. 
+
+
+<div id=toccontainer>
+   <div align=right><a href=# id=toclink>Table of contents</a></div>
+   <div id=toc style='display: inline'></div>
+</div>
+
+        <h2 id=editdiagram>Editing a Model's Diagram</h2>
+        The FW Profile Editor can be opened in multiple tabs within the same browser or in multiple windows of the
+        same browser. Each tab or window is used to edit a diagram representing either a state machine or a procedure. 
+
+        <h3 id=addelements>Add Elements</h2>
+        
+           <p>Diagram elements are added by clicking the appropriate entries in the left menu:
+
+           <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+              <img src="states.png" class="pull-left">
+              <img src="machine.png" class="pull-left">
+           </div>
+           <div class="pull-left" style="margin-bottom: 30px;">
+              <img src="procedures.png" class="pull-left">
+              <img src="procedure.png" class="pull-left">
+           </div>
+
+        <br clear=all>
+
+        <h3 id=resizeandmove>Resize and Move Elements</h2>
+
+           <p>Every element can be moved by drag&drop. When moving, the center of each element snaps to the center of  other
+           elements for easier alignment. Resizable elements can be made smaller or bigger by dragging the
+           bottom-right corner. The minimum size of every element is determined by the amount of text written in it.
+
+           <div class="pull-left" style="margin-bottom: 30px;">
+              <img src="resize.png" class="pull-left">
+           </div>
+
+        <br clear=all>
+
+
+        <h3 id=selectmultiple>Selecting Multiple Elements</h2>
+
+           <p>Multiple elements can be selected by pressing the left mouse button on an empty space at the desktop
+           and dragging the mouse while still holding the left button. A selection box is created, and all elements
+           which are entirely covered by the selection box are selected upon the mouse button release.
+           Elements can be selected individually by left mouse click.
+
+           <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+              <img class="pull-left" style="margin-right: 30px;" src="select.png">
+              <img class="pull-left" src="selected.png">
+           </div>
+
+        <br clear=all>
+
+
+        <h3 id=zoom>Zoom</h2>
+
+           <p>An entire diagram can be zoomed out temporarily by pressing and holding the right mouse button.
+           While the zoom mode is active, moving the mouse will shift the dashed rectangle, which indicates the visible
+           screen area. Releasing the mouse button zooms in back to 100%.
+           <div class="pull-left" style="margin-bottom: 30px;">
+              <img  src="zoom.png">
+           </div>
+
+        <br clear=all>
+
+        <h3 id=transitions>Transitions</h2>
+
+           <p>In order to create a transition (a connection from one element to another), the starting
+           element needs to be selected by clicking it. Then, the small blue circle (which appears on the element)
+           can be dragged to the destination element. Once the dragging stops by releasing the mouse button,
+           a transition (for state machines) or control flow (for procedures) is created between the two elements:
+
+           <div class="pull-left" style="margin-bottom: 30px;">
+              <img  src="connect.png">
+           </div>
+
+        <br clear=all>
+
+
+           <h4 id=transadj>Transition adjustments</h4>
+              Transition (or control flow) arrow can be adjusted by dragging the red circle in the middle, which apears
+              on hover. Dragging the red circle creates a vertex, or moves an existing one. Dragging the red circle while
+              holding Shift key on the keyboard shifts the position of the arrow. 
+              Clicking the red circle without dragging deletes the vertex,
+              and clicking the red circle while holding Shift key resets the position to its default place.
+              Dragging the black circle at the start of an arrow or dragging the arrow's tip to another state (or node)
+              reconnects the arrow to that state (or node), while preserving all the triggers, actions and guards.<br clear=all><br>
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                <img  src="conhover.png">
+              </div>
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img  src="vertex.png">
+              </div>
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img  src="conmove.png">
+              </div>
+
+        <br clear=all>
+
+
+           <h4 id=selfconnect>Self-Connection</h4>
+
+              <p>A self-connection on a state or action node can be created
+              by selecting the state in question and clicking "To Self" in the left menu:
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="actions.png">
+                 <img class="pull-left" src="self.png">
+              </div>
+
+        <br clear=all>
+
+        <h3 id=embed>Embedded State Machines</h2>
+
+           <p>There are currently two ways to embed a state machine into the state of another state machine. 
+           Note that there is no embedding mechanism for procedures (i.e. it is not possible to embed a procedure
+           within the action node of another procedure).
+
+           <h4 id=embeddirect>Directly Embedded State Machine</h4>
+
+              <p>All elements on top of any existing state are considered as embedded into that particular state.
+              The elements must be positioned so that they do not overlap with the edge of the embedding state.
+              It is allowed to create multi-level structures of embedded state machines.
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="embed.png">
+              </div>
+
+           <br clear=all>
+
+           <h4 id=embedsaved>Externally Embedded State Machine</h4>
+
+              <p>If an embedded state machine is too big to be drawn on the containing state directly, it can be created in a separate
+              document and linked to any state later. The embedded state machine can be opened in a separate window/tab by double clicking the embedding state,
+              or by clicking the green edit button next to the selected document name. All changes to the embedded document are propagated to its parent and
+              child state machines.
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="submachine.png">
+              </div>
+
+           <br clear=all>
+
+           
+        <h2 id=properties>Editing a Model's Properties</h2>
+           <p>Model properties are edited through dialog boxes. 
+           Clicking on a state or a transition (state machine) or on an action node or control flow (procedure)
+           shows a dialog box to define its <strong>actions and guards</strong>. 
+           When no element is selected or when more than one element is selected 
+           a dialog box appears for editing the <strong>global properties</strong> of a model.
+
+           <h3 id=actions>Actions and Guards</h3>
+           
+              <p>To each action or guard a <strong>Description</strong> is associated where the behaviour executed by the 
+              action or guard is described. This description appears on the diagram when the 'description' option
+              is selected for displaying the diagram.
+               
+              <p>The code to be generated for the action or guard is determined by selecting one of three options:
+               <ul>
+                  <li>Define Function</li>
+                  <li>Call Function</li>
+                  <li>Run Code</li>
+               </ul>
+
+              <p>The <strong>Define Function</strong> option covers the case where the action or guard is implemented by a function whose implementation
+              must be provided by the user. In the example in the figure, the entry action of state S1 is implemented by function 
+              <kbd>S1EntryActionFnc</kbd>. This function is declared in the header file created by the code generator but the user
+              must provide an implementation for it.
+              
+              <p>The <strong>Call Function</strong> option covers the case where the action or guard is implemented by a function which is defined 
+              elsewhere, either in an <kbd>#include</kbd> file specified through the Global Properties dialog box or as a
+              Define Function for some other element in the same model.
+              
+              <p>The <strong>Run Code</strong> option covers the case where the user defines the code implementing the action or guard directly in the 
+              tool. In the figure below, for instance, the exit action of state S1 must increment variable <kbd>var</kbd> by 3 and the
+              corresponding code is directly entered in the dialog box for the action.
+              
+              <p>With the Run Code option, the user is responsible for defining the code implementing the action or guard but the tool offers
+              two "code templates" for two common situations: an "Else" guard which always returns true and a guard which waits for N 
+              execution cycles before returning true. 
+              The Else guard should only be used on the last transition coming out of a decision node or choice pseudo-state. 
+              This constraint is not enforced by the tool and is therefore under the responsibility of the user.
+               
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="ActionAndGuardProperties.png">
+              </div>
+
+           <br clear=all>
+
+           <h3 id=options>Global Properties</h3>
+           
+            <p>The global properties dialog box is used to set the model name, its variables and include files and its display options.
+            
+
+           <br clear=all>
+            
+
+               <h3 id=modelname>Model Name</h3>
+              <p>Each model must have a name and may, optionally, be assigned to a <strong>project</strong>. 
+              A project is intended to group logically related models. 
+              Projects cannot be nested within each other (i.e. a project cannot contain lower-level projects).
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="Names.png">
+              </div>
+
+              <br clear=all>
+                
+              <h3 id=varinclude>Model Variables and Include Files</h3>
+              
+              <p>The model variables and include files are only relevant to the code generation process.
+              
+              <p>Any number of <strong>variables</strong> may be defined for a model.
+              Variables are intended to support the definition of the guards and actions of the model.
+              During code generation, they are mapped to <kbd>static</kbd> variables in the body file
+              generated for the model.
+              
+              <p>By default, the header and body files generated by the editor <kbd>#include</kbd> several
+              files provided by the FW Profile implementation library. 
+              Additional files may be included in the 'custom includes' fields.
+              This option is useful when an action or guard is defined through the 'Call Function' option
+              as it allows user-defined functions to be used to implement actions or guards.
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="VarAndInclude.png">
+              </div>
+
+              <br clear=all>
+                
+              <h3 id=displayoptions>Display Options</h3>  
+
+              <p>There are two display options which are set in the Global Properties dialog box.
+              The first one concerns the order in which transitions originating from the same state (State Machines) 
+              or control flows originating from the same decision node (Procedures). The order of a transition is shown 
+              on the diagram if "Show transition order" is set to 'Yes'. The order of a transition may be in the dialog box
+              associated to the transition. 
+              
+              <p>The second display option determines which kind of text is shown on a diagram for the actions and guards.
+              In one case, the action or guard description is shown; in the other case, the name of the function associated
+              to the action or guard is shwon.
+
+             <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="options.png">
+              </div>
+
+                <br clear=all>
+
+
+        <h2 id=files>Files Menu</h2>
+
+              <p>Clicking the 'Files' menu entry shows a dialog to perform various actions on the FW Profile models. 
+              Some actions are only accessible to users who have signed in.
+              In order to sign in a user should first register. Registration is free and only requires the user to enter 
+              a valid e-mail address.                     
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="files.png">
+              </div>
+
+           <br clear=all>
+
+           <h3 id=presets>Presets</h3>
+                  <p>The 'Presets' menu allows a user to create a new procedure or state machine diagram. New users can start
+                  from one of three pre-defined examples.
+
+
+
+            <h3 id=load>Load</h3>
+
+              <p>This menu lists all models currently in the repository. Models may be grouped in projects and are
+              therefore listed by project. Note that models do not need to be assigned to a project (projectless models
+              are listed first). Clicking on a project name expands or collapses the list of models in the project.
+              Clicking a model name causes the model to be loaded. After a model has been loaded, the user can edit it.
+              
+              The small icons at the left and right side of the file name are used as follows:
+              
+              <ul>
+              <li>Clicking the square box at the left selects the model.</li>
+              <li>Clicking the 'pencil' icon at the right shows a dialog to edit the model name and/or the name of the project to which the
+              model belongs.</li>
+              <li>Clicking the 'clock' icon shows the history of previously committed versions of this model.</li>
+              <li>Clicking the 'user' icon allows a model to be shared to support collaborative working.
+              The owner of the model can withdraw the  </li>
+              <li>Clicking the red 'cross' icon deletes the model.</li>
+              </ul>
+              
+              
+              A user shares a model by giving access to it to other users. Either read-only or read-write access can be granted.
+              Sharing is reversible: the owner of the model can un-share the model at any time.
+              A user who receives a model in sharing from another user can in turn share it on with other users (but if the owner
+              of the model un-shares it, then all other users lose access to it).
+              
+              
+                 
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="load.png" style="border: 1px solid silver;">
+              </div>
+
+           <br clear=all>
+
+        <h3 id=save>Save</h3>
+
+            <p>The 'Save' menu allows a user to save the currently loaded model.
+            When a model is saved, a project name can be specified (a project is intended to contain logically related models).
+            If a model with the given name is already present then this model is overwritten (but a warning is given first).
+            
+            <p>A model can be either saved or committed. If a model is saved, its local copy is overwritten. If instead it is
+            committed, a new entry in the history is created and the previous version of the model is retained. The history
+            of a model can be inspected by clicking the 'clock' icon which is shown on the right side of the model name. 
+            
+             <br clear=all>
+
+        <h3 id=selectactions>Actions</h3>
+
+              <p>It is possible to perform the actions listed below on a set of files which have been selected in the 'load' menu. 
+                  If no file is selected, or if the action is not defined for multiple files, then the action is performed on 
+                  the currently loaded diagram only.
+                  
+              <ul>
+              <li>Import model in JSON format</li>
+              <li>Export model in JSON format</li>
+              <li>Download an SVG image of the model</li>
+              <li>Download a PNG image of the model</li>
+              <li>Download C code generated with the static creation method</li>
+              <li>Download C code generated with the dynamic creation method</li>
+              <li>Download C code generated with the direct creation method</li>
+              <li>Print diagram</li>
+              </ul>
+
+           <br clear=all>
+
+        <h2 id=code>Code Generation</h2>
+
+            <p>Clicking the 'Code' menu entry shows the C code generated for the currently loaded model. 
+            For a model XYZ, three files are generated:
+            a header file <kbd>XYZ.h</kbd>, a body file <kbd>XYZ.c</kbd>, and a main file <kbd>XYZMain.c</kbd>. 
+            The header file and the body file are intended to be deployed within the user's application. They must be
+            linked with the FW Profile library downloadable from <a href="https://pnp-software.com/fwprofile/download.html">here</a>.
+            The generated code is documented using doxygen-style comments.
+            
+            <p>The header file
+            declares the function to create one instance of the state machine or procedure in model XYZ. 
+            The implementation of this function depends on the code generation option selected by the user.
+             
+            <p>The state machine or
+            procedure is configured with a set of function pointers as follows:
+            
+              <ul>
+              <li>For actions/guards for which the "Run Code" option was selected, the code generator creates a <kbd>static</kbd>
+              function in the body file with a randomly defined name.</li>
+              <li>For actions/guards for which the "Define Function" option was selected, the code generator creates a function
+              declaration in the header file and the user should provide a body file which implements it.</li>
+              <li>For actions/guards for which the "Call Function" option was selected, the code generator assumes that the function
+              is declared in an <kbd>#include</kbd> file defined in the global properties dialog and that is implemented in some user-provided
+              file.</li>
+              </ul>
+         
+            <p>The <kbd>XYZMain.c</kbd> file contains stub implementations of the actions and guards
+            configured with the "Define Function" option and a <kbd>main</kbd> program which exercises the state machine or procedure 
+            in model XYZ. The intention is that this file may be used to performa a quick verification of the implementation of the 
+            XYZ model. 
+            
+            
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="code.png">
+              </div>
+
+           <br clear=all>           
+
+
+        <h2 id=messages>Error Messages</h2>
+
+              <p>When the editor encounters an error, a bubble slides down from the top of the screen containing the error message.
+              By default, the bubble disappears after few seconds. If there is a need to keep the error message on screen for a longer time,
+              hovering the mouse over the bubble effectively cancels the auto-hide interval. In this case, the message will stay on screen
+              until it is clicked.
+
+              <div class="pull-left" style="margin-right: 30px; margin-bottom: 30px;">
+                 <img class="pull-left" src="msgbox.png">
+              </div>
+
+           <br clear=all>
+
+</div>
+
+<script type="text/javascript" src=doc.js></script>

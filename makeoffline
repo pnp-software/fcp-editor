@@ -1,0 +1,36 @@
+#!/bin/bash
+
+DOMAIN="slax.org"
+URL="http://$DOMAIN/projects/fwprofile.git/?rev=1"
+CUTDIRS=2
+TARGET=offline
+
+mkdir -p $TARGET || exit 1
+cd $TARGET || exit 1
+wget -D $DOMAIN -r -nH --cut-dirs=$CUTDIRS "$URL"
+
+mv "index.html?rev=1" "index.html"
+sed -i -r "s/[.](js|php)[?0-9]+/.js/" index.html
+sed -i -r "s/[.]css[?0-9]+/.css/" index.html
+sed -i -r "s/src=blank[.]php/src=blank.html/" index.html
+sed -i -r "s/action=[a-z]+[.]php/action=blank.html/" index.html
+sed -i -r "s/src=\"vars[.]php/src=\"vars.js/" index.html
+sed -i -r "s/var offline=false/var offline=true/" offline.js
+touch blank.html
+rm robots.txt
+rm blank.php
+mv vars.php vars.js
+cp -R ../doc .
+cp ../DOCUMENTATION.version ./history.txt
+cp ../app/* .
+
+VERSION=$(cat vars.js | grep g.currentVersion= | cut -d "=" -f 2 | tr -d ";")
+sed -i "s/\"version\":.*/\"version\": $VERSION,/" manifest.json
+
+ls -1 *.txt *.json *.js *.html doc/*.js doc/*.html | while read FILE; do
+   sed -i "s/$//" "$FILE"
+done
+
+cd ..
+tar -c $TARGET > $TARGET.tar
+rm -Rf $TARGET

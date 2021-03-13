@@ -1,0 +1,126 @@
+5.26
+
+* Created version for public release under the GPLv3 licence
+
+5.25
+
+* Removed unnecessary check in inc_db.php
+
+5.24
+
+* Added disclaimer in the opening page
+
+5.23
+
+* Added statement to avoid comppiler warning about function argument not being used
+
+5.22
+
+* Fixed incorrect parameter name in procedure functions
+* Converted or added comments to #define constants in doxygen style
+
+5.21
+
+* Fixed error in the auto-generated code for "Wait N Cycles" guards
+
+5.20
+
+* Fixed GitHub issues 36 (Incorrect Code Generation for "Wait N Cycles")
+* Fixed GitHub issue 37 (Sample Main Program for Procedures Never Terminates) 
+
+... some versions were not tracked
+
+
+4.6
+
+* state identifiers are now defined outsite of the state machine creation function
+  in the generated code for state machines or procedures
+
+
+4.5
+
+* dummy code is separated to *Main.c file
+
+
+v4.4
+
+* persistent integers for identifiers are generated per user (editable)
+* filelist is loaded incrementally from server
+* notes are now included in generated C code as comments
+* performance improvements
+* various bugfixes and enhancements here and there
+
+
+v4.0
+
+* offline support
+* Chrome Application support
+
+
+v3.1
+
+* added documentation
+* support for multiple documents code generation - download
+* various bugfixes and enhancements
+
+
+v3.0
+* use better comment format for doxygen
+* added error reporting when pasting results with dulicite identifiers
+* tag support and filtering in files list
+* camel case understands diacritics and removes it, leaving ASCII variants of the letters
+* multiple file select and actions, allowing to export JSON and gen PNG/SVG images for multiple files at once
+* various little enhancements and bugfixes here and there
+
+
+v2.9
+* zoom on right mouse click&hold
+* multiple tabs support
+* embedded state machine on external tab
+* copy and paste diagram data between tabs
+* paste Ctrl+V to current mouse cursor position
+
+
+v2.8
+* auto adjust edit boxes height to fit current window size and allow for scrolling
+* fixed a bug when Note connections were counted towards the NSTATES counter
+
+
+v2.7
+* state width and height can be set smaller if there are no actions
+* transition order can be hidden from the diagram
+
+
+v2.6
+* state names and exit/do/entry actions are now bold
+* transition start can be dragged to shift the arrow
+
+
+v2.5
+* fixed a bug in renaming of a saved diagram
+* added PNG image download support
+* fixed some internet explorer compatibility
+
+
+v2.4
+* introduced multiple connections from a note element
+* introduced SVG image export (download) and Print option
+* introduced JSON export download
+
+v2.3
+* introduced multiline descriptions for actions, guards, etc.
+* introduced global configuration to show functions or description only
+
+v2.2
+* introduced notes
+
+v2.1
+* save file dialog now contains list of saved diagrams,
+  user can click one to save as. Overwrite dialog added.
+
+v2.0
+* added Procedure editor and code generator
+* reworked Manage Files section
+
+v1.0
+* initial release of State Machine editor

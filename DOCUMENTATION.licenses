@@ -1,0 +1,36 @@
+These are scripts for framework profile web-based design tool.
+Main file is index.php, it includes other files.
+
+
+Used libraries:
+
+  * js/raphael.js
+
+     ... to draw objects on screen (www.raphaeljs.com), MIT license
+
+
+  * js/jquery.min.js
+  * js/jquery.ui.min.js
+  * js/jquery.slimscroll.js
+  * js/jquery.sameheight.js
+
+     ... for easier and more powerful javascript functions (jquery.com and jqueryui.com),
+         MIT license or free
+
+
+  * css/bootstrap.min.css
+
+     ... twitter bootstrap css styles, Apache license v2.0, http://twitter.github.io/bootstrap/
+
+
+  * img/glyphicons-halflings.png and img/glyphicons-halflings-white.png
+
+     ... https://getbootstrap.com/2.3.2/base-css.html#icons made available under licence CC By 3.0
+         (this component must be downloaded separately by user of the GPL version of the editor)
+
+
+  * js/sh_main.min.js
+  * js/sh_cpp.min.js
+  * css/sh_typical.min.css
+
+     ... Syntax highlighting SHJS, GPL License v3, http://shjs.sourceforge.net/

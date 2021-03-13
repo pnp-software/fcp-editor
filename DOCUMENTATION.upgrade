@@ -1,0 +1,28 @@
+How to upgrade:
+
+Basically, any new installation of FW Profile web editor doesn't have to be backward compatible with
+any older installation. New version will probably contain some new files, and will exclude some old
+files. For that reason, it is recommended to completely delete the old installation directory
+before installing any new version. However, you may find it useful to make a backup of your old
+installation, so you can reuse some settings (most importantly, database login infos from config.php
+or mandrillapp account settings if you used it in inc_mail.php).
+
+The database tables are most likely modified with new version, so you should remove them
+before installing new version, since new version won't be able to update your existing tables,
+it will also not be able to reuse your existing tables. It is recommended to backup your
+old tables, just for the case.
+
+- install a fresh installation as described in DOCUMENTATION.install
+  (make sure to use a different database name for fresh installation)
+
+- if you want to preserve your existing data (diagrams, users, etc),
+  you can wisely copy them from your database backup to newly created
+  tables. You should manually check for missing columns in your old
+  tables, and wisely add missing values to them if necessary.
+
+  As an example, old version can store State Machines in table
+  'machines' whereas new version may use table 'diagrams' instead (the
+  table has been renamed). New version may contain columns editorType
+  and isEmpty in table 'diagrams', while those are missing in old
+  version, just put there "State Machine" in editorType if you're
+  missing it, and 'N' for isEmpty.

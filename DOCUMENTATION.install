@@ -1,0 +1,26 @@
+How to install:
+
+- Make sure your server supports PHP, MySQL
+
+- Make a new directory on your webserver's DocumentRoot
+  and unpack this archive to it, for example to ./fwprofile-editor/
+
+- Make sure that the 'tmp' directory is writable by all:
+  chmod 0777 ./fwprofile-editor/tmp
+
+- Edit config.php file on server, for example ./fwprofile-editor/config.php
+  and make sure to put there correct credentials for MySQL connection.
+
+- Make sure your database is already created. It doesn't need
+  to contain any tables yet, the install script will create them.
+
+- Load install.php script in browser, for example by visiting:
+  http://www.yourdomain.com/fwprofile-editor/install.php
+  It will setup appropriate tables on mysql side if those do not exist yet.
+  If there are existing data, they remain untouched.
+
+  If you wish to reinstall the database from scratch, you have to manually
+  delete all existing tables and rerun the install.php script again.
+
+- When done, navigate to http://www.yourdomain.com/fwprofile-editor/
+  and you will see FW Profile editor there.
