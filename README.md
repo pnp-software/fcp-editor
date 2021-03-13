@@ -8,7 +8,7 @@ This delivery includes all components for an installation of the editor with the
 The installation guide is available [here](https://github.com/pnp-software/fwprofile-editor-pub/blob/master/DOCUMENTATION.install). We have tested the installation on various Ubuntu server distributions.
 
 ## Licence
-The fwprofile editor is made available under the terms of the GPLv3 licence but it also includes components made available under the Apache v2, MIT and GPL licences. See [here](https://github.com/pnp-software/fwprofile-editor-pub/blob/master/DOCUMENTATION.licenses) for details.
+The fwprofile editor is made available under the terms of the [GPLv3](http://www.gnu.org/licenses/gpl-3.0.en.html) licence but it also includes components made available under the Apache v2, MIT and GPL licences. See [here](https://github.com/pnp-software/fwprofile-editor-pub/blob/master/DOCUMENTATION.licenses) for details.
 
 ## Ownership
 The owner of the editor is [P&P Software GmbH](https://pnp-software.com/).
