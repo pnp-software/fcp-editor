@@ -11,6 +11,9 @@ $(document).ready(function(){
    setInterval(timer,1000); // refresh list of saved files in 60-second interval
    load_saved_files_list(); // initialize saved files list
 
+   // turn off browser's autocomplete for all input fields
+   $('input').each(function(ix,el){ $(el).prop('autocomplete','off'); })
+
    $('.colorpickerHTML').html(colorPicker());
    $('.colorItem').click(setStateColor);
 
