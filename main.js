@@ -29,6 +29,7 @@
    g.selectedFiles={};           // ids of selected files
    g.tagFilter='';               // string of currently filtered tag in files list
    g.currentVersion=false;       // current version of editor on server
+   g.autocomplete=[];            // list of autocomplete strings to offer autocomplete in Descriptions
 
    var loadfunction=function(){} // function which is called for loading document after confirmation
    var otherTabsData={};         // object which holds data received from other tabs, like autosuggest etc
