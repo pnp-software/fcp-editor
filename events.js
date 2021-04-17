@@ -7,6 +7,7 @@ function timer()
 
 $(document).ready(function(){
 
+   init_autocomplete_list();
    setInterval(timer,1000); // refresh list of saved files in 60-second interval
    load_saved_files_list(); // initialize saved files list
 
@@ -40,6 +41,7 @@ $(document).ready(function(){
    $('input, textarea, select, button').prop("spellcheck",false);
    $('input, textarea, select, button').keyup(propUpdate);
    $('#epropEntry, #epropDo, #epropExit, #epropTrAction, #epropTrGuard, #epropEmbedSM').find("select").change(propSelectChange)
+   $('#epropAutocomplete').change(propUpdate);
    $('input').keyup(propUpdate);
    $('#epropEntryAp').change(propUpdate);
    $('#epropDoAp').change(propUpdate);

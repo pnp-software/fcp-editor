@@ -532,6 +532,7 @@ function propEditFill()
    $('#epropSmName').val(g.fwprop.smName);
    $('#epropSmTags').val(g.fwprop.smTags);
    $('#epropSmIncludes').val(g.fwprop.smIncludes);
+   $('#epropAutocomplete').val(g.fwprop.autocomplete);
    $('#epropSmNotes').val(g.fwprop.smNotes);
 
    $("#globadd").empty();
@@ -688,6 +689,7 @@ function propUpdate()
    g.fwprop.smTags=$('#epropSmTags').val();
    g.fwprop.smIncludes=$('#epropSmIncludes').val();
    g.fwprop.smNotes=$('#epropSmNotes').val();
+   g.fwprop.autocomplete=$('#epropAutocomplete').val();
 
    g.fwprop.globalvar=[];
    $("#globvar, #globadd").find(".globrow").each(function(){ 
@@ -701,3 +703,12 @@ function propUpdate()
    all_tabs_refresh();
 }
 
+
+function init_autocomplete_list()
+{
+   var options=[];
+   for (var i in g.autocomplete) options.push(i);
+   options=options.sort(naturalSort).reverse();
+   if (options.length==0) $('#autocompleteList').hide();
+   else $('#epropAutocomplete').html( '<option><option>'+options.join('<option>'));
+}

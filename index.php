@@ -296,10 +296,15 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
       </div>
 
       <br>Show text on diagram:<br>
-      <div class="btn-group" data-toggle="buttons-radio" style='margin-bottom: 5px;' id="displayInfo">
+      <div class="btn-group" data-toggle="buttons-radio" style='margin-bottom: 10px;' id="displayInfo">
          <button type="button" class="btn btn-info" id=displayInfo0btn><i class="icon-ok icon-white" id=displayInfo0></i> auto</button>
          <button type="button" class="btn" id=displayInfo1btn><i class="icon-ok icon-white hidden" id=displayInfo1></i> functions/code</button>
          <button type="button" class="btn" id=displayInfo2btn><i class="icon-ok icon-white hidden" id=displayInfo2></i> descriptions</button>
+      </div>
+
+      <div id="autocompleteList">
+         Choose autocomplete preset:<br>
+         <select class='input-small' style='width: 100%;' id=epropAutocomplete></select>
       </div>
 
    </div>
