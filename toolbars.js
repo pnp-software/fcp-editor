@@ -177,7 +177,7 @@
       $('.qmarkR').css({'margin-right':"5px"});
       if ($('#editbox').height()+20>=$('#sizer').height())
       {
-         $('#editboxscrollablearea').css({"height": ($('#sizer').height()-80-1)+"px" , "padding-right": "7px" }).scrollTop(scroll);
+         $('#editboxscrollablearea').css({"height": ($('#sizer').height()-70-1)+"px" , "padding-right": "7px" }).scrollTop(scroll);
          $('.qmarkR').css({'margin-right':"10px"});
       }
 

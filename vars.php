@@ -33,7 +33,7 @@
       // get telecommands #TC and add to autocomplete list
       $resultTC=execQuery("SELECT * FROM ".$database.".ccf");
       while($row=mysqli_fetch_assoc($resultTC))
-         $autocomplete[]="\""."#TC(".$row['CCF_TYPE'].",".$row['CCF_STYPE'].")[".$row['CCF_CNAME']."] ".$row['CCF_DESCR']." - ".$row['CCF_DESCR2']."\"";
+         $autocomplete[]="\""."#TC(".$row['CCF_TYPE'].",".$row['CCF_STYPE'].")[".$row['CCF_CNAME']."] ".$row['CCF_DESCR']." [".$row['CCF_DESCR2']."]\"";
 
       // get telemetry reports #TM and add to autocomplete list
       $resultTM=execQuery("SELECT * FROM ".$database.".pid");

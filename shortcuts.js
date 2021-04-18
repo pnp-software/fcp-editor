@@ -199,3 +199,77 @@ function textareaRowsUpdate(t)
    refreshToolbarButtons();
 }
 
+
+function textareaAutocomplete(t)
+{
+   var pop=$('#autocomplete');
+   pop.data('targetElement',t);
+   pop.empty().hide();
+
+   // get list of current autocomplete strings
+   var list=g.autocomplete[g.fwprop.autocomplete];
+   if (!list || list.length==0) return;
+
+   var start=$(t).prop("selectionStart");
+   pop.data('targetCursorPos',start);
+
+   // get crrent word before cursor
+   var text=$(t).val();
+   while(start>0 && !text.substr(start-1,1).match(/\s/)) start--; // find word start
+   pop.data('targetPositionStart',start);
+
+   // trim current word to first whitespace
+   var word=text.substr(start);
+   var len=0;
+   while(len<word.length && !word.substr(len,1).match(/\s/)) len++; // find word length
+   word=$.trim(word.substr(0,len));
+   pop.data('targetPositionLength',len);
+   if (word=='') return;
+
+   // find word position height within the element
+   $('#dummyTextarea').remove();
+   var dummy=$('<textarea id=dummyTextarea>').attr('class',$(t).attr('class')).css('display','block').width($(t).width()).css('overflow','hidden').height(1);
+   dummy.val($.trim(text.substr(0,start+len)));
+   dummy.insertAfter($(t));
+   var h=dummy.prop("scrollHeight");
+   dummy.remove();
+
+   // find all entries matching the word
+   var matching=[];
+   for (var i=0; i<list.length; i++) if (list[i].indexOf(word)===0) matching.push(list[i]);
+
+   // show autocomplete suggestions in a popup
+   var html='';
+   for(i=0; i<matching.length; i++)
+   {
+      var spl=matching[i].split(/\[|\]/,4);
+      html+="<tr data-autocomplete='"+matching[i].replace(/\s.*/,'')+"'><td>"+spl[0]+"</td><td>["+spl[1]+"]</td><td>"+spl[2]+"</td>"+(spl[3]?"<td>"+spl[3]+"</td>":"")+"</tr>";
+   }
+   pop.html("<table>"+html+"</table>");
+   pop.css('top',$(t).offset().top+h).css('right',$(window).width()-$(t).offset().left-$(t).width()-14);
+   if (matching.length>0) pop.show(); else autocompleteHide();
+}
+
+
+function autocompleteHide()
+{
+   $('#autocomplete').empty().hide();
+}
+
+
+function autocomplete_do(r)
+{
+   var pop=$('#autocomplete');
+
+   var t=pop.data('targetElement');
+   var start=pop.data('targetPositionStart');
+   var len=pop.data('targetPositionLength');
+   var cur=pop.data('targetCursorPos');
+   var nword=$(r).closest('tr').data('autocomplete');
+   var txt=$(t).val();
+
+   $(t).val(txt.substr(0,start)+nword+ txt.substr(start+len));
+   $(t).focus().prop('selectionEnd',cur-len+nword.length);
+   $(t).keyup();
+   autocompleteHide()
+}

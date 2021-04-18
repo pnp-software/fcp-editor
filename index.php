@@ -107,6 +107,19 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
 .suggest.rounded a { padding-top: 3px; padding-bottom: 3px; }
 .suggest.sharp { border: 1px solid #000; }
 
+
+.autocomplete
+{
+   position: fixed;
+   border: 1px solid #000;
+   max-height: 100px;
+   overflow-x: hidden;
+   overflow-y: auto;
+   background-color: #fff;
+}
+.autocomplete tr td { padding: 0 4px 0 4px; color: black; cursor: default; font-size: 11px; white-space: nowrap; }
+.autocomplete tr:hover td { background-color: #6599FF; color: #fff; }
+
 .checkall { cursor: pointer; }
 
 .menu
@@ -476,6 +489,11 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 <div id=suggest class="suggest hidden">
 </div>
 
+<!-- autocomplete box for Description autocompletes -->
+<div id=autocomplete class="autocomplete hidden">
+</div>
+
+
 <div id=payment class=hidden>
 <div id=paymentbg style="position: fixed; background-color: #000; left: 0; top: 0; width: 100%; height: 100%; opacity: 0.8;"></div>
 <div id=paymentdialog style="position: fixed; left: 0; top: 0; width: 100%; height: 100%;">
@@ -757,6 +775,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
      </td></tr>
    </table>
 </div>
+
 
 </div><!-- end of noprint section -->
 <div class=print><img id=printelement></div>

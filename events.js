@@ -38,7 +38,8 @@ $(document).ready(function(){
    $('input').keydown(function(ev){ processInputSpecialKeys(ev); });
    $('input').keypress(function(ev){ validateInput(ev,true); });
    $('input').keyup(function(ev){ validateInput(ev,false); });
-   $('textarea').keyup(function(ev){ textareaRowsUpdate(ev.target); });
+   $('textarea').click(function(ev){ textareaAutocomplete(ev.target); });
+   $('textarea').keyup(function(ev){ textareaRowsUpdate(ev.target); textareaAutocomplete(ev.target); });
    $('textarea').change(function(ev){ textareaRowsUpdate(ev.target); });
 
    $('input, textarea, select, button').prop("spellcheck",false);
@@ -77,6 +78,7 @@ $(document).ready(function(){
 
    $('#importfile').change(function(){importFileSelected();});
    $('#tagselect').change(function(){g.tagFilter=$(this).val(); updateFileSelections();});
+   $('#autocomplete').click(function(ev){ autocomplete_do(ev.target); });
 
    $(document).on('click','.checkall',selectall);
    $(document).on('click','.projectbox blockquote',projectExpand);
@@ -151,7 +153,6 @@ $(document).ready(function(){
 
    // style file input
    $("#importfile").filestyle({input: false, buttonText: "&nbsp;Choose JSON file for import"});
-
 
    // set listeners
    if (isChromeApp())

@@ -308,6 +308,7 @@ function propSuggestHide()
 {
    $('#suggest').hide();
    $('#suggest').attr("data-target","");
+   autocompleteHide();
 }
 
 function propSuggestSelect(ev)
