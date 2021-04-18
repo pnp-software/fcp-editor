@@ -184,12 +184,15 @@ function textareaRowsUpdateOnly(t)
    $(t).attr("rows",Math.max(2, $(t).val().split("\n").length+1) );
 
    // fix height of the element with long lines
-   var origHeight=$(t).height();
-   if (origHeight==0) return;
-   $(t).height(1);
-   var scrollHeight=$(t).prop("scrollHeight");
-   if (scrollHeight) $(t).height(Math.max(30,scrollHeight-8)+10);
-   else $(t).height(origHeight);
+   // needs to be called after other rendering is complete
+   setTimeout(function(){
+      var origHeight=$(t).height();
+      if (origHeight==0) return;
+      $(t).height(1);
+      var scrollHeight=$(t).prop("scrollHeight");
+      if (scrollHeight) $(t).height(Math.max(30,scrollHeight-8)+10);
+      else $(t).height(origHeight);
+   },10);
 }
 
 function textareaRowsUpdate(t)

@@ -173,13 +173,11 @@
    function fixEditboxPos(newpos)
    {
       var scroll=$('#editboxscrollablearea').scrollTop();
-      $('#editboxscrollablearea').css({'height':'','padding-right':''});
       $('.qmarkR').css({'margin-right':"5px"});
-      if ($('#editbox').height()+20>=$('#sizer').height())
-      {
-         $('#editboxscrollablearea').css({"height": ($('#sizer').height()-70-1)+"px" , "padding-right": "7px" }).scrollTop(scroll);
-         $('.qmarkR').css({'margin-right':"10px"});
-      }
+
+      var scr=$('#editboxscrollablearea');
+      scr.css('max-height',$('#sizer').height()-80);
+      scr.css('padding-right',scr.css('height')==scr.css('max-height')?'7px':'0px');
 
       var marginV=15; // vertical margin
       var marginH=10; // horizontal margin
