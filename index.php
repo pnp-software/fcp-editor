@@ -316,8 +316,8 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
       </div>
 
       <div id="autocompleteList">
-         Choose autocomplete preset:<br>
-         <select class='input-small' style='width: 100%;' id=epropAutocomplete></select>
+         Text editor autocomplete preset:<br>
+         <select class='input-small' style='width: 324px;' id=epropAutocomplete></select>
       </div>
 
    </div>

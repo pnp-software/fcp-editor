@@ -12,7 +12,7 @@ $(document).ready(function(){
    load_saved_files_list(); // initialize saved files list
 
    // turn off browser's autocomplete for all input fields
-   $('input').each(function(ix,el){ $(el).prop('autocomplete','off'); })
+   $('input').each(function(ix,el){ $(el).prop('autocomplete','off'); });
 
    $('.colorpickerHTML').html(colorPicker());
    $('.colorItem').click(setStateColor);
