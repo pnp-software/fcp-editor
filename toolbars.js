@@ -166,7 +166,6 @@
             g.selected[i].attr("fill","#"+rgb);
 
       historyAddFinish();
-      refreshToolbars();
    }
 
 
