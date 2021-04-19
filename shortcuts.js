@@ -239,7 +239,7 @@ function textareaAutocomplete(t)
    // find word position height within the element
    $('#dummyTextarea').remove();
    var dummy=$('<textarea id=dummyTextarea>').attr('class',$(t).attr('class')).css('display','block').width($(t).width()).css('overflow','hidden').height(1);
-   dummy.val($.trim(text.substr(0,start+len)));
+   dummy.val(text.substr(0,start+len));
    dummy.insertAfter($(t));
    var h=dummy.prop("scrollHeight");
    dummy.remove();
