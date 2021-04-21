@@ -33,12 +33,12 @@
       // get telecommands #TC and add to autocomplete list
       $resultTC=execQuery("SELECT * FROM ".$database.".ccf");
       while($row=mysqli_fetch_assoc($resultTC))
-         $autocomplete[]="\""."#TC(".$row['CCF_TYPE'].",".$row['CCF_STYPE'].")[".$row['CCF_CNAME']."] ".$row['CCF_DESCR']." [".$row['CCF_DESCR2']."]\"";
+         $autocomplete[]="\""."#TC(".$row['CCF_TYPE'].",".$row['CCF_STYPE'].")_".$row['CCF_CNAME']."; ".$row['CCF_DESCR']."; ".$row['CCF_DESCR2']."\"";
 
       // get telemetry reports #TM and add to autocomplete list
       $resultTM=execQuery("SELECT * FROM ".$database.".pid");
       while($row=mysqli_fetch_assoc($resultTM))
-         $autocomplete[]="\""."#TM(".$row['PID_TYPE'].",".$row['PID_STYPE'].")[".$row['PID_SPID']."] ".$row['PID_DESCR']."\"";
+         $autocomplete[]="\""."#TM(".$row['PID_TYPE'].",".$row['PID_STYPE'].")_".$row['PID_SPID']."; ".$row['PID_DESCR']."\"";
 
       // send whole autocoplete object for current SCOS_ database
       echo "g.autocomplete['".$database."']=[".join(",",$autocomplete)."];";
