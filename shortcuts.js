@@ -252,9 +252,9 @@ function textareaAutocomplete(t)
    var html='';
    for(i=0; i<matching.length; i++)
    {
-      var sp1=matching[i].split(/[;]/,4);
+      var sp1=matching[i].split(/ [;] /,4);
       var sp2=sp1[0].split(/_/,2);
-      html+="<tr data-autocomplete='"+matching[i].replace(/;.*/,'')+"'><td>"+sp2[0]+"</td><td>"+sp2[1]+"</td><td>"+sp1[1]+"</td>"+(sp1[2]?"<td>"+sp1[2]+"</td>":"")+"</tr>";
+      html+="<tr data-autocomplete='"+matching[i].replace(/\s.*/,'')+"'><td>"+sp2[0]+"</td><td>"+sp2[1]+"</td><td>"+sp1[1]+"</td>"+(sp1[2]?"<td>"+sp1[2]+"</td>":"")+"</tr>";
    }
    pop.html("<table>"+html+"</table>");
    pop.css('top',$(t).offset().top+h).css('right',$(window).width()-$(t).offset().left-$(t).width()-14);
