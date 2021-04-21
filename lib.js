@@ -752,11 +752,10 @@
          conn.arrowend.hide();
       }
 
-      if (color)
-      {
-         conn.attr({stroke: color});
-         conn.arrowend.attr({stroke: color, fill: color});
-      }
+      if (!color) color=conn.fwprop.color;
+      if (!color) color='#000';
+      conn.attr({stroke: color});
+      conn.arrowend.attr({stroke: color, fill: color});
       updateConnectionText(conn,color);
    }
 

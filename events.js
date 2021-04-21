@@ -15,7 +15,8 @@ $(document).ready(function(){
    $('input').each(function(ix,el){ $(el).prop('autocomplete','off'); });
 
    $('.colorpickerHTML').html(colorPicker());
-   $('.colorItem').click(setStateColor);
+   $('.colorpickerHTMLdark').html(colorPickerDark());
+   $('.colorItem').click(setColor);
 
    $('#toolbar').mouseenter(function(){ if (mouseButtonIsDown()) toolbarTransparent(); else { toolbarMidi(); toolbarVisible(); }  });
    $('#toolbar tr.menurow').hover(menurowHoverOver,menurowHoverOut);

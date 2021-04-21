@@ -726,16 +726,16 @@ function propUpdate()
                for (var prop in g.connections[n].fwprop)
                   if ((g.connections[n].fwprop[prop]+"").indexOf(listPrev[i])>=0)
                   {
-                     // connection colors are temporary until user clicks them
-                     g.connections[n].attr("stroke",errColor);
-                     g.connections[n].arrowend.attr("fill",errColor).attr("stroke",errColor);
-                     g.connections[n].text.attr("fill",errColor);
+                     g.connections[n].fwprop.color=errColor;
                      wrong.push(listPrev[i]);
                   }
+
+             refreshConnections();
+             refreshStates();
          }
 
          wrong=array_unique(wrong);
-         if (wrong.length>0) msg("The following autocompleted texts are no longer available in currently selected preset. Elements containing these texts have been highlighted:<br><br>"+wrong.join("<br>"),"error");
+         if (wrong.length>0) msg("The following autocompleted texts are no longer available in currently selected preset. Elements containing these texts have been highlighted. After you fix the problem, reset the color of the elements manually.<br><br>"+wrong.join("<br>"),"error");
       }
    }
 

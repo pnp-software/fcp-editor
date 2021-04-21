@@ -579,9 +579,9 @@
           g.connectorArrow.stateTo=g.connector;
           g.connectorArrow.vertexes=[];
           g.connectorArrow.arrowend=paper.path(arrow_path_string());
-          updateConnectionAttrs(g.connectorArrow, '#000');
+          updateConnectionAttrs(g.connectorArrow);
        }
-       updateConnectionAttrs(g.connectorArrow, '#000');
+       updateConnectionAttrs(g.connectorArrow);
    }
 
    var connectordragend = function()

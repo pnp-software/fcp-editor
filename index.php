@@ -316,7 +316,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
       </div>
 
       <div id="autocompleteList">
-         Text editor autocomplete preset:<br>
+         SCOS Database:<br>
          <select class='input-small' style='width: 324px;' id=epropAutocomplete></select>
       </div>
 
@@ -433,6 +433,9 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
      </div>
 
      Notes:<br><textarea rows=2 class='input-xlarge' id=epropTrNote placeholder="notes"></textarea>
+
+     <br>Color:
+     <span class=colorpickerHTMLdark></span>
    </div>
 
    </div>

@@ -50,7 +50,7 @@
    function deselectConnection(con)
    {
       if (!con) con=g.selectedCon;
-      if (con) refreshConnection(getConnectionsIndex(con),'#000');
+      if (con) refreshConnection(getConnectionsIndex(con));
       refreshToolbars();
       g.selectedCon=false;
    }
