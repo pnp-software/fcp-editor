@@ -531,6 +531,7 @@ function propEditFill()
    // if we are here so far, we're going to process global state properties
    refreshDisplayInfo();
    $('#epropSmName').val(g.fwprop.smName);
+   $('#epropSmTitle').val(g.fwprop.smTitle);
    $('#epropSmTags').val(g.fwprop.smTags);
    $('#epropSmIncludes').val(g.fwprop.smIncludes);
    $('#epropAutocomplete').val(g.fwprop.autocomplete);
@@ -688,6 +689,7 @@ function propUpdate()
    historyAdd('globalprop');
    g.fwprop.smName=$('#epropSmName').val();
    g.fwprop.smTags=$('#epropSmTags').val();
+   g.fwprop.smTitle=$('#epropSmTitle').val();
    g.fwprop.smIncludes=$('#epropSmIncludes').val();
    g.fwprop.smNotes=$('#epropSmNotes').val();
 

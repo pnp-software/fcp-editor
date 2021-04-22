@@ -284,6 +284,8 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
    <div id=globalprop class=hidden>
       <span id=nameLabel>State Machine Name:</span><br>
       <input type=text style='width: 310px;' data-filter="freeform" placeholder="state machine name" id=epropSmName><br>
+      <span>Title:</span><br>
+      <input type=text style='width: 310px;' data-filter="noregex" placeholder="Title (optional)" id=epropSmTitle><br>
       <span id=tagLabel>Project name:</span><br>
       <input type=text style='width: 310px;' data-filter="noregex" placeholder="Project name (optional)" id=epropSmTags data-suggest="tags"><br>
       User-Defined global variables:
