@@ -929,6 +929,9 @@
             state.text.attr("text", buildStateText(state));
          }
 
+         // force pre-formated whitespace for Notes
+         if (stateIsNote(state)) $(state.text.node).css("white-space","pre");
+
          var y=0
          var tspans=state.text.node.childNodes;
 
