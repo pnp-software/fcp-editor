@@ -14,7 +14,7 @@ Used libraries:
   * js/jquery.slimscroll.js
   * js/jquery.sameheight.js
 
-     ... for easier and more powerful javascript functions (jquery.com and jqueryui.com),
+     ... for fasier and more powerful javascript functions (jquery.com and jqueryui.com),
          MIT license or free
 
 
@@ -26,7 +26,6 @@ Used libraries:
   * img/glyphicons-halflings.png and img/glyphicons-halflings-white.png
 
      ... https://getbootstrap.com/2.3.2/base-css.html#icons made available under licence CC By 3.0
-         (this component must be downloaded separately by user of the GPL version of the editor)
 
 
   * js/sh_main.min.js
