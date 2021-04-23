@@ -308,6 +308,7 @@ function propSuggestHide()
 {
    $('#suggest').hide();
    $('#suggest').attr("data-target","");
+   autocompleteHide();
 }
 
 function propSuggestSelect(ev)
@@ -530,8 +531,10 @@ function propEditFill()
    // if we are here so far, we're going to process global state properties
    refreshDisplayInfo();
    $('#epropSmName').val(g.fwprop.smName);
+   $('#epropSmTitle').val(g.fwprop.smTitle);
    $('#epropSmTags').val(g.fwprop.smTags);
    $('#epropSmIncludes').val(g.fwprop.smIncludes);
+   $('#epropAutocomplete').val(g.fwprop.autocomplete);
    $('#epropSmNotes').val(g.fwprop.smNotes);
 
    $("#globadd").empty();
@@ -686,8 +689,58 @@ function propUpdate()
    historyAdd('globalprop');
    g.fwprop.smName=$('#epropSmName').val();
    g.fwprop.smTags=$('#epropSmTags').val();
+   g.fwprop.smTitle=$('#epropSmTitle').val();
    g.fwprop.smIncludes=$('#epropSmIncludes').val();
    g.fwprop.smNotes=$('#epropSmNotes').val();
+
+   var prevName=g.fwprop.autocomplete || "";
+   g.fwprop.autocomplete=$('#epropAutocomplete').val();
+   var curName=g.fwprop.autocomplete || "";
+
+   if (prevName!=curName)
+   {
+      // get list of previous autocomplete possibilities
+      var listPrev=g.autocomplete[prevName] || [];
+      listPrev=listPrev.map(function(val){ return val.replace(/ .*/,''); });
+      // get list of current autocomplete possibilities
+      var listCur=g.autocomplete[curName] || [];
+      listCur=listCur.map(function(val){ return val.replace(/ .*/,''); });
+
+      // continue checking only if it makes sense
+      if (listPrev.length>0 && listCur.length>0)
+      {
+         var wrong=[];
+         var errColor='#ff0000';
+         // get rid of previous which are still included in current
+         listPrev = listPrev.filter(function(val) { return listCur.indexOf(val)<0; });
+         // what remains must not be used anywhere anymore
+         for (var i=0; i<listPrev.length; i++)
+         {
+            for (var n=0; n<g.states.length; n++)
+               for (var prop in g.states[n].fwprop)
+                  if ((g.states[n].fwprop[prop]+"").indexOf(listPrev[i])>=0)
+                  {
+                     g.states[n].attr("fill",errColor);
+                     wrong.push(listPrev[i]);
+                  }
+
+            for (var n=0; n<g.connections.length; n++)
+               for (var prop in g.connections[n].fwprop)
+                  if ((g.connections[n].fwprop[prop]+"").indexOf(listPrev[i])>=0)
+                  {
+                     g.connections[n].fwprop.color=errColor;
+                     wrong.push(listPrev[i]);
+                  }
+
+             refreshConnections();
+             refreshStates();
+         }
+
+         wrong=array_unique(wrong);
+         if (wrong.length>0) msg("The following autocompleted texts are no longer available in currently selected preset. Elements containing these texts have been highlighted. After you fix the problem, reset the color of the elements manually.<br><br>"+wrong.join("<br>"),"error");
+      }
+   }
+
 
    g.fwprop.globalvar=[];
    $("#globvar, #globadd").find(".globrow").each(function(){ 
@@ -701,3 +754,12 @@ function propUpdate()
    all_tabs_refresh();
 }
 
+
+function init_autocomplete_list()
+{
+   var options=[];
+   for (var i in g.autocomplete) options.push(i);
+   options=options.sort(naturalSort).reverse();
+   if (options.length==0) $('#autocompleteList').hide();
+   else $('#epropAutocomplete').html( '<option><option>'+options.join('<option>'));
+}

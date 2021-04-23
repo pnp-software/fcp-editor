@@ -182,6 +182,24 @@ function validateInput(ev, keyIsChar)
 function textareaRowsUpdateOnly(t)
 {
    $(t).attr("rows",Math.max(2, $(t).val().split("\n").length+1) );
+   fixEditboxPos();
+
+   // TODO: this is intricate. Sometimes it works sometimes it does not. Lets skip this for now
+   /*
+   // fix height of the element with long lines
+   // needs to be called after other rendering is complete
+   setTimeout(function(){
+      var scroll=$('#editboxscrollablearea').scrollTop();
+      var origHeight=$(t).height();
+      if (origHeight==0) return;
+      $(t).height(1);
+      var scrollHeight=$(t).prop("scrollHeight");
+      if (scrollHeight) $(t).height(Math.max(30,scrollHeight-8)+10);
+      else $(t).height(origHeight);
+      $('#editboxscrollablearea').scrollTop(scroll);
+
+   },10);
+   */
 }
 
 function textareaRowsUpdate(t)
@@ -191,3 +209,77 @@ function textareaRowsUpdate(t)
    refreshToolbarButtons();
 }
 
+
+function textareaAutocomplete(t)
+{
+   var pop=$('#autocomplete');
+   pop.data('targetElement',t);
+   pop.empty().hide();
+
+   // get list of current autocomplete strings
+   var list=g.autocomplete[g.fwprop.autocomplete];
+   if (!list || list.length==0) return;
+
+   var start=$(t).prop("selectionStart");
+   pop.data('targetCursorPos',start);
+
+   // get crrent word before cursor
+   var text=$(t).val();
+   while(start>0 && !text.substr(start-1,1).match(/\s/)) start--; // find word start
+   pop.data('targetPositionStart',start);
+
+   // trim current word to first whitespace
+   var word=text.substr(start);
+   var len=0;
+   while(len<word.length && !word.substr(len,1).match(/\s/)) len++; // find word length
+   word=$.trim(word.substr(0,len));
+   pop.data('targetPositionLength',len);
+   if (word=='') return;
+
+   // find word position height within the element
+   $('#dummyTextarea').remove();
+   var dummy=$('<textarea id=dummyTextarea>').attr('class',$(t).attr('class')).css('display','block').width($(t).width()).css('overflow','hidden').height(1);
+   dummy.val(text.substr(0,start+len));
+   dummy.insertAfter($(t));
+   var h=dummy.prop("scrollHeight");
+   dummy.remove();
+
+   // find all entries matching the word
+   var matching=[];
+   for (var i=0; i<list.length; i++) if (list[i].indexOf(word)===0) matching.push(list[i]);
+
+   // show autocomplete suggestions in a popup
+   var html='';
+   for(i=0; i<matching.length; i++)
+   {
+      var sp1=matching[i].split(/ [;] /,4);
+      var sp2=sp1[0].split(/_/,2);
+      html+="<tr data-autocomplete='"+matching[i].replace(/\s.*/,'')+"'><td>"+sp2[0]+"</td><td>"+sp2[1]+"</td><td>"+sp1[1]+"</td>"+(sp1[2]?"<td>"+sp1[2]+"</td>":"")+"</tr>";
+   }
+   pop.html("<table>"+html+"</table>");
+   pop.css('top',$(t).offset().top+h).css('right',$(window).width()-$(t).offset().left-$(t).width()-14);
+   if (matching.length>0) pop.show(); else autocompleteHide();
+}
+
+
+function autocompleteHide()
+{
+   $('#autocomplete').empty().hide();
+}
+
+
+function autocomplete_do(r)
+{
+   var pop=$('#autocomplete');
+   var t=pop.data('targetElement');
+   var start=pop.data('targetPositionStart');
+   var len=pop.data('targetPositionLength');
+   var cur=pop.data('targetCursorPos');
+   var nword=$(r).closest('tr').data('autocomplete');
+   var txt=$(t).val();
+
+   $(t).val(txt.substr(0,start)+nword+ txt.substr(start+len));
+   $(t).focus().prop('selectionEnd',cur-len+nword.length);
+   $(t).keyup();
+   autocompleteHide()
+}

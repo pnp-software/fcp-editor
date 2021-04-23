@@ -7,11 +7,16 @@ function timer()
 
 $(document).ready(function(){
 
+   init_autocomplete_list();
    setInterval(timer,1000); // refresh list of saved files in 60-second interval
    load_saved_files_list(); // initialize saved files list
 
+   // turn off browser's autocomplete for all input fields
+   $('input').each(function(ix,el){ $(el).prop('autocomplete','off'); });
+
    $('.colorpickerHTML').html(colorPicker());
-   $('.colorItem').click(setStateColor);
+   $('.colorpickerHTMLdark').html(colorPickerDark());
+   $('.colorItem').click(setColor);
 
    $('#toolbar').mouseenter(function(){ if (mouseButtonIsDown()) toolbarTransparent(); else { toolbarMidi(); toolbarVisible(); }  });
    $('#toolbar tr.menurow').hover(menurowHoverOver,menurowHoverOut);
@@ -34,12 +39,14 @@ $(document).ready(function(){
    $('input').keydown(function(ev){ processInputSpecialKeys(ev); });
    $('input').keypress(function(ev){ validateInput(ev,true); });
    $('input').keyup(function(ev){ validateInput(ev,false); });
-   $('textarea').keyup(function(ev){ textareaRowsUpdate(ev.target); });
+   $('textarea').click(function(ev){ textareaAutocomplete(ev.target); });
+   $('textarea').keyup(function(ev){ textareaRowsUpdate(ev.target); textareaAutocomplete(ev.target); });
    $('textarea').change(function(ev){ textareaRowsUpdate(ev.target); });
 
    $('input, textarea, select, button').prop("spellcheck",false);
    $('input, textarea, select, button').keyup(propUpdate);
    $('#epropEntry, #epropDo, #epropExit, #epropTrAction, #epropTrGuard, #epropEmbedSM').find("select").change(propSelectChange)
+   $('#epropAutocomplete').change(propUpdate);
    $('input').keyup(propUpdate);
    $('#epropEntryAp').change(propUpdate);
    $('#epropDoAp').change(propUpdate);
@@ -72,6 +79,7 @@ $(document).ready(function(){
 
    $('#importfile').change(function(){importFileSelected();});
    $('#tagselect').change(function(){g.tagFilter=$(this).val(); updateFileSelections();});
+   $('#autocomplete').click(function(ev){ autocomplete_do(ev.target); });
 
    $(document).on('click','.checkall',selectall);
    $(document).on('click','.projectbox blockquote',projectExpand);
@@ -146,7 +154,6 @@ $(document).ready(function(){
 
    // style file input
    $("#importfile").filestyle({input: false, buttonText: "&nbsp;Choose JSON file for import"});
-
 
    // set listeners
    if (isChromeApp())

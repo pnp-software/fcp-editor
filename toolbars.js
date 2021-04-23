@@ -139,14 +139,10 @@
    }
 
 
-   function colorPicker()
+   function colorPickerHTML(colors)
    {
-       var res="",i;
-       var colors = [
-             'ffffff', 'eeeeee', 'ffcccc', 'ffcc99', 'ffff99', 'ccffaa', 'ccffff', 'ccccff', '999999'
-       ];
-
-       for(i=0; i<colors.length; i++)
+       var res="";
+       for(var i=0; i<colors.length; i++)
        {
           res=res+"<i class=colorItem style='background-color: #"+colors[i]+"' data-color='"+colors[i]+"'>&nbsp;</i>";
           if (i % 9 == 8) res=res+"<br clear=all>";
@@ -156,7 +152,20 @@
    }
 
 
-   function setStateColor()
+   function colorPicker()
+   {
+       return colorPickerHTML(['ffffff', 'eeeeee', 'ffcccc', 'ffcc99', 'ffff99', 'ccffaa', 'ccffff', 'ccccff', '999999']);
+   }
+
+
+   function colorPickerDark()
+   {
+       return colorPickerHTML([ '9c27b0', '3f51b5', '009688', '795548', '000000']);
+   }
+
+
+
+   function setColor()
    {
       var rgb=$(this).attr("data-color");
       historyAddPrepare();
@@ -165,21 +174,24 @@
          for (var i=0; i<g.selected.length; i++)
             g.selected[i].attr("fill","#"+rgb);
 
+      if (g.selectedCon)
+         g.selectedCon.fwprop.color="#"+rgb;
+
+      refreshConnections();
+      refreshStates();
+
       historyAddFinish();
-      refreshToolbars();
    }
 
 
    function fixEditboxPos(newpos)
    {
       var scroll=$('#editboxscrollablearea').scrollTop();
-      $('#editboxscrollablearea').css({'height':'','padding-right':''});
       $('.qmarkR').css({'margin-right':"5px"});
-      if ($('#editbox').height()+20>=$('#sizer').height())
-      {
-         $('#editboxscrollablearea').css({"height": ($('#sizer').height()-80-1)+"px" , "padding-right": "7px" }).scrollTop(scroll);
-         $('.qmarkR').css({'margin-right':"10px"});
-      }
+
+      var scr=$('#editboxscrollablearea');
+      scr.css('max-height',$('#sizer').height()-80);
+      scr.css('padding-right',scr.css('height')==scr.css('max-height')?'7px':'0px');
 
       var marginV=15; // vertical margin
       var marginH=10; // horizontal margin

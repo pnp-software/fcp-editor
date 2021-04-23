@@ -107,6 +107,19 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
 .suggest.rounded a { padding-top: 3px; padding-bottom: 3px; }
 .suggest.sharp { border: 1px solid #000; }
 
+
+.autocomplete
+{
+   position: fixed;
+   border: 1px solid #000;
+   max-height: 100px;
+   overflow-x: hidden;
+   overflow-y: auto;
+   background-color: #fff;
+}
+.autocomplete tr td { padding: 0 4px 0 4px; color: black; cursor: default; font-size: 11px; white-space: nowrap; }
+.autocomplete tr:hover td { background-color: #6599FF; color: #fff; }
+
 .checkall { cursor: pointer; }
 
 .menu
@@ -271,6 +284,8 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
    <div id=globalprop class=hidden>
       <span id=nameLabel>State Machine Name:</span><br>
       <input type=text style='width: 310px;' data-filter="freeform" placeholder="state machine name" id=epropSmName><br>
+      <span>Title:</span><br>
+      <input type=text style='width: 310px;' data-filter="noregex" placeholder="Title (optional)" id=epropSmTitle><br>
       <span id=tagLabel>Project name:</span><br>
       <input type=text style='width: 310px;' data-filter="noregex" placeholder="Project name (optional)" id=epropSmTags data-suggest="tags"><br>
       User-Defined global variables:
@@ -296,10 +311,15 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
       </div>
 
       <br>Show text on diagram:<br>
-      <div class="btn-group" data-toggle="buttons-radio" style='margin-bottom: 5px;' id="displayInfo">
+      <div class="btn-group" data-toggle="buttons-radio" style='margin-bottom: 10px;' id="displayInfo">
          <button type="button" class="btn btn-info" id=displayInfo0btn><i class="icon-ok icon-white" id=displayInfo0></i> auto</button>
          <button type="button" class="btn" id=displayInfo1btn><i class="icon-ok icon-white hidden" id=displayInfo1></i> functions/code</button>
          <button type="button" class="btn" id=displayInfo2btn><i class="icon-ok icon-white hidden" id=displayInfo2></i> descriptions</button>
+      </div>
+
+      <div id="autocompleteList">
+         SCOS Database:<br>
+         <select class='input-small' style='width: 324px;' id=epropAutocomplete></select>
       </div>
 
    </div>
@@ -415,6 +435,9 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
      </div>
 
      Notes:<br><textarea rows=2 class='input-xlarge' id=epropTrNote placeholder="notes"></textarea>
+
+     <br>Color:
+     <span class=colorpickerHTMLdark></span>
    </div>
 
    </div>
@@ -470,6 +493,11 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 <!-- suggestion box for actions, guards and triggers in INPUT edit -->
 <div id=suggest class="suggest hidden">
 </div>
+
+<!-- autocomplete box for Description autocompletes -->
+<div id=autocomplete class="autocomplete hidden">
+</div>
+
 
 <div id=payment class=hidden>
 <div id=paymentbg style="position: fixed; background-color: #000; left: 0; top: 0; width: 100%; height: 100%; opacity: 0.8;"></div>
@@ -752,6 +780,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
      </td></tr>
    </table>
 </div>
+
 
 </div><!-- end of noprint section -->
 <div class=print><img id=printelement></div>

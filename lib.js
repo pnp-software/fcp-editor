@@ -752,11 +752,10 @@
          conn.arrowend.hide();
       }
 
-      if (color)
-      {
-         conn.attr({stroke: color});
-         conn.arrowend.attr({stroke: color, fill: color});
-      }
+      if (!color) color=conn.fwprop.color;
+      if (!color) color='#000';
+      conn.attr({stroke: color});
+      conn.arrowend.attr({stroke: color, fill: color});
       updateConnectionText(conn,color);
    }
 
@@ -929,10 +928,10 @@
          {
             state.text.attr("text", buildStateText(state));
          }
-         
+
          // force pre-formated whitespace for Notes
          if (stateIsNote(state)) $(state.text.node).css("white-space","pre");
-         
+
          var y=0
          var tspans=state.text.node.childNodes;
 
