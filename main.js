@@ -5,7 +5,7 @@
 
    g.fwprop={};                  // global properties for current desktop
    g.fwprop.globalvar=[];        // user-defined variables
-   g.fwprop.editorType='Sm';     // editor type, 'Sm' for state machine, 'Pr' for procedures
+   g.fwprop.editorType='Pr';     // editor type, 'Sm' for state machine, 'Pr' for procedures
    g.fwprop.displayInfo=0;       // auto show descriptions or functions
    g.fwprop.displayOrder=1;      // show order on transitions (non-standard)
    g.states=[];                  // all states array
