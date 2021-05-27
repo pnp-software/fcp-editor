@@ -701,12 +701,13 @@ function propUpdate()
    {
       // get list of previous autocomplete possibilities
       var listPrev=g.autocomplete[prevName] || [];
-      listPrev=listPrev.map(function(val){ return val.replace(/ .*/,''); });
+//      listPrev=listPrev.map(function(val){ return val.replace(/ .*/,''); });
       // get list of current autocomplete possibilities
       var listCur=g.autocomplete[curName] || [];
-      listCur=listCur.map(function(val){ return val.replace(/ .*/,''); });
+//      listCur=listCur.map(function(val){ return val.replace(/ .*/,''); });
 
       // continue checking only if it makes sense
+if (false)
       if (listPrev.length>0 && listCur.length>0)
       {
          var wrong=[];

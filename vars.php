@@ -23,31 +23,63 @@
    echo "for (var i=0; i<files.length; i++) fileListAppend(\"#examples\",files[i],false);";
    echo "\n";
 
+   function fetch($res)
+   {
+      $row=mysqli_fetch_assoc($res);
+      $res=[];
+      foreach($row as $key=>$val) $res[preg_replace("{^[^_]+_}","",$key)]=preg_replace("{\\s+}","_",trim($val));
+      return $res;
+   }
+
 
    // send autocomplete data from databases prefixed by SCOS_
-   $result=execQuery("SHOW DATABASES LIKE 'SCOS_%'"); // result order is undefined
-   while($database=reset(mysqli_fetch_assoc($result)))
+   $resultDB=execQuery("SHOW DATABASES LIKE 'SCOS_%'"); // result order is undefined
+   while($database=reset(mysqli_fetch_assoc($resultDB)))
    {
-      $autocomplete=[];
+      // Telemetry Reports
+      // PID: data
+      // PCF: params
+      // PLF: assignment of params to data
 
-      // get telecommands #TC and add to autocomplete list
-      $resultTC=execQuery("SELECT * FROM ".$database.".ccf");
-      while($row=mysqli_fetch_assoc($resultTC))
-         $autocomplete[]="\""."#TC(".$row['CCF_TYPE'].",".$row['CCF_STYPE'].")_".$row['CCF_CNAME']." ; ".$row['CCF_DESCR']." ; ".$row['CCF_DESCR2']."\"";
+      $telemetry_reports=[];
+      $result=execQuery("SELECT * FROM $database.pid");
+      while($row=fetch($result))
+      {
+         $row['params']=[];
+         $params=execQuery("SELECT * FROM $database.pcf, $database.plf WHERE PLF_NAME=PCF_NAME and PLF_SPID=\"".mysqli_escape($row['SPID'])."\"");
+         while($par=fetch($params)) $row['params'][]=$par;
+         $telemetry_reports[]=$row;
+      }
 
-      // get telemetry reports #TM and add to autocomplete list
-      $resultTM=execQuery("SELECT * FROM ".$database.".pid");
-      while($row=mysqli_fetch_assoc($resultTM))
-         $autocomplete[]="\""."#TM(".$row['PID_TYPE'].",".$row['PID_STYPE'].")_".$row['PID_SPID']." ; ".$row['PID_DESCR']."\"";
+      // Telecommands
+      // CCF: data
+      // CDF: 
+      // CPC: 
+
+      $telecommands=[];
+      $result=execQuery("SELECT * FROM $database.ccf");
+      while($row=fetch($result))
+      {
+         $row['params']=[];
+         $params=execQuery("SELECT * FROM $database.cdf,$database.cpc WHERE CPC_PNAME=CDF_PNAME and CDF_CNAME=\"".mysqli_escape($row['CNAME'])."\"");
+         while($par=fetch($params))
+         {
+            $parref=execQuery("SELECT * FROM $database.pas WHERE PAS_NUMBR=\"".mysqli_escape($par['PAFREF'])."\"");
+            $par['params']=[];
+            while($ref=fetch($parref)) $par['params'][]=$ref;
+            $row['params'][]=$par;
+         }
+         $telecommands[]=$row;
+      }
 
       // send whole autocoplete object for current SCOS_ database
-      echo "g.autocomplete['".$database."']=[".join(",",$autocomplete)."];";
+      echo "g.autocomplete['".$database."']=".json_encode(["TM"=>$telemetry_reports, "TC"=>$telecommands]).";";
    }
 
 
    // send version
    echo "g.currentVersion=\"".$version."\";";
 
-   
+
 
 ?>

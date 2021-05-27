@@ -244,22 +244,69 @@ function textareaAutocomplete(t)
    var h=dummy.prop("scrollHeight");
    dummy.remove();
 
-   // find all entries matching the word
    var matching=[];
-   for (var i=0; i<list.length; i++) if (list[i].indexOf(word)===0) matching.push(list[i]);
+   var txt,i,j,row;
+
+
+   for(i=0; i<list.TM.length; i++)
+   {
+      row=list.TM[i];
+
+      // TM(x,y)_spid
+      txt="#TM("+row.TYPE+","+row.STYPE+")_"+row.SPID;
+      if (txt.indexOf(word)>=0) matching.push({'display':['TM('+row.TYPE+','+row.STYPE+')',row.DESCR,row.SPID], "replace":txt, "group":"#TM"});
+
+      // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
+      for(j=0; j<row.params.length; j++)
+      {
+         if (row.params[j].PID!=null)
+         {
+            txt=row.params[j].DESCR;
+            if (txt.indexOf(word)>=0) matching.push({'display':[row.params[j].NAME,row.params[j].DESCR], "replace":txt, "group":"#HK"}); // TODO: TMPAR?
+         }
+      }
+
+      // Find matching #EID ... TM where TYPE=5
+      if (row.TYPE==5)
+      {
+         txt=row.DESCR;
+         if (txt.indexOf(word)>=0 || "#EID".indexOf(word)>=0) matching.push({'display':["EID("+row.TYPE+","+row.STYPE+")",row.DESCR,row.SPID], "replace":txt, "group":"#EID"});
+      }
+   }
+
+
+   for(i=0; i<list.TC.length; i++)
+   {
+      row=list.TC[i];
+
+      // TC(x,y)_cname
+      txt="#TC("+row.TYPE+","+row.STYPE+")_"+row.CNAME;
+      if (txt.indexOf(word)>=0) matching.push({'display':['TC('+row.TYPE+','+row.STYPE+')',row.DESCR,row.CNAME], "replace":txt, "group":"#TC"});
+
+      // TCPar, such as PAR_PROP_PARAM_STR_LENGT
+      for(j=0; j<row.params.length; j++)
+      {
+         txt=row.params[j].DESCR;
+         if (txt.indexOf(word)>=0) matching.push({'display':[row.params[j].PNAME,row.params[j].DESCR], "replace":txt, "group":"#TCPar"}); // TODO: TCPAR
+      }
+   }
+
+   // TODO Find matching #FPC
+
 
    // show autocomplete suggestions in a popup
    var html='';
    for(i=0; i<matching.length; i++)
    {
-      var sp1=matching[i].split(/ [;] /,4);
-      var sp2=sp1[0].split(/_/,2);
-      html+="<tr data-autocomplete='"+matching[i].replace(/\s.*/,'')+"'><td>"+sp2[0]+"</td><td>"+sp2[1]+"</td><td>"+sp1[1]+"</td>"+(sp1[2]?"<td>"+sp1[2]+"</td>":"")+"</tr>";
+      var td='<td>'+matching[i].group+'</td>'; for(j=0; j<matching[i].display.length; j++) td+="<td>"+matching[i].display[j]+"</td>"
+      html+="<tr data-autocomplete='"+matching[i].replace+"'>"+td+"</tr>";
    }
-   pop.html("<table>"+html+"</table>");
+   pop.html("<table cellspacing=0>"+html+"</table>");
+
    pop.css('top',$(t).offset().top+h).css('right',$(window).width()-$(t).offset().left-$(t).width()-14);
    if (matching.length>0) pop.show(); else autocompleteHide();
 }
+
 
 
 function autocompleteHide()
