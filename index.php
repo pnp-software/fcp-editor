@@ -257,9 +257,6 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 <script type="text/javascript" src="loadsave.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="tabs.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="actions.js<?php echo $rev; ?>"></script>
-<script type="text/javascript" src="codegenlib.js<?php echo $rev; ?>"></script>
-<script type="text/javascript" src="codegenPR.js<?php echo $rev; ?>"></script>
-<script type="text/javascript" src="codegenSM.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="offline.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="payment.js<?php echo $rev; ?>"></script>
 
@@ -464,7 +461,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
   <table border=0 cellspacing=0 cellpadding=5 align=left width=110 height='100%' id=toolbartbl>
     <tr class=menurow id=toolbaropenbutton><td width=30><button class=toolbarbut><i class=icon-folder-open></i></button></td><td class=toolbardescr>Files</td></tr>
-    <tr class=menurow id=toolbarcodebutton><td><button class=toolbarbut><i class=icon-list></i></button></td><td class=toolbardescr>Code</td></tr>
+    <tr class=menurow id=toolbarcheckbutton><td><button class=toolbarbut><i class=icon-list></i></button></td><td class=toolbardescr>Check</td></tr>
 
     <tr class=toolbarsepa><td></td></tr>
     <tr class="menurow nomenu" id=historybutton><td><button class=toolbarbut><i class=icon-share-alt></i></button></td><td class=toolbardescr>Undo</td></tr>

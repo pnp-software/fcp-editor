@@ -364,7 +364,6 @@ function setMemAlloc(type)
 {
    g.fwprop.memalloc=type;
    refreshMemAlloc();
-   FWcode(); // refresh the code
 }
 
 function refreshMemAlloc()
