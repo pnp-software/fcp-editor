@@ -288,23 +288,28 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
       <input type=text style='width: 310px;' data-filter="noregex" placeholder="Title (optional)" id=epropSmTitle><br>
       <span id=tagLabel>Project name:</span><br>
       <input type=text style='width: 310px;' data-filter="noregex" placeholder="Project name (optional)" id=epropSmTags data-suggest="tags"><br>
-      User-Defined global variables:
+
+      Pre-Conditions:
+      <br><textarea id=epropPreConditions rows=2 class='input-xlarge' style='width: 310px; font-size: 11px; line-height: 16px; font-family: monospace;' placeholder=''></textarea><br>
+      Post-Conditions:
+      <br><textarea id=epropPostConditions rows=2 class='input-xlarge' style='width: 310px; font-size: 11px; line-height: 16px; font-family: monospace;' placeholder=''></textarea><br>
+
+      Procedure Inputs:
       <div id=globvar>
          <div>
            <div class='form-inline globrow' style='margin-bottom: 5px;'>
-             <select class='input-mini globvartype' style='width: 85px;'><option>int<option>short<option>long<option>char<option>uint<option>ushort<option>ulong<option>uchar<option>double<option>float</select><input type=text class='input-small globvarname' placeholder='variable name' data-filter="varname" style='width: 107px;' data-enter="global_variable_add"><input type=text placeholder='=value' class='input-mini globvarvalue' data-filter="number" data-enter="global_variable_add">
+             <select class='input-mini globvartype' style='width: 85px;'><option>int<option>short<option>long<option>char<option>uint<option>ushort<option>ulong<option>uchar<option>double<option>float<option>string</select><input type=text class='input-small globvarname' placeholder='variable name' data-filter="varname" style='width: 107px;' data-enter="global_variable_add"><input type=text placeholder='=value' class='input-mini globvarvalue' data-filter="number" data-enter="global_variable_add">
              <button class='btn btn-success' style='height: 30px;' id=globvaraddbtn><i class='icon-plus icon-white' style='margin-bottom: 2px;'></i></button>
            </div>
          </div>
       </div>
       <div id=globadd></div>
-      Custom includes:
-      <br><textarea id=epropSmIncludes rows=2 class='input-xlarge' style='width: 310px; font-size: 11px; line-height: 16px; font-family: monospace;' placeholder='#include "yourfile.h"'></textarea><br>
+
       Notes:
       <br><textarea id=epropSmNotes rows=2 class='input-xlarge' style='width: 310px;' placeholder='notes'></textarea>
 
 
-      <br><span id=orderShowLabel>Show transition order:</span><span class=qmark id=orderqmarkbtn><img src=img/qmark.png></span><br>
+      <br><span id=orderShowLabel>Show control flow order:</span><span class=qmark id=orderqmarkbtn><img src=img/qmark.png></span><br>
       <div class="btn-group" data-toggle="buttons-radio" style='margin-bottom: 10px;' id="displayOrder">
          <button type="button" class="btn btn-info" id=displayOrder0btn ><i class="icon-ok icon-white" id=displayOrder0></i> no</button>
          <button type="button" class="btn" id=displayOrder1btn><i class="icon-ok icon-white hidden" id=displayOrder1></i> yes</button>

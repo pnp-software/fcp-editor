@@ -533,7 +533,8 @@ function propEditFill()
    $('#epropSmName').val(g.fwprop.smName);
    $('#epropSmTitle').val(g.fwprop.smTitle);
    $('#epropSmTags').val(g.fwprop.smTags);
-   $('#epropSmIncludes').val(g.fwprop.smIncludes);
+   $('#epropPreConditions').val(g.fwprop.preConditions);
+   $('#epropPostConditions').val(g.fwprop.postConditions);
    $('#epropAutocomplete').val(g.fwprop.autocomplete);
    $('#epropSmNotes').val(g.fwprop.smNotes);
 
@@ -690,7 +691,8 @@ function propUpdate()
    g.fwprop.smName=$('#epropSmName').val();
    g.fwprop.smTags=$('#epropSmTags').val();
    g.fwprop.smTitle=$('#epropSmTitle').val();
-   g.fwprop.smIncludes=$('#epropSmIncludes').val();
+   g.fwprop.preConditions=$('#epropPreConditions').val();
+   g.fwprop.postConditions=$('#epropPostConditions').val();
    g.fwprop.smNotes=$('#epropSmNotes').val();
 
    var prevName=g.fwprop.autocomplete || "";
