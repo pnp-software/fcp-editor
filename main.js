@@ -90,7 +90,7 @@
    g.username=""; // username of currently signed in user, is updated after login
    g.userID=0; // id of currently signed in user, is updated after login
 
-   msg("Welcome to FW Profile editor.<br>You may start by opening an example<br>using Files menu on the left.", 'info', 10);
+   msg("Welcome to FCP editor.<br>You may start by opening an example<br>using Files menu on the left.", 'success', 10);
    historyClear();
 
    g.last_saved_state=getExportString();
