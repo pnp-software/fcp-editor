@@ -122,7 +122,7 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
 .autocomplete tr td:last-child { padding-right: 20px; }
 .autocomplete tr:hover td { background-color: #6599FF; color: #fff; }
 
-tspan a { fill: green; text-decoration: none !important; }
+tspan a { fill: green; cursor: help; text-decoration: none !important; }
 
 .checkall { cursor: pointer; }
 
