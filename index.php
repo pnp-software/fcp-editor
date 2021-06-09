@@ -117,8 +117,12 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
    overflow-y: auto;
    background-color: #fff;
 }
-.autocomplete tr td { padding: 0 4px 0 4px; color: black; cursor: default; font-size: 11px; white-space: nowrap; }
+.autocomplete tr td { padding: 0 4px 0 4px; color: black; cursor: default; font-size: 11px; white-space: nowrap; border-left: 1px solid #aaa; }
+.autocomplete tr td:first-child { border-left: 0; }
+.autocomplete tr td:last-child { padding-right: 20px; }
 .autocomplete tr:hover td { background-color: #6599FF; color: #fff; }
+
+tspan a { fill: green; text-decoration: none !important; }
 
 .checkall { cursor: pointer; }
 

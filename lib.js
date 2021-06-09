@@ -897,8 +897,11 @@
 
    function updateStateBoxByText(state,margin,onlyWidth)
    {
-      var w=Math.floor(state.text.getBBox().width/2)*2;
-      var h=Math.floor(state.text.getBBox().height/2)*2;
+      var el=state.text.clone();
+      $(el.node.childNodes).find('a').remove();
+      var w=Math.floor(el.getBBox().width/2)*2;
+      var h=Math.floor(el.getBBox().height/2)*2;
+      el.remove();
 
       if (w+margin>state.attr("width"))
       {
@@ -939,6 +942,16 @@
          {
             $(tspans[0]).css("font-weight","bold");
             y=$(tspans[0]).attr("dy");
+            for (var i=0; i<tspans.length; i++)
+            {
+               var words=$(tspans[i]).text().split(/\s/);
+               for (var j=0; j<words.length; j++) if (words[j]!='')
+               {
+                  var matching=findMatching(words[j]);
+                  if (matching.length>0) words[j]="<a><title>"+matching[0].title+"</title>"+words[j]+"</a>";
+               }
+               $(tspans[i]).html(words.join(' '));
+            }
          }
 
          var h=updateStateBoxByText(state,margin);
