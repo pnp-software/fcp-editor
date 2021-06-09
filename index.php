@@ -119,15 +119,27 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
    border-radius: 0px;
    font-size: 9px;
 }
-.atooltip2::after {
+.atooltip::before {
   content: " ";
   position: absolute;
-  top: 100%; /* At the bottom of the tooltip */
-  left: 50%;
-  margin-left: -10px;
-  border-width: 10px;
+  top: -10px; /* At the bottom of the tooltip */
+  left: 12px;
+  margin-left: -5px;
+  border-width: 5px;
   border-style: solid;
-  border-color: black transparent transparent transparent;
+  border-color: transparent transparent black transparent;
+  pointer-events: none;
+}
+.atooltip::after {
+  content: " ";
+  position: absolute;
+  top: -9px; /* At the bottom of the tooltip */
+  left: 12px;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #fff transparent;
+  pointer-events: none;
 }
 
 .autocomplete
