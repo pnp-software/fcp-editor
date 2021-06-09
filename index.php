@@ -107,6 +107,28 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
 .suggest.rounded a { padding-top: 3px; padding-bottom: 3px; }
 .suggest.sharp { border: 1px solid #000; }
 
+.atooltip
+{
+   position:absolute;
+   max-width:400px;
+   background-color: #ffffff;
+   color: #000000;
+   border: 1px solid #000000;
+   text-align: center;
+   padding: 2px 5px;
+   border-radius: 0px;
+   font-size: 9px;
+}
+.atooltip2::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
 
 .autocomplete
 {
@@ -503,6 +525,10 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 <!-- autocomplete box for Description autocompletes -->
 <div id=autocomplete class="autocomplete hidden">
+</div>
+
+<!-- tooltip box for autocomplete properties -->
+<div id=atooltip class="atooltip hidden">
 </div>
 
 

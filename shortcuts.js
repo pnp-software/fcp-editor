@@ -210,6 +210,17 @@ function textareaRowsUpdate(t)
 }
 
 
+function autosuggestTooltip(el,show)
+{
+   var t=$(el.target).data('title');
+   var tooltip=$('#atooltip');
+   tooltip.css({'top':($(el.target).position().top+15)+'px','left':$(el.target).position().left+'px'});
+   tooltip.text(t);
+   if (show && !mouseButtonIsDown()) tooltip.show();
+   else tooltip.hide();
+}
+
+
 function findMatching(word)
 {
    // get list of current autocomplete strings

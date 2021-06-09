@@ -950,7 +950,7 @@
                      for (var j=0; j<words.length; j++) if (words[j]!='')
                      {
                         var matching=findMatching(words[j]);
-                        if (matching.length>0) words[j]="<a><title>"+matching[0].title+"</title>"+words[j]+"</a>";
+                        if (matching.length>0) words[j]="<a data-title=\""+matching[0].title+"\">"+words[j]+"</a>";
                      }
                      $(tspans[i]).html(words.join('&nbsp;').replace(/(&nbsp;)+/g,'&nbsp;'));
                   }

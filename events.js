@@ -139,6 +139,9 @@ $(document).ready(function(){
    $('#memallocstaticbtn').click(function(){setMemAlloc('static');});
    $('#memallocdynamicbtn').click(function(){setMemAlloc('dynamic');});
 
+   $(document).on('mousemove','tspan a',function(ev){ autosuggestTooltip(ev,true); });
+   $(document).on('mouseleave mousedown','tspan a',function(ev){ autosuggestTooltip(ev,false); });
+
    // payment events
    $('#freetrialcontinue').click(function(){$('#payment').hide();});
    $('#chromeloginretry').click(function(){check_payment();});
