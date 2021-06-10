@@ -214,7 +214,7 @@ function autosuggestTooltip(el,show)
 {
    var t=$(el.target).data('title');
    var tooltip=$('#atooltip');
-   tooltip.css({'top':($(el.target).position().top+15)+'px','left':$(el.target).position().left+'px'});
+   tooltip.css({'top':($(el.target).position().top+16)+'px','left':Math.floor($(el.target).position().left+el.target.getBBox().width-20)+'px'});
    tooltip.text(t);
    if (show && !mouseButtonIsDown()) tooltip.show();
    else tooltip.hide();
