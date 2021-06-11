@@ -139,8 +139,8 @@ $(document).ready(function(){
    $('#memallocstaticbtn').click(function(){setMemAlloc('static');});
    $('#memallocdynamicbtn').click(function(){setMemAlloc('dynamic');});
 
-   $(document).on('mousemove mouseup','tspan a',function(ev){ setTimeout(function(){autosuggestTooltip(ev,true);},10); });
-   $(document).on('mouseleave mousedown','tspan a',function(ev){ setTimeout(function(){autosuggestTooltip(ev,false);},10); });
+   $(document).on('mousemove mouseup','tspan a',function(ev){ setTimeout(function(){autocompleteTooltip(ev,true);},10); });
+   $(document).on('mouseleave mousedown','tspan a',function(ev){ setTimeout(function(){autocompleteTooltip(ev,false);},10); });
 
    // payment events
    $('#freetrialcontinue').click(function(){$('#payment').hide();});

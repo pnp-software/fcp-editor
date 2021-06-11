@@ -294,6 +294,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 <script type="text/javascript" src="props.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="history.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="loadsave.js<?php echo $rev; ?>"></script>
+<script type="text/javascript" src="autocomplete.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="tabs.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="actions.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="offline.js<?php echo $rev; ?>"></script>
