@@ -1,3 +1,64 @@
+
+// initialize (prepare) autocomplete data so it does not need to be made every time again
+function init_autocomplete()
+{
+   g.autocomplete_processed={};
+
+   for (var ix in g.autocomplete)
+   {
+      var res=[];
+      var str,par,i,j,row;
+      var list=g.autocomplete[ix];
+
+      for(i=0; i<list.TM.length; i++)
+      {
+         row=list.TM[i];
+
+         // TM(x,y)_spid
+         str="#TM("+row.TYPE+","+row.STYPE+")_"+row.SPID;
+         res.push({'display':['TM('+row.TYPE+','+row.STYPE+')',row.DESCR,row.SPID], "replace":str, "group":"#TM", "title":row.DESCR});
+
+         // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
+         for(j=0; j<row.params.length; j++)
+         {
+            if (row.params[j].PID!=null)
+            {
+               par=row.params[j].DESCR;
+               res.push({'belongsTo':str,'display':[row.params[j].NAME,row.params[j].DESCR], "replace":par, "group":"#HK", "title":row.params[j].NAME}); // TODO: TMPAR
+            }
+         }
+
+         // Find matching #EID ... TM where TYPE=5
+         if (row.TYPE==5)
+         {
+            str=row.DESCR;
+            res.push({'display':["EID("+row.TYPE+","+row.STYPE+")",row.DESCR,row.SPID], "replace":str, "group":"#EID", "title":row.DESCR});
+         }
+      }
+
+      for(i=0; i<list.TC.length; i++)
+      {
+         row=list.TC[i];
+
+         // TC(x,y)_cname
+         str="#TC("+row.TYPE+","+row.STYPE+")_"+row.CNAME;
+         res.push({'display':['TC('+row.TYPE+','+row.STYPE+')',row.DESCR,row.CNAME], "replace":str, "group":"#TC", "title":row.DESCR});
+
+         // TCPar, such as PAR_PROP_PARAM_STR_LENGT
+         for(j=0; j<row.params.length; j++)
+         {
+            par=row.params[j].DESCR;
+            res.push({'belongsTo':str,'display':[row.params[j].PNAME,row.params[j].DESCR], "replace":par, "group":"#TCPar", "title":row.params[j].PNAME}); // TODO: TCPAR
+         }
+      }
+
+      g.autocomplete_processed[ix]=res;
+   }
+
+   init_autocomplete_list();
+}
+
+
 // show or hide tooltip when hovering a text in diagram
 function autocompleteTooltip(el,show)
 {
@@ -10,59 +71,20 @@ function autocompleteTooltip(el,show)
 }
 
 
-function findMatching(word)
+function autocompleteTitle(word)
 {
-   // get list of current autocomplete strings
-   var list=g.autocomplete[g.fwprop.autocomplete];
-   if (!list || list.length==0) return [];
+   var list=g.autocomplete_processed[g.fwprop.autocomplete];
+   for(var i=0; i<list.length; i++) if (list[i].replace==word) return list[i].title;
+   return '';
+}
 
+
+function autocompleteFindMatching(word)
+{
+   var list=g.autocomplete_processed[g.fwprop.autocomplete];
    var matching=[];
-   var txt,i,j,row;
-
-   for(i=0; i<list.TM.length; i++)
-   {
-      row=list.TM[i];
-
-      // TM(x,y)_spid
-      txt="#TM("+row.TYPE+","+row.STYPE+")_"+row.SPID;
-      if (txt.indexOf(word)>=0) matching.push({'display':['TM('+row.TYPE+','+row.STYPE+')',row.DESCR,row.SPID], "replace":txt, "group":"#TM", "title":row.DESCR});
-
-      // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
-      for(j=0; j<row.params.length; j++)
-      {
-         if (row.params[j].PID!=null)
-         {
-            txt=row.params[j].DESCR;
-            if (txt.indexOf(word)>=0) matching.push({'display':[row.params[j].NAME,row.params[j].DESCR], "replace":txt, "group":"#HK", "title":row.params[j].NAME}); // TODO: TMPAR?
-         }
-      }
-
-      // Find matching #EID ... TM where TYPE=5
-      if (row.TYPE==5)
-      {
-         txt=row.DESCR;
-         if (txt.indexOf(word)>=0 || "#EID".indexOf(word)>=0) matching.push({'display':["EID("+row.TYPE+","+row.STYPE+")",row.DESCR,row.SPID], "replace":txt, "group":"#EID", "title":row.DESCR});
-      }
-   }
-
-   for(i=0; i<list.TC.length; i++)
-   {
-      row=list.TC[i];
-
-      // TC(x,y)_cname
-      txt="#TC("+row.TYPE+","+row.STYPE+")_"+row.CNAME;
-      if (txt.indexOf(word)>=0) matching.push({'display':['TC('+row.TYPE+','+row.STYPE+')',row.DESCR,row.CNAME], "replace":txt, "group":"#TC", "title":row.DESCR});
-
-      // TCPar, such as PAR_PROP_PARAM_STR_LENGT
-      for(j=0; j<row.params.length; j++)
-      {
-         txt=row.params[j].DESCR;
-         if (txt.indexOf(word)>=0) matching.push({'display':[row.params[j].PNAME,row.params[j].DESCR], "replace":txt, "group":"#TCPar", "title":row.params[j].PNAME}); // TODO: TCPAR
-      }
-   }
-
+   for(var i=0; i<list.length; i++) if (list[i].replace.indexOf(word)>=0) matching.push(list[i]);
    // TODO Find matching #FPC
-
    return matching;
 }
 
@@ -99,7 +121,7 @@ function textareaAutocomplete(t)
    var h=dummy.prop("scrollHeight");
    dummy.remove();
 
-   var matching=findMatching(word);
+   var matching=autocompleteFindMatching(word);
 
    // show autocomplete suggestions in a popup
    var html='';

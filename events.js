@@ -7,7 +7,7 @@ function timer()
 
 $(document).ready(function(){
 
-   init_autocomplete_list();
+   init_autocomplete();
    setInterval(timer,1000); // refresh list of saved files in 60-second interval
    load_saved_files_list(); // initialize saved files list
 
