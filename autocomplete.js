@@ -74,6 +74,7 @@ function autocompleteTooltip(el,show)
 function autocompleteTitle(word)
 {
    var list=g.autocomplete_processed[g.fwprop.autocomplete];
+   if (!list) return '';
    for(var i=0; i<list.length; i++) if (list[i].replace==word) return list[i].title;
    return '';
 }
@@ -82,10 +83,27 @@ function autocompleteTitle(word)
 function autocompleteFindMatching(word)
 {
    var list=g.autocomplete_processed[g.fwprop.autocomplete];
+   if (!list) return [];
    var matching=[];
    for(var i=0; i<list.length; i++) if (list[i].replace.indexOf(word)>=0) matching.push(list[i]);
    // TODO Find matching #FPC
    return matching;
+}
+
+
+// add actual html/svg code to the tspans to support tooltips
+function autocompleteTooltips(tspans)
+{
+   for (var i=0; i<tspans.length; i++)
+   {
+      var words=$(tspans[i]).text().split(/\s/);
+      for (var j=0; j<words.length; j++) if (words[j]!='')
+      {
+         var title=autocompleteTitle(words[j]);
+         if (title) words[j]="<a data-title=\""+htmlspecialchars(title)+"\">"+words[j]+"</a>";
+      }
+      $(tspans[i]).html(words.join('&nbsp;').replace(/(&nbsp;)+/g,'&nbsp;'));
+   }
 }
 
 

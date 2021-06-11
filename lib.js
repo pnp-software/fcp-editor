@@ -718,6 +718,8 @@
          {
             conn.text.str=text;
             conn.text.attr({ "text": text });
+            var tspans=conn.text.node.childNodes;
+            if (tspans.length>0) autocompleteTooltips(tspans);
          }
       }
    }
@@ -944,17 +946,7 @@
                {
                   $(tspans[0]).css("font-weight","bold");
                   y=$(tspans[0]).attr("dy");
-
-                  for (var i=0; i<tspans.length; i++)
-                  {
-                     var words=$(tspans[i]).text().split(/\s/);
-                     for (var j=0; j<words.length; j++) if (words[j]!='')
-                     {
-                        var title=autocompleteTitle(words[j]);
-                        if (title) words[j]="<a data-title=\""+htmlspecialchars(title)+"\">"+words[j]+"</a>";
-                     }
-                     $(tspans[i]).html(words.join('&nbsp;').replace(/(&nbsp;)+/g,'&nbsp;'));
-                  }
+                  autocompleteTooltips(tspans);
                }
             }
          }
