@@ -922,13 +922,14 @@
    function updateStateText(state,updateOnlyPosition)
    {
       var margin=20;
-      var oldtext=state.text.attr("text");
-      var newtext=buildStateText(state);
-      var tspans=state.text.node.childNodes;
-      var y=$(tspans[0]).attr("dy");
 
       if (state.text)
       {
+         var tspans=state.text.node.childNodes;
+         var y=$(tspans[0]).attr("dy");
+         var oldtext=state.text.attr("text");
+         var newtext=buildStateText(state);
+
          if (!updateOnlyPosition)
          {
             // force pre-formated whitespace for Notes
