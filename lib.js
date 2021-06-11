@@ -697,13 +697,13 @@
       if (stateIsNote(conn.stateFrom)) return;
 
       stereotypeAp = svgDoubleLt()+"AP"+svgDoubleGt()+" ";
-      sStereotypeApGuard = conn.fwprop.guardAp?stereotypeAp:svgEmptyChar();
-      sStereotypeApAction = conn.fwprop.actionAp?stereotypeAp:svgEmptyChar();      
+      sStereotypeApGuard = conn.fwprop.guardAp?stereotypeAp:"";
+      sStereotypeApAction = conn.fwprop.actionAp?stereotypeAp:"";
 
       var text= (conn.fwprop.identifier!='' ? conn.fwprop.identifier : "") +
                 ( (conn.fwprop.guardFunc && conn.fwprop.guardFunc!='')
                   || (conn.fwprop.guardCode && conn.fwprop.guardCode!='')
-                  || (conn.fwprop.guardDesc && conn.fwprop.guardDesc!='') ? " ["+sStereotypeApGuard+svgNewlines(displayInfoText(conn.fwprop.guardFunc?conn.fwprop.guardFunc:conn.fwprop.guardCode,conn.fwprop.guardDesc))+"] " : "");
+                  || (conn.fwprop.guardDesc && conn.fwprop.guardDesc!='') ? " [ "+sStereotypeApGuard+svgNewlines(displayInfoText(conn.fwprop.guardFunc?conn.fwprop.guardFunc:conn.fwprop.guardCode,conn.fwprop.guardDesc))+" ] " : "");
 
           text = text + ( (conn.fwprop.actionFunc && conn.fwprop.actionFunc!='')
                           || (conn.fwprop.actionCode && conn.fwprop.actionCode!='')
@@ -831,11 +831,11 @@
 
    function svgDoubleLt()
    {
-       return String.fromCharCode(60).concat(String.fromCharCode(60));
+       return "&lt;&lt;";
    }
    function svgDoubleGt()
    {
-       return String.fromCharCode(62).concat(String.fromCharCode(62));
+       return "&gt;&gt;";
    }   
 
    function textPFX(text,prefix,suffix,nonbsp)
