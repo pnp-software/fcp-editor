@@ -15,24 +15,24 @@ function init_autocomplete()
          row=list.TM[i];
 
          // TM(x,y)_spid
-         str="#TM("+row.TYPE+","+row.STYPE+")_"+row.SPID;
-         res.push({'display':['TM('+row.TYPE+','+row.STYPE+')',row.DESCR,row.SPID], "replace":str, "group":"#TM", "title":row.DESCR});
+         str="#TM("+row.TYPE+","+row.STYPE+"):"+row.SPID;
+         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',row.DESCR,row.SPID], "replace":str, "group":"#TM", "title":row.DESCR});
 
          // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
          for(j=0; j<row.params.length; j++)
          {
             if (row.params[j].PID!=null)
             {
-               par=row.params[j].DESCR;
-               res.push({'belongsTo':str,'display':[row.params[j].NAME,row.params[j].DESCR], "replace":par, "group":"#HK", "title":row.params[j].NAME}); // TODO: TMPAR
+               par='#HK:'+row.params[j].DESCR;
+               res.push({'belongsTo':str,'display':[par,row.params[j].NAME], "replace":par, "group":"#HK", "title":row.params[j].NAME});
             }
          }
 
          // Find matching #EID ... TM where TYPE=5
          if (row.TYPE==5)
          {
-            str=row.DESCR;
-            res.push({'display':["EID("+row.TYPE+","+row.STYPE+")",row.DESCR,row.SPID], "replace":str, "group":"#EID", "title":row.DESCR});
+            str='#EID:'+row.DESCR;
+            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",row.DESCR,row.SPID], "replace":str, "group":"#EID", "title":row.DESCR});
          }
       }
 
@@ -41,14 +41,14 @@ function init_autocomplete()
          row=list.TC[i];
 
          // TC(x,y)_cname
-         str="#TC("+row.TYPE+","+row.STYPE+")_"+row.CNAME;
-         res.push({'display':['TC('+row.TYPE+','+row.STYPE+')',row.DESCR,row.CNAME], "replace":str, "group":"#TC", "title":row.DESCR});
+         str="#TC("+row.TYPE+","+row.STYPE+"):"+row.CNAME;
+         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',row.DESCR,row.CNAME], "replace":str, "group":"#TC", "title":row.DESCR});
 
          // TCPar, such as PAR_PROP_PARAM_STR_LENGT
          for(j=0; j<row.params.length; j++)
          {
-            par=row.params[j].DESCR;
-            res.push({'belongsTo':str,'display':[row.params[j].PNAME,row.params[j].DESCR], "replace":par, "group":"#TCPar", "title":row.params[j].PNAME}); // TODO: TCPAR
+            par='#TCPAR:'+row.params[j].DESCR;
+            res.push({'belongsTo':str,'display':[par,row.params[j].PNAME], "replace":par, "group":"#TCPAR", "title":row.params[j].PNAME});
          }
       }
 
@@ -62,10 +62,10 @@ function init_autocomplete()
 // show or hide tooltip when hovering a text in diagram
 function autocompleteTooltip(el,show)
 {
-   var t=$(el.target).data('title');
+   var t=htmlspecialchars($(el.target).data('title')).replace('\n','<br>');
    var tooltip=$('#atooltip');
    tooltip.css({'top':($(el.target).position().top+16)+'px','left':Math.floor($(el.target).position().left+el.target.getBBox().width-20)+'px'});
-   tooltip.text(t);
+   tooltip.html(t);
    if (show && !mouseButtonIsDown()) tooltip.show();
    else tooltip.hide();
 }
@@ -73,10 +73,11 @@ function autocompleteTooltip(el,show)
 
 function autocompleteTitle(word)
 {
+   var res=[];
    var list=g.autocomplete_processed[g.fwprop.autocomplete];
-   if (!list) return '';
-   for(var i=0; i<list.length; i++) if (list[i].replace==word) return list[i].title;
-   return '';
+   if (!list) return res;
+   for(var i=0; i<list.length; i++) if (list[i].replace==word) res.push(list[i].title);
+   return res.filter(function(value,index,self){ return self.indexOf(value) === index}).join("\n");
 }
 
 
@@ -145,8 +146,9 @@ function textareaAutocomplete(t)
    var html='';
    for(i=0; i<matching.length; i++)
    {
-      var td='<td>'+matching[i].group+'</td>'; for(j=0; j<matching[i].display.length; j++) td+="<td>"+matching[i].display[j]+"</td>";
-      td+='<td></td>'.repeat(4-j-1);
+      var td=''; for(j=0; j<matching[i].display.length; j++) td+="<td>"+matching[i].display[j]+"</td>";
+      if (matching[i].belongsTo) td+="<td>For: "+matching[i].belongsTo+"</td>"
+      td+='<td></td>'.repeat(Math.max(0,4-j-2));
       html+="<tr data-autocomplete='"+matching[i].replace+"'>"+td+"</tr>";
    }
    pop.html("<table cellspacing=0>"+html+"</table>");
