@@ -154,6 +154,7 @@ function textareaAutocomplete(t)
    pop.html("<table cellspacing=0>"+html+"</table>");
 
    pop.css('top',$(t).offset().top+h).css('right',$(window).width()-$(t).offset().left-$(t).width()-14);
+   pop.css('max-height',($(window).height()-$(t).offset().top-h-20)+'px');
    if (matching.length>0) pop.show(); else autocompleteHide();
 }
 
