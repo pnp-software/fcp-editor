@@ -700,46 +700,17 @@ function propUpdate()
 
    if (prevName!=curName)
    {
-      // get list of previous autocomplete possibilities
-      var listPrev=g.autocomplete[prevName] || [];
-//      listPrev=listPrev.map(function(val){ return val.replace(/ .*/,''); });
-      // get list of current autocomplete possibilities
-      var listCur=g.autocomplete[curName] || [];
-//      listCur=listCur.map(function(val){ return val.replace(/ .*/,''); });
-
-      // continue checking only if it makes sense
-if (false)
-      if (listPrev.length>0 && listCur.length>0)
+      // update all texts on states and connections
+      // so autosuggest tooltips are refreshed
+      for (var i=0; i<g.states.length; i++) 
       {
-         var wrong=[];
-         var errColor='#ff0000';
-         // get rid of previous which are still included in current
-         listPrev = listPrev.filter(function(val) { return listCur.indexOf(val)<0; });
-         // what remains must not be used anywhere anymore
-         for (var i=0; i<listPrev.length; i++)
-         {
-            for (var n=0; n<g.states.length; n++)
-               for (var prop in g.states[n].fwprop)
-                  if ((g.states[n].fwprop[prop]+"").indexOf(listPrev[i])>=0)
-                  {
-                     g.states[n].attr("fill",errColor);
-                     wrong.push(listPrev[i]);
-                  }
-
-            for (var n=0; n<g.connections.length; n++)
-               for (var prop in g.connections[n].fwprop)
-                  if ((g.connections[n].fwprop[prop]+"").indexOf(listPrev[i])>=0)
-                  {
-                     g.connections[n].fwprop.color=errColor;
-                     wrong.push(listPrev[i]);
-                  }
-
-             refreshConnections();
-             refreshStates();
-         }
-
-         wrong=array_unique(wrong);
-         if (wrong.length>0) msg("The following autocompleted texts are no longer available in currently selected preset. Elements containing these texts have been highlighted. After you fix the problem, reset the color of the elements manually.<br><br>"+wrong.join("<br>"),"error");
+         if (g.states[i].text) g.states[i].text.str='';
+         updateStateText(g.states[i]);
+      }
+      for (i=0; i<g.connections.length; i++) 
+      {
+         if (g.connections[i].text) g.connections[i].text.str='';
+         updateConnectionText(g.connections[i]);
       }
    }
 

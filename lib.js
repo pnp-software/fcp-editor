@@ -929,7 +929,6 @@
       {
          var tspans=state.text.node.childNodes;
          var y=$(tspans[0]).attr("dy");
-         var oldtext=state.text.attr("text");
          var newtext=buildStateText(state);
 
          if (!updateOnlyPosition)
@@ -937,8 +936,9 @@
             // force pre-formated whitespace for Notes
             if (stateIsNote(state)) $(state.text.node).css("white-space","pre");
 
-            if (oldtext!=newtext)
+            if (state.text.str!=newtext)
             {
+               state.text.str=newtext;
                state.text.attr("text", newtext);
                tspans=state.text.node.childNodes;
 
