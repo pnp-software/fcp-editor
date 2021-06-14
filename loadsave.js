@@ -445,6 +445,9 @@ function processFilelist(res,noBroadcast)
 
    // refresh toolbars, but only if focus is somewhere else
    if ($(':focus').filter(':input').length==0) refreshToolbars();
+
+   // refresh autocomplete lists
+   init_autocomplete();
 }
 
 function updateSaveList()

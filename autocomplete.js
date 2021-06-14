@@ -52,6 +52,13 @@ function init_autocomplete()
          }
       }
 
+      // #FPC diagrams list
+      for (i=0; i<g.knownFiles.length; i++)
+      {
+         str='#FCP:'+g.knownFiles[i].fwdata.globals.fwprop.smName.replace(/ /g,'_');
+         res.push({'display':[str,g.knownFiles[i].fwdata.globals.fwprop.smTitle], "replace":str, "group":"#FCP", "title":g.knownFiles[i].fwdata.globals.fwprop.smTitle||g.knownFiles[i].fwdata.globals.fwprop.smName});
+      }
+
       g.autocomplete_processed[ix]=res;
    }
 
@@ -87,7 +94,6 @@ function autocompleteFindMatching(word)
    if (!list) return [];
    var matching=[];
    for(var i=0; i<list.length; i++) if (list[i].replace.indexOf(word)>=0 || (list[i].belongsTo && list[i].belongsTo.indexOf(word)>=0 )) matching.push(list[i]);
-   // TODO Find matching #FPC
    matching.sort(function(a,b){ if (a.replace.indexOf(word)>=0) return -1; if (b.replace.indexOf(word)>=0) return 1; return 0; })
    return matching;
 }
@@ -147,9 +153,9 @@ function textareaAutocomplete(t)
    var html='';
    for(i=0; i<matching.length; i++)
    {
-      var td=''; for(j=0; j<matching[i].display.length; j++) td+="<td>"+matching[i].display[j]+"</td>";
-      if (matching[i].belongsTo) td+="<td>For: "+matching[i].belongsTo+"</td>"
-      td+='<td></td>'.repeat(Math.max(0,4-j-2));
+      var td=''; for(j=0; j<matching[i].display.length; j++) td+="<td>"+(matching[i].display[j]||'')+"</td>";
+      if (matching[i].belongsTo) { td+="<td>For: "+matching[i].belongsTo+"</td>"; j++; }
+      td+='<td></td>'.repeat(Math.max(0,4-j-1));
       html+="<tr data-autocomplete='"+matching[i].replace+"'>"+td+"</tr>";
    }
    pop.html("<table cellspacing=0>"+html+"</table>");
