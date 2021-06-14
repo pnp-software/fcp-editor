@@ -57,6 +57,12 @@ function init_autocomplete()
       {
          str='#FCP:'+g.knownFiles[i].fwdata.globals.fwprop.smName.replace(/ /g,'_');
          res.push({'display':[str,g.knownFiles[i].fwdata.globals.fwprop.smTitle], "replace":str, "group":"#FCP", "title":g.knownFiles[i].fwdata.globals.fwprop.smTitle||g.knownFiles[i].fwdata.globals.fwprop.smName});
+
+         for (j=0; j<g.knownFiles[i].fwdata.globals.fwprop.globalvar.length; j++) if (g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].name)
+         {
+            par=str+":"+g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].name;
+            res.push({'belongsTo':str,'display':[par,g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].name,"="+g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].value], "replace":par, "group":"#FPCPAR", "title":"="+g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].value});
+         }
       }
 
       g.autocomplete_processed[ix]=res;
@@ -155,7 +161,7 @@ function textareaAutocomplete(t)
    {
       var td=''; for(j=0; j<matching[i].display.length; j++) td+="<td>"+(matching[i].display[j]||'')+"</td>";
       if (matching[i].belongsTo) { td+="<td>For: "+matching[i].belongsTo+"</td>"; j++; }
-      td+='<td></td>'.repeat(Math.max(0,4-j-1));
+      td+='<td></td>'.repeat(Math.max(0,5-j-1));
       html+="<tr data-autocomplete='"+matching[i].replace+"'>"+td+"</tr>";
    }
    pop.html("<table cellspacing=0>"+html+"</table>");
