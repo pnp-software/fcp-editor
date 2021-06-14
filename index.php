@@ -147,10 +147,12 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
    position: fixed;
    border: 1px solid #000;
    max-height: 100px;
+   min-width: 350px;
    overflow-x: hidden;
    overflow-y: auto;
    background-color: #fff;
 }
+.autocomplete table { width: 100%; }
 .autocomplete tr td { padding: 0 4px 0 4px; color: black; cursor: default; font-size: 11px; white-space: nowrap; border-left: 1px solid #aaa; }
 .autocomplete tr td:first-child { border-left: 0; }
 .autocomplete tr td:last-child { padding-right: 20px; }

@@ -75,7 +75,7 @@ function autocompleteTitle(word)
 {
    var res=[];
    var list=g.autocomplete_processed[g.fwprop.autocomplete];
-   if (!list) return res;
+   if (!list) return '';
    for(var i=0; i<list.length; i++) if (list[i].replace==word) res.push(list[i].title);
    return res.filter(function(value,index,self){ return self.indexOf(value) === index}).join("\n");
 }
@@ -86,8 +86,9 @@ function autocompleteFindMatching(word)
    var list=g.autocomplete_processed[g.fwprop.autocomplete];
    if (!list) return [];
    var matching=[];
-   for(var i=0; i<list.length; i++) if (list[i].replace.indexOf(word)>=0) matching.push(list[i]);
+   for(var i=0; i<list.length; i++) if (list[i].replace.indexOf(word)>=0 || (list[i].belongsTo && list[i].belongsTo.indexOf(word)>=0 )) matching.push(list[i]);
    // TODO Find matching #FPC
+   matching.sort(function(a,b){ if (a.replace.indexOf(word)>=0) return -1; if (b.replace.indexOf(word)>=0) return 1; return 0; })
    return matching;
 }
 
