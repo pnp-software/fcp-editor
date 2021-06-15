@@ -144,6 +144,7 @@ function textareaAutocomplete(t)
    word=$.trim(word.substr(0,len));
    pop.data('targetPositionLength',len);
    if (word=='') return;
+   if (word.length<2) return;
 
    // find word position height within the element
    $('#dummyTextarea').remove();
