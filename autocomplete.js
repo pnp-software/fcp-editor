@@ -158,11 +158,15 @@ function textareaAutocomplete(t)
 
    // show autocomplete suggestions in a popup
    var html='';
+   var cols=0;
+
+   for(i=0; i<matching.length; i++) { cols=Math.max(cols,matching[i].display.length + (matching[i].belongsTo?1:0) ); }
+
    for(i=0; i<matching.length; i++)
    {
       var td=''; for(j=0; j<matching[i].display.length; j++) td+="<td>"+(matching[i].display[j]||'')+"</td>";
       if (matching[i].belongsTo) { td+="<td>For: "+matching[i].belongsTo+"</td>"; j++; }
-      td+='<td></td>'.repeat(Math.max(0,5-j-1));
+      td+='<td></td>'.repeat(Math.max(0,cols-j));
       html+="<tr data-autocomplete='"+matching[i].replace+"'>"+td+"</tr>";
    }
    pop.html("<table cellspacing=0>"+html+"</table>");
