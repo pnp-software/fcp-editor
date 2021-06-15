@@ -725,6 +725,7 @@ function propUpdate()
 
    updateTitle();
    all_tabs_refresh();
+   init_autocomplete();
 }
 
 
@@ -735,4 +736,5 @@ function init_autocomplete_list()
    options=options.sort(naturalSort).reverse();
    if (options.length==0) $('#autocompleteList').hide();
    else $('#epropAutocomplete').html( '<option><option>'+options.join('<option>'));
+   if (g.fwprop.autocomplete) $('#epropAutocomplete').val(g.fwprop.autocomplete);
 }
