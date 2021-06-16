@@ -694,27 +694,6 @@ function propUpdate()
    g.fwprop.postConditions=$('#epropPostConditions').val();
    g.fwprop.smNotes=$('#epropSmNotes').val();
 
-   var prevName=g.fwprop.autocomplete || "";
-   g.fwprop.autocomplete=$('#epropAutocomplete').val();
-   var curName=g.fwprop.autocomplete || "";
-
-   if (prevName!=curName)
-   {
-      // update all texts on states and connections
-      // so autosuggest tooltips are refreshed
-      for (var i=0; i<g.states.length; i++) 
-      {
-         if (g.states[i].text) g.states[i].text.str='';
-         updateStateText(g.states[i]);
-      }
-      for (i=0; i<g.connections.length; i++) 
-      {
-         if (g.connections[i].text) g.connections[i].text.str='';
-         updateConnectionText(g.connections[i]);
-      }
-   }
-
-
    g.fwprop.globalvar=[];
    $("#globvar, #globadd").find(".globrow").each(function(){ 
        g.fwprop.globalvar.push({
@@ -725,6 +704,20 @@ function propUpdate()
 
    updateTitle();
    all_tabs_refresh();
+
+   // update all texts on states and connections
+   // so autosuggest tooltips are refreshed
+   for (var i=0; i<g.states.length; i++) 
+   {
+      if (g.states[i].text) g.states[i].text.str='';
+      updateStateText(g.states[i]);
+   }
+   for (i=0; i<g.connections.length; i++) 
+   {
+      if (g.connections[i].text) g.connections[i].text.str='';
+      updateConnectionText(g.connections[i]);
+   }
+
    init_autocomplete();
 }
 
