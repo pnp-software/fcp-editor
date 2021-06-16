@@ -27,7 +27,7 @@
    {
       $row=mysqli_fetch_assoc($res);
       $res=[];
-      foreach($row as $key=>$val) $res[preg_replace("{^[^_]+_}","",$key)]=preg_replace("{\\s+}","_",trim($val));
+      foreach($row as $key=>$val) $res[preg_replace("{^[^_]+_}","",$key)]=is_null($val)?null:preg_replace("{\\s+}","_",trim($val));
       return $res;
    }
 

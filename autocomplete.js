@@ -21,7 +21,12 @@ function init_autocomplete()
          // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
          for(j=0; j<row.params.length; j++)
          {
-            if (row.params[j].PID!=null)
+            if (row.params[j].PID==null)
+            {
+               par='#TMPAR:'+row.params[j].DESCR;
+               res.push({'belongsTo':str,'display':[par,row.params[j].NAME], "replace":par, "group":"#TMPAR", "title":row.params[j].NAME});
+            }
+            else
             {
                par='#HK:'+row.params[j].DESCR;
                res.push({'belongsTo':str,'display':[par,row.params[j].NAME], "replace":par, "group":"#HK", "title":row.params[j].NAME});
