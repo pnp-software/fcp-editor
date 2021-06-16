@@ -114,7 +114,7 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
    background-color: #ffffff;
    color: #000000;
    border: 1px solid #000000;
-   text-align: center;
+   text-align: left;
    padding: 2px 5px;
    border-radius: 0px;
    font-size: 9px;

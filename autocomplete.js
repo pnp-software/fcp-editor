@@ -80,7 +80,7 @@ function init_autocomplete()
 // show or hide tooltip when hovering a text in diagram
 function autocompleteTooltip(el,show)
 {
-   var t=htmlspecialchars($(el.target).data('title')).replace('\n','<br>');
+   var t=htmlspecialchars($(el.target).data('title')).replace(/\n/g,'<br>');
    var tooltip=$('#atooltip');
    tooltip.css({'top':($(el.target).position().top+16)+'px','left':Math.floor($(el.target).position().left+el.target.getBBox().width-20)+'px'});
    tooltip.html(t);
@@ -94,7 +94,7 @@ function autocompleteTitle(word)
    var res=[];
    var list=g.autocomplete_processed[g.fwprop.autocomplete];
    if (!list) return '';
-   for(var i=0; i<list.length; i++) if (list[i].replace==word) res.push(list[i].title);
+   for(var i=0; i<list.length; i++) if (list[i].replace==word) res.push(list[i].title+(list[i].belongsTo?" | For: "+list[i].belongsTo:""));
    return res.filter(function(value,index,self){ return self.indexOf(value) === index}).join("\n");
 }
 
