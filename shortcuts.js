@@ -25,12 +25,17 @@ function processGlobalShortcuts(event)
       break;
 
       case 27: // Esc
-      if (event.type=='keydown') // ignore esc keyup
+      if (event.type=='keydown')
       {
          propSuggestHide();
          if ($('#modalq').is(":visible")) modalqDestroy();
          else modalDestroy();
       }
+      if (event.type=='keyup')
+      {
+         autocompleteHide();
+      }
+
       break;
    }
 
