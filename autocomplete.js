@@ -94,7 +94,7 @@ function autocompleteTitle(word)
    var res=[];
    var list=g.autocomplete_processed[g.fwprop.autocomplete];
    if (!list) return '';
-   for(var i=0; i<list.length; i++) if (list[i].replace==word) res.push(list[i].title+(list[i].belongsTo?" ... In "+list[i].belongsTo:""));
+   for(var i=0; i<list.length; i++) if (list[i].replace==word) res.push(list[i].title+(list[i].belongsTo?" ... in "+list[i].belongsTo:""));
    return res.filter(function(value,index,self){ return self.indexOf(value) === index}).join("\n");
 }
 
@@ -170,7 +170,7 @@ function textareaAutocomplete(t)
    for(i=0; i<matching.length; i++)
    {
       var td=''; for(j=0; j<matching[i].display.length; j++) td+="<td>"+(matching[i].display[j]||'')+"</td>";
-      if (matching[i].belongsTo) { td+="<td>In: "+matching[i].belongsTo+"</td>"; j++; }
+      if (matching[i].belongsTo) { td+="<td>in: "+matching[i].belongsTo+"</td>"; j++; }
       td+='<td></td>'.repeat(Math.max(0,cols-j));
       html+="<tr data-autocomplete='"+matching[i].replace+"'>"+td+"</tr>";
    }
