@@ -66,7 +66,7 @@ function init_autocomplete()
          for (j=0; j<g.knownFiles[i].fwdata.globals.fwprop.globalvar.length; j++) if (g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].name)
          {
             par=str+":"+g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].name;
-            res.push({'belongsTo':str,'display':[par,g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].name,"="+g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].value], "replace":par, "group":"#FPCPAR", "title":"="+g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].value});
+            res.push({'belongsTo':str,'display':[par,g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].name,"="+g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].value], "replace":par, "group":"#FPCPAR", "title":g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].name+" = "+g.knownFiles[i].fwdata.globals.fwprop.globalvar[j].value});
          }
       }
 
@@ -94,7 +94,7 @@ function autocompleteTitle(word)
    var res=[];
    var list=g.autocomplete_processed[g.fwprop.autocomplete];
    if (!list) return '';
-   for(var i=0; i<list.length; i++) if (list[i].replace==word) res.push(list[i].title+(list[i].belongsTo?" | For: "+list[i].belongsTo:""));
+   for(var i=0; i<list.length; i++) if (list[i].replace==word) res.push(list[i].title+(list[i].belongsTo?" ... For: "+list[i].belongsTo:""));
    return res.filter(function(value,index,self){ return self.indexOf(value) === index}).join("\n");
 }
 
