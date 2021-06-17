@@ -3,7 +3,7 @@
    require('version.php');
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head><title>FW Profile Editor for State Machines and Procedures</title>
+<html><head><title>FCP Editor</title>
 <meta name="description" content="Edit State Machines and Procedures using web user interface and generate C code by just one click">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Content-Language" content="en">
@@ -555,7 +555,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 <div style='margin: auto; margin-top: 200px; background-color: #fff; border: 1px solid silver; border-radius: 5px; width: 400px; padding: 20px;'>
 <div id=paynoaccess>
   <h1>Sign in to get access</h1>
-  <br>Thank you for using FW Profile Editor.
+  <br>Thank you for using the FCP Editor.
   Please make sure you sign in using your Google account. If you are not signed in, a new window with login form should open.
   The sign in process is needed to grant you your free trial access.<br><br>
   <button class="btn btn-info" id=chromeloginretry>Sign In</button>
@@ -565,14 +565,14 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 </div>
 <div id=paysoonmsg>
   <h1>Your free trial is ending soon.</h1>
-  <br>Thank you for using FW Profile Editor.
+  <br>Thank you for using the FCP Editor.
   Your free trial is ending soon. You can continue using it for <b id=freedaysleft>3</b> more days,
   then you will be required to purchase. Thank you very much for your support.<br><br>
   <button class="btn btn-info" id=freetrialcontinue>Continue</button>
 </div>
 <div id=paynowmsg>
   <h1>Your free trial is over.</h1>
-  <br>Thank you for using FW Profile Editor.
+  <br>Thank you for using the FCP Editor.
   Your free trial is over. Please consider purchasing to support further development. Thank you very much for your support.<br><br>
   <button class="btn btn-success" id=buynowbtn>Buy now</button>
 </div>

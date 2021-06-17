@@ -783,7 +783,7 @@
 
    function updateTitle()
    {
-      var t="FW Profile Editor for State Machines and Procedures";
+      var t="FCP Editor for State Machines and Procedures";
       if (g.fwprop.smName!='') t=g.fwprop.smName+" :: "+editorSwitch("State Machine","Procedure");
       document.title=t;
    }

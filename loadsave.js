@@ -916,7 +916,7 @@ function revisionsDo(revisions)
 function shareStart(ev,t,id)
 {
    ev.stopPropagation();
-   if (offline()) { msg('Sharing is not available for offline version of FW Profile editor','error'); return; }
+   if (offline()) { msg('Sharing is not available for offline version of FCP Editor','error'); return; }
 
    $('#waitimg').show();
    $.post('share.php',{'action':'getusers','id':id},function(res)

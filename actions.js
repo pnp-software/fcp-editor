@@ -17,8 +17,8 @@ function importFileSelected()
       reader.onloadend=function(ev)
       {
          g.import=this.result;
-         try { var data=JSON.parse(g.import); } catch (err) { importFilePrintError('Not a valid JSON export file for FW Profile editor'); return; }
-         try { var smName=data.globals.fwprop.smName; } catch(err) { importFilePrintError('Not a valid JSON export file for FW Profile editor'); return; }
+         try { var data=JSON.parse(g.import); } catch (err) { importFilePrintError('Not a valid JSON export file for FCP Eeditor'); return; }
+         try { var smName=data.globals.fwprop.smName; } catch(err) { importFilePrintError('Not a valid JSON export file for FCP Editor'); return; }
          $('#importfilename').html("<b>Selected file:</b> "+name+"<br><b>Diagram name:</b> "+smName+"<BR><b>Type:</b> "+(data.globals.fwprop.editorType=='Pr' ? "Procedure" : "State Machine")+"<br><br><i>Click the Import button to proceed with import. Any unsaved diagram data will be lost.<br>You may still hit the Undo button to go back in history and revert the import though.</i>");
          $('#importbutton').show();
       };
@@ -56,7 +56,7 @@ function fixSVG(svg,viewbox)
       vbx='"'+x+" "+y+" "+w+" "+h+'"';
    }
 
-   svg=svg.replace(/<desc[^>]*>[^<>]*<\/desc>/gi,"<desc>Created by FW Profile Editor thanks to Raphaeljs library</desc>");
+   svg=svg.replace(/<desc[^>]*>[^<>]*<\/desc>/gi,"<desc>Created by FCP Editor thanks to Raphaeljs library</desc>");
    svg=svg.replace(/ *= */g,"=");
    svg=svg.replace(/viewBox="[^"]+"/gi,'viewBox='+vbx);
    if (!svg.match(/viewBox=/i)) svg=svg.replace(/(<svg )/i,"$1viewBox="+vbx+" ");

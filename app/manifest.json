@@ -5,9 +5,9 @@
       "scopes": ["https://www.googleapis.com/auth/chromewebstore.readonly"]
   },
 
-  "name": "FW Profile Editor",
-  "description": "FW Profile Editor for state machines and procedures",
-  "version": "4.0",
+  "name": "FCP Editor",
+  "description": "Editor for Flight Control Procedure (FCPs)",
+  "version": "0.9",
   "manifest_version": 2,
 
   "app": {

@@ -19,7 +19,7 @@
    {
       $hash=md5(nicePassword(32));
       execQuery("UPDATE users SET passResetCode='".$hash."' WHERE id=".$user['id']);
-      sendmailPHP("noreply@pnp-software.com",$user['email'],"Password reset code for FW Profile editor","Dear user.\nPassword reset code for you is following:\n\n".$hash);
+      sendmailPHP("noreply@pnp-software.com",$user['email'],"Password reset code for FCP Editor","Dear user.\nPassword reset code for you is following:\n\n".$hash);
       die("ok");
    }
 

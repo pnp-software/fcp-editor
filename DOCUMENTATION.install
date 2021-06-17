@@ -23,7 +23,7 @@ How to install:
   delete all existing tables and rerun the install.php script again.
 
 - When done, navigate to http://www.yourdomain.com/fcp-editor/
-  and you will see FW Profile editor there.
+  and you will see FCP Editor there.
   
 - If you wish to have auto-completion support for PUS items, install a
   database in SCOS-2000 format. The database name must start with "SCOS_".
