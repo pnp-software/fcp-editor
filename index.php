@@ -525,7 +525,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
     <tr><td colspan=2 style="height: 100%;" valign=bottom>
        <!-- logo -->
        <table border=0 width=120 cellspacing=0 cellpadding=0>
-       <tr><td width=30><a href="http://www.pnp-software.com/fwprofile/" target=_blank><img border=0 src=img/logo.png style='margin-bottom: 15px; margin-left: 3px; margin-top: 15px;'></a>
+       <tr><td width=30><a href="http://www.pnp-software.com/fcp-editor/" target=_blank><img border=0 src=img/LogoFcp.png style='margin-bottom: 15px; margin-left: 3px; margin-top: 15px;'></a>
        </td><td valign=bottom><div class=rotate style='color: #fff; font-size: 12px; white-space: nowrap; margin-bottom: 45px;'>(c) P&amp;P Software<br>version <?php echo $version; ?></div>
        </td></tr></table>
     </td></tr>
