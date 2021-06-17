@@ -1,6 +1,6 @@
 How to upgrade:
 
-Basically, any new installation of FW Profile web editor doesn't have to be backward compatible with
+Basically, any new installation of FCP web editor doesn't have to be backward compatible with
 any older installation. New version will probably contain some new files, and will exclude some old
 files. For that reason, it is recommended to completely delete the old installation directory
 before installing any new version. However, you may find it useful to make a backup of your old
