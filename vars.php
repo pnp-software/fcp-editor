@@ -27,6 +27,7 @@
    {
       $row=mysqli_fetch_assoc($res);
       $res=[];
+      if (!$row || count($row)<1) return $res;
       foreach($row as $key=>$val) $res[preg_replace("{^[^_]+_}","",$key)]=is_null($val)?null:preg_replace("{\\s+}","_",trim($val));
       return $res;
    }
@@ -34,8 +35,9 @@
 
    // send autocomplete data from databases prefixed by SCOS_
    $resultDB=execQuery("SHOW DATABASES LIKE 'SCOS_%'"); // result order is undefined
-   while($database=reset(mysqli_fetch_assoc($resultDB)))
+   while($database=mysqli_fetch_assoc($resultDB))
    {
+      $database=reset($database);
       // Telemetry Reports
       // PID: data
       // PCF: params
