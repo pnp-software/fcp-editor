@@ -692,6 +692,7 @@ function propUpdate()
    g.fwprop.smTitle=$('#epropSmTitle').val();
    g.fwprop.preConditions=$('#epropPreConditions').val();
    g.fwprop.postConditions=$('#epropPostConditions').val();
+   g.fwprop.autocomplete=$('#epropAutocomplete').val();
    g.fwprop.smNotes=$('#epropSmNotes').val();
 
    g.fwprop.globalvar=[];
