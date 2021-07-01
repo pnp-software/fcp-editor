@@ -4,7 +4,9 @@ Web-based editor for specifying Flight Control Procedures (FCPs) based on ESA's 
 
 FCPs are represented as UML activity diagrams which are created by dragging and dropping pre-defined elements on a canvas.
 The editor is customized with a MySQL database which defines the PUS telecommands and telemetry packets in SCOS-2000 format.
-The editor offers auto-completion facilities which allow users to quickly reference telecommands and telemetry packets and their internal parameters.
+The editor offers auto-completion facilities which allow users to quickly reference telecommands and telemetry packets and their internal parameters (see screenshot below).
+
+![TcAutoComp](https://user-images.githubusercontent.com/15838404/124101807-03c6ae00-da60-11eb-9a0c-51bd509d3c85.png)
 
 FCP models can be shared (either in read-only or in read-write mode) with other users. They are serialized to a <code>json</code> format which can be exported and which users can use for further processing (e.g. to generate a test sequence implementing an FCP).
 
