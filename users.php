@@ -3,7 +3,7 @@
    require_once('inc_db.php');
    require_once('inc_lib.php');
    require_once('inc_session.php');
-   require('config.php');
+   require('config_user.php');
 
    if (userID()!=$exampleUserID) die("You are not authorized to see this. Please login first.");
 

@@ -1,7 +1,7 @@
 <?php
 
    require('inc_db.php');
-   require('config.php');
+   require('config_user.php');
 
    echo "Creating mysql tables (if not exist)... ";
 

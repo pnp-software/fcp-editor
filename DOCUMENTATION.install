@@ -8,7 +8,8 @@ How to install:
 - Make sure that the 'tmp' directory is writable by all:
   chmod 0777 ./fcp-editor/tmp
 
-- Edit config.php file on server, for example ./fcp-editor/config.php
+- Rename or copy config.php file on server to config_user.php,
+  for example ./fcp-editor/config_user.php
   and make sure to put there correct credentials for MySQL connection.
 
 - Make sure your database is already created. It doesn't need

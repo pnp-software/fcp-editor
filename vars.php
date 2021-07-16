@@ -1,8 +1,8 @@
 <?php
-   require('config.php');
    require('version.php');
    require_once('inc_db.php');
    require_once('inc_lib.php');
+   require('config_user.php');
 
    header("Content-Type: text/javascript");
 

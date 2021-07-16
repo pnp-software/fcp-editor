@@ -22,7 +22,8 @@
   {
      GLOBAL $dbcon_link_db;
 
-     require('config.php'); // sql settings
+     // sql settings
+     require('config_user.php');
 
      // if mysql connection is not set, setup it now
      if (!$dbcon_link_db)
