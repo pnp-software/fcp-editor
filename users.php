@@ -5,16 +5,16 @@
    require_once('inc_session.php');
    require('config_user.php');
 
-   $r="?rand=".time();
-   echo "<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"></head><body>";
-   echo "<script type='text/javascript' src=js/jquery.min.js></script>";
-   echo "<style>td,body { font-family: Verdana; font-size: 12px; } button,input {padding:10px; margin: 1px;} i { color: red; display: block; margin-bottom: 20px; } </style>";
+   $html="<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"></head><body>".
+         "<script type='text/javascript' src=js/jquery.min.js></script>".
+         "<style>td,body { font-family: Verdana; font-size: 12px; } button,input {padding:10px; margin: 1px;} i { color: red; display: block; margin-bottom: 20px; } </style>";
 
    // check if user is signed in
    // if not, provide login form
    //
    if (userID()!=$exampleUserID)
    {
+      echo $html;
       echo "You are not authorized to see this. Please login first.<br><br>";
 
       echo "<table border=0 cellspacing=0 cellpadding=5>
@@ -35,18 +35,6 @@
    }
 
 
-   // user is signed in
-
-   $dbs=[];
-   $result=execQuery("SHOW DATABASES LIKE 'SCOS_%'"); // result order is undefined
-   while($database=mysqli_fetch_assoc($result))
-   {
-      $database=reset($database);
-      $dbs[]=$database;
-   }
-
-
-
    // user requested to be signed in as a different user:
    //
    if ($_REQUEST['seeas']>0)
@@ -59,6 +47,16 @@
    }
 
 
+   $dbs=[];
+   $result=execQuery("SHOW DATABASES LIKE 'SCOS_%'"); // result order is undefined
+   while($database=mysqli_fetch_assoc($result))
+   {
+      $database=reset($database);
+      $dbs[]=$database;
+   }
+
+
+   echo $html;
 
    // user uploaded a file to import SCOS database
    //
@@ -218,10 +216,9 @@
       echo "<td>".$row['registered']."</td>";
       echo "<td>".$row['lastLogin']."</td>";
       echo "<td align=right>".$row['cnt']."</td>";
-      echo "<td><a target=_blank href=\"users.php?seeas=".$row['id']."&name=".urlencode($row['fullName'])."\">sign in as this user</a>";
+      echo "<td><a href=\"users.php?seeas=".$row['id']."&name=".urlencode($row['fullName'])."\">sign in as this user</a>";
       echo "</tr>";
    }
 
    echo "</table>";
-
 ?>
