@@ -620,14 +620,14 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
                           <blockquote>Sign in</blockquote>
                           <div style='margin-left: 20px;'>
                              <p>This website has more to offer when you sign in to your Account. Save and restore your diagrams,
-                             download generated code as ZIP archive, and many more. Please sign in with your existing Account now, or register one, it's free.
+                             download generated code as ZIP archive, and much more. Please sign in with your existing Account now, or register one, it's free.
                              </p><p>
                              <strong>IMPORTANT WARNING</strong>: Free access is offered <strong>ENTIRELY AT THE USER's OWN RISK</strong>. 
                              We offer <strong>NO GUARANTEE OF ANY KIND</strong>
                              about the stability, persistence, integrity or security of data which users choose to store on our server.
                              </p><p>
                              If you prefer a local installation of the editor, you can download a GPLv3 version
-                             from <a href="https://github.com/pnp-software/fwprofile-editor-pub">here</a>.     
+                             from <a href="https://github.com/pnp-software/fcp-editor">here</a>.     
                              <a href="mailto:pnp-software@pnp-software.com">Contact us</a> if you want a local installation on a commercial license.
                              <div id=logorreg style='white-space: nowrap'><br>
                                  <button class='btn btn-success btn-large' id=loginbtn><i class='icon-user icon-white'></i> &nbsp;Sign in</button> &nbsp; &nbsp;
