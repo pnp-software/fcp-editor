@@ -55,7 +55,6 @@
       $dbs[]=$database;
    }
 
-
    echo $html;
 
    // user uploaded a file to import SCOS database
@@ -148,11 +147,12 @@
 
 
    // hidden upload form for scos database import from ZIP file
-   echo "<br>";
    echo "<div style='display:none' id=uploadform>";
+   echo "<br><br>";
    echo "<form method=post action=\"".htmlspecialchars($_SERVER['PHP_SELF'])."\" enctype='multipart/form-data'>";
    echo "<input type=hidden name=ac value=import>";
-   echo "<br>Upload new database by uploading ZIP file with CSV data:<br><br>";
+   if (!class_exists("ZipArchive")) echo "<i>Warning: your PHP installation seems to be missing ZipArchive, please install it and refresh this page.<br>Example installation command: sudo apt-get install php-zip</i>";
+   echo "Upload new database by uploading ZIP file with CSV data:<br><br>";
    echo "<table border=0 cellspacing=1 cellpadding=5 bgcolor=silver>";
    echo "<tr><td>ZIP file for upload:</td><td bgcolor=white><input type=file name=zip style='padding:0;'></td></tr>";
    echo "<tr><td>Create database name:</td><td bgcolor=white><input type=text name=dbname placeholder='For example: SCOS_1_2' style='padding: 5px; width: 250px;'></td></tr>";
