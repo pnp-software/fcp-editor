@@ -109,6 +109,24 @@ This online help focuses on the FCP-specific features of the FCP Editor.
         the model's <code>json</code> serialization.
         
         
+        <h2 id=scosdatabaseloading>SCOS Database Loading</h2>
+        The SCOS database can be uploaded either as an *.sql file or as a zip file which holds
+        the SCOS tables in csv format. The upload can only be done by the "example" user.
+        The "example" user is configured in the configuration file <code>config_user.php</code>.
+        The "example" user uploads the SCOS database by logging at: 
+        <code>http://www.yourdomain.com/fcp-editor/users.php</code>. 
+        The figure shows the upload page. The user must specify the position within the csv
+        tables of the SCOS parameters used by the editor. The editor proposes a default
+        configuration but users can edit this default.
+        
+           <div class="pull-left" style="margin-bottom: 30px;">
+              <img src="ScosDbUpload.png" class="pull-left">
+           </div>
+        <br clear=all>
+        
+        
+        
+        
         <h2 id=autocompletion>Auto-Completion Facility</h2>
         <p>One important aid in the generation of FCPs is the auto-completion feature of the
         editor.

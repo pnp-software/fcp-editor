@@ -28,3 +28,10 @@ How to install:
   
 - If you wish to have auto-completion support for PUS items, install a
   database in SCOS-2000 format. The database name must start with "SCOS_".
+  
+- If you wish to have auto-completion support for PUS items, install a
+  database in SCOS-2000 format. The database name must start with "SCOS_".
+  The database is loaded by the "example" user (as configured in
+  config_user.php). The database can be loaded either in mySQL format
+  or as a set of csv tables in a zip. The loading is done by logging it 
+  at this page: http://www.yourdomain.com/fcp-editor/users.php
