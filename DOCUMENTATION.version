@@ -1,3 +1,8 @@
 v0.9
 * initial release based on release 5.25 of FW Profile Editor with the 
 * addition of the auto-completion feature for PUS items
+
+v1.0.0
+* Added facilities for uploading MIB tables
+* Improved on-line help
+

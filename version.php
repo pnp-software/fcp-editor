@@ -1,5 +1,5 @@
 <?php
-   $version="0.9";
+   $version="1.0.0";
    $rev="?v".$version;
     
     /* When client loads fw profile editor, his browser loads bunch of files

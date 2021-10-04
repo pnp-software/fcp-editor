@@ -39,28 +39,27 @@ li { font-size: 14px; line-height: 18px; }
 (FCPs) for PUS-based applications. A FCP is a conditional sequence of telecommands and telemetry checks.
 
 <p>FCPs are represented as UML activity diagrams which are created by dragging and dropping pre-defined elements on a canvas.
-The editor is customized with a mySQL database which defines the PUS telecommands and telemetry packets in
+The editor is customized with either a MySQL database or a set of MIB Tables which define the PUS telecommands and telemetry packets in
 SCOS-2000 format.
 The editor offers auto-completion facilities which allow users to quickly reference telecommands and
 telemetry packets and their internal parameters.
 
 <p>FCP models can be shared (either in read-only or in read-write mode) with other users.
 They are serialized to a <code>json</code> format which can be exported and which users
-can use for further processing (e.g. to generate a test sequence implementing an FCP).
+can process further (e.g. to generate a test sequence implementing an FCP).
 
 <p>Although the FCP Editor was developed with Flight Control Procedures in mind, it can be
 used to model any kind of control procedure for a PUS application.
 For instance, it could be used to define a test procedure or any other
 procedure consisting of sequences of telecommands and telemetry checks.
 
-<p>The FCP Editor is a <code>specification-level editor</code>.
-It is agnostic about FCPs are implemented.
+<p>The FCP Editor is a <strong>specification-level editor</strong>.
+It is agnostic about how FCPs are implemented.
 Users would typically proceed as follows:
 
 <ul>
 <li>The FCPs are defined in the editor</li>
-<li>The FCP models (representing the formal specification of the FCPs) are 
-exported in <code>json</code> format</li>
+<li>The FCP models are exported to <code>json</code> format</li>
 <li>The <code>json</code> models are processed to generate the implementation of the FCPs</li>
 </ul>
 
@@ -68,9 +67,9 @@ exported in <code>json</code> format</li>
 <p>The FCP Editor is based on the <a href="https://www.pnp-software.com/fwprofile/editor/">FW Profile Editor</a>.
 Users are referred to the online help of the FW Profile Editor for information about how
 to edit diagrams (but the interface of the editor is very intuitive and most users
-will be able to find out what they need by trail-and-error).
+will be able to find out what they need by trial-and-error).
 This online help focuses on the FCP-specific features of the FCP Editor.
-
+ 
 
 <div id=toccontainer>
    <div align=right><a href=# id=toclink>Table of contents</a></div>
@@ -94,9 +93,9 @@ This online help focuses on the FCP-specific features of the FCP Editor.
         
 
         <h2 id=scosdatabase>SCOS Database</h2>
-        The SCOS Database must be installed on the mySQL server where the FCP Editor models reside.
+        <p>The SCOS Database must be installed on the mySQL server where the FCP Editor models reside.
         Its name must start with "SCOS_". 
-        There may be more than SCOS databases installed at any given time, either because
+        There may be more than one SCOS databases installed at any given time, either because
         the editor is used for multiple applications with different TM/TC interfaces, or
         because the editor is used with multiple versions of the TM/TC interface.
         
@@ -110,10 +109,15 @@ This online help focuses on the FCP-specific features of the FCP Editor.
         
         
         <h2 id=scosdatabaseloading>SCOS Database Loading</h2>
-        The SCOS database can be uploaded either as an *.sql file or as a zip file which holds
-        the SCOS tables in csv format. The upload can only be done by the "example" user.
-        The "example" user is configured in the configuration file <code>config_user.php</code>.
-        The "example" user uploads the SCOS database by logging at: 
+        <p>The SCOS database can be uploaded either as an *.sql file or as a zip file which holds
+        the SCOS tables in csv format (MIB Tables). 
+        
+        <p>The *.sql database is loaded in the MySQL server of the editor. Its name must start
+        with "SCOS_".
+        
+        <p>The upload of the SCOS tables as a zip file can only be done by the <code>example</code> user.
+        The <code>example</code> user is configured in the editor's configuration file <code>config_user.php</code>.
+        The <code>example</code> user uploads the SCOS database by logging at: 
         <code>http://www.yourdomain.com/fcp-editor/users.php</code>. 
         The figure shows the upload page. The user must specify the position within the csv
         tables of the SCOS parameters used by the editor. The editor proposes a default
@@ -143,7 +147,7 @@ This online help focuses on the FCP-specific features of the FCP Editor.
         a string which matches one of its entries, it displays a table with the 
         PUS information about the matching entries.
         For instance. if a user types "TC(192,", the editor responds by generating
-        a table as in the figure which display all available service 192 telecommands:
+        a table as in the figure which displays all available service 192 telecommands:
         
            <div class="pull-left" style="margin-bottom: 30px;">
               <img src="TcAutoComp.png" class="pull-left">
@@ -187,11 +191,10 @@ This online help focuses on the FCP-specific features of the FCP Editor.
         <li>Extension of auto-completion mechanism to handle other kinds of
             items (e.g. service 1 failure codes or calibration curves for
             TC parameters)</li>
-        <li>Implementation of model check function (e.g. to verify 
+        <li>Implementation of model check functions (e.g. to verify 
             consistency with a SCOS Database version or to enforce
             project specific conventions on the definition of PUS items)</li>
         </ul>
-        
         
         
         

@@ -2,8 +2,8 @@
 
      // Login details to MySQL database
      $sql_settings['dbname']='XYZ';  // database name 
-     $sql_settings['user']  ='XYZ';  // username to the database (sometimes the same like FTP username)
-     $sql_settings['pass']  ='XYZ';  // password to the database (sometimes the same like FTP password)
+     $sql_settings['user']  ='XYZ';  // username to the database 
+     $sql_settings['pass']  ='XYZ';  // password to the database 
      $sql_settings['host']  ='XYZ'; // database host or IP
 
      // The website by default provides some example diagrams. Those can be edited by signing in as the example user.
