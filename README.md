@@ -12,6 +12,8 @@ FCP models can be shared (either in read-only or in read-write mode) with other 
 
 Although the FCP Editor was developed with Flight Control Procedures in mind, it can be used to model any kind of control procedure for a PUS application. For instance, it could be used to define a test procedure or any other procedure consisting of sequences of telecommands and telemetry checks.
 
+A public installation of the FCP Editor is available [here](https://www.pnp-software.com/fcp-editor/). It can be used to experiment and test the editor (its SCOS database was kindly provided by [R. Ottensamer](http://homepage.univie.ac.at/roland.ottensamer/) of the [Dept. of Astrophysics of the University of Vienna](https://ucris.univie.ac.at/portal/de/organisations/department-of-astrophysics(ea5888cb-4e25-46fa-9a04-9ecb91290ee7).html). 
+
 The editor is an open and free software project. If you want to contribute, please [contact us](https://pnp-software.com/#contact-us).
 
 ## Licence
