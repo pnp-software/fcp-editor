@@ -46,6 +46,7 @@
       die();
    }
 
+   $status=[];
 
    $dbs=[];
    $result=execQuery("SHOW DATABASES LIKE 'SCOS_%'"); // result order is undefined
@@ -55,7 +56,7 @@
       $dbs[]=$database;
    }
 
-   echo $html;
+   echo $html; // header
 
    // user uploaded a file to import SCOS database
    //
@@ -104,15 +105,16 @@
          execQuery("CREATE TABLE ".$db.".pid (PID_TYPE int(11) NOT NULL,PID_STYPE int(11) NOT NULL,PID_SPID int(11) NOT NULL,PID_DESCR varchar(255) DEFAULT NULL,PRIMARY KEY (PID_TYPE,PID_STYPE,PID_SPID),KEY PID_SPID (PID_SPID))");
          execQuery("CREATE TABLE ".$db.".plf (PLF_NAME varchar(255) NOT NULL,PLF_SPID int(11) NOT NULL,PRIMARY KEY (PLF_NAME,PLF_SPID))");
 
-
          // import files one by one
          foreach (['ccf','cdf','cpc','pas','pcf','pid','plf'] as $table)
          {
+            $status[$table]="<span style='color:red'>not found!</span>"; // initial value
+
             $data=[];
             for($i=0;$i<$z->numFiles;$i++)
             {
                $filepath=$z->getNameIndex($i);
-               if (basename($filepath)==$table.".dat") { $data=preg_split("{(\r*\n)+}",$z->getFromName($filepath)); break; }
+               if (basename($filepath)==$table.".dat") { $data=preg_split("{(\r*\n)+}",$z->getFromName($filepath)); $status[$table]=$filepath; break; }
             }
 
             $data=array_filter($data);
@@ -130,6 +132,8 @@
                }
                if (count($set)>0) execQuery("INSERT IGNORE INTO ".$db.".".$table." SET ".join(",",$set));
             }
+
+            $status[$table].=" ... ".count($data)." entries imported OK";
          }
 
       }
@@ -138,6 +142,17 @@
    out:
 
    usort($dbs,'version_compare');
+
+
+   // list of imported tables
+   //
+   if (count($status)>0)
+   {
+      echo "<h3>Import finished for newly created database ".$db.". Status below:</h3><pre>";
+      foreach($status as $key=>$val) echo "Table $key: ".$val."<br>";
+      echo "</pre><br><br>";
+   }
+
 
    // top buttons
    echo "<button id=signoutbtn>Sign Out</button> &nbsp; ";
@@ -149,7 +164,7 @@
    // hidden upload form for scos database import from ZIP file
    echo "<div style='display:none' id=uploadform>";
    echo "<br><br>";
-   echo "<form method=post action=\"".htmlspecialchars($_SERVER['PHP_SELF'])."\" enctype='multipart/form-data'>";
+   echo "<form id=uploadform method=post action=\"".htmlspecialchars($_SERVER['PHP_SELF'])."\" enctype='multipart/form-data'>";
    echo "<input type=hidden name=ac value=import>";
    if (!class_exists("ZipArchive")) echo "<i>Warning: your PHP installation seems to be missing ZipArchive, please install it and refresh this page.<br>Example installation command: sudo apt-get install php-zip</i>";
    echo "Upload new database by uploading ZIP file with CSV data:<br><br>";
@@ -165,11 +180,11 @@
    echo "pid: PID_TYPE=1, PID_STYPE=2, PID_SPID=6, PID_DESCR=7\n";
    echo "plf: PLF_NAME=1, PLF_SPID=2\n";
    echo "</textarea></td></tr>";
-   echo "<tr><td></td><td bgcolor=white><input type=submit value='Start upload'></td></tr>";
+   echo "<tr><td></td><td bgcolor=white><input type=submit value='Start upload' id=uploadbtn><img id=waitimage src=img/wait32.gif style='display: none; position: absolute; margin: 4px;'></td></tr>";
    echo "</table>";
    echo "</form>";
    echo "</div>";
-
+   echo '<script> $("#uploadbtn").on("click",function(ev){ setTimeout(function(){$("#uploadbtn").prop("disabled",true);},100);  $("#waitimage").css("display","inline"); });</script>';
 
    // list of known SCOS databases
    //
