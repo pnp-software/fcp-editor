@@ -30,11 +30,12 @@ How to install:
   
 - If you wish to have auto-completion support for PUS items, you must 
   load in the MySQL server a database in SCOS-2000 format. The database 
-  name must start with "SCOS_". You can either load the database directly
-  in the MySQL server. Or else you can upload the MIB tables through
+  name must start with "SCOS_". You can load the database directly
+  in the MySQL server. Or alternatively you can upload the MIB tables through
   the editor. The upload of the MIB tables must be done by the "example"
   user (as configured in config_user.php) by visiting: 
   http://www.yourdomain.com/fcp-editor/users.php.
   If you choose to upload the MIB tables, you must ensure that the
   database user specified in config_user.php has sufficient privileges
-  to create a new database.
+  to create a new database. Depending ont he eize of the MIB tables, the
+  upload process may last several minutes.
