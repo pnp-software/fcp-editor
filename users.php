@@ -7,7 +7,7 @@
 
    $html="<html><head><meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"></head><body>".
          "<script type='text/javascript' src=js/jquery.min.js></script>".
-         "<style>td,body { font-family: Verdana; font-size: 12px; } button,input {padding:10px; margin: 1px;} i { color: red; display: block; margin-bottom: 20px; } </style>";
+         "<style>td,body { font-family: Verdana; font-size: 12px; } button,input {padding:10px; margin: 1px;} i { color: red; display: block; margin-bottom: 20px; } .delbtn { font-weight: bold; cursor: pointer; margin: -5px; padding: 5px; } .delbtn:hover { color: red; } a { color: #00f; text-decoration: none; } a:hover { text-decoration: underline; } </style>";
 
    // check if user is signed in
    // if not, provide login form
@@ -45,6 +45,17 @@
       header("Location: ./");
       die();
    }
+
+
+   if ($_REQUEST['action']=='deletedb')
+   {
+      $db=trim($_REQUEST['dbname']);
+      if (!preg_match("{^SCOS_}",$db)) die("Error: Only databases with prefix SCOS_ can be deleted this way");
+      execQuery("DROP DATABASE ".$db);
+      echo "ok";
+      die();
+   }
+
 
    $status=[];
 
@@ -193,16 +204,24 @@
    echo "<table border=0 cellspacing=1 cellpadding=5 bgcolor=silver>";
 
    echo "<tr>";
-   echo "<td>database name</td>";
+   echo "<td>database name</td><td></td>";
    echo "</tr>";
 
    foreach($dbs as $database)
    {
       echo "<tr bgcolor=white>";
       echo "<td>".$database."</td>";
+      echo "<td><span class=delbtn>&times;</span></td>";
       echo "</tr>";
    }
    echo "</table>";
+   echo '<script>$(".delbtn").on("click",function(ev){ var n=$(ev.target).parent().prev().text(); if (confirm("Delete database "+n+"?"))
+   {
+      $.post("users.php",{"action":"deletedb","dbname":n},function(res){
+         if (res=="ok") location.search="r="+Math.random(); // force reload if successful
+         else alert(res); // print error
+      })
+   } })</script>';
 
 
    // list of all known users
