@@ -37,5 +37,5 @@ How to install:
   http://www.yourdomain.com/fcp-editor/users.php.
   If you choose to upload the MIB tables, you must ensure that the
   database user specified in config_user.php has sufficient privileges
-  to create a new database. Depending ont he eize of the MIB tables, the
+  to create a new database. Depending on the size of the MIB tables, the
   upload process may last several minutes.
