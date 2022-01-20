@@ -8,10 +8,10 @@ function init_autocomplete()
    {
       var res=[];
       var str,par,i,j,row;
-      var tmPacketName,tmPacketDescr,tmPacketDescrShort;
-      var tmParName,tmParDescr,tmParDescr_short;
-      var tcName, tcDescr, TcDescrShort;
-      var tcParName, tcParDescr, tcParDescrShort;
+      var tmPacketName,tmPacketDescr;
+      var tmParName,tmParDescr;
+      var tcName, tcDescr;
+      var tcParName, tcParDescr;
       var list=g.autocomplete[ix];
 
       for(i=0; i<list.TM.length; i++)
@@ -22,31 +22,23 @@ function init_autocomplete()
          tmPacketName=row.NNAME;
          tmPacketDescr=row.NDESCR.replace(/_/g," ");
          str="#TM("+row.TYPE+","+row.STYPE+"):"+tmPacketName;
-         if (tmPacketDescr.length>64)
-            tmPacketDescrShort=tmPacketDescr.substring(0,64).concat("...");
-         else
-            tmPacketDescrShort=tmPacketDescr;
-         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',tmPacketDescrShort,tmPacketName], "replace":str, "group":"#TM", "title":tmPacketDescr});
+         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',tmPacketDescr,tmPacketName], "replace":str, "group":"#TM", "title":tmPacketDescr});
 
          // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
          for(j=0; j<row.params.length; j++)
          {
             tmParName=row.params[j].NNAME;
             tmParDescr=row.params[j].NDESCR.replace(/_/g," ");
-            if (tmParDescr.length>64)
-                tmParDescrShort=tmParDescr.substring(0,64).concat("...");
-            else
-                tmParDescrShort=tmParDescr;
-			
+
             if (row.params[j].PID==null)
             {
                par='#TMPAR:'+tmParName;
-               res.push({'belongsTo':str,'display':[par,tmParDescrShort], "replace":par, "group":"#TMPAR", "title":tmParDescr});
+               res.push({'belongsTo':str,'display':[par,tmParDescr], "replace":par, "group":"#TMPAR", "title":tmParDescr});
             }
             else
             {
                par='#HK:'+tmParName;
-               res.push({'belongsTo':str,'display':[par,tmParDescrShort], "replace":par, "group":"#HK", "title":tmParDescr});
+               res.push({'belongsTo':str,'display':[par,tmParDescr], "replace":par, "group":"#HK", "title":tmParDescr});
             }
          }
 
@@ -54,7 +46,7 @@ function init_autocomplete()
          if (row.TYPE==5)
          {
             str="#EID("+row.TYPE+","+row.STYPE+"):"+tmPacketName;
-            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",tmPacketDescrShort,tmPacketName], "replace":str, "group":"#EID", "title":tmPacketDescr});
+            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",tmPacketDescr,tmPacketName], "replace":str, "group":"#EID", "title":tmPacketDescr});
          }
       }
 
@@ -66,23 +58,15 @@ function init_autocomplete()
          tcName=row.NNAME;
          tcDescr=row.NDESCR.replace(/_/g," ");
          str="#TC("+row.TYPE+","+row.STYPE+"):"+tcName;
-         if (tcDescr.length>64)
-            tcDescrShort=tcDescr.substring(0,64).concat("...");
-         else
-            tcDescrShort=tcDescr;
-         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',tcDescrShort,tcName], "replace":str, "group":"#TC", "title":tcDescr});
+         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',tcDescr,tcName], "replace":str, "group":"#TC", "title":tcDescr});
 
          // TCPar, such as PAR_PROP_PARAM_STR_LENGT
          for(j=0; j<row.params.length; j++)
          {
             tcParName=row.params[j].NNAME;
             tcParDescr=row.params[j].NDESCR.replace(/_/g," ");
-            if (tcParDescr.length>64)
-                tcParDescrShort=tcParDescr.substring(0,64).concat("...");
-            else
-                tcParDescrShort=tcParDescr;
             par='#TCPAR:'+tcParName;
-            res.push({'belongsTo':str,'display':[par,tcParDescrShort], "replace":par, "group":"#TCPAR", "title":tcParDescr});
+            res.push({'belongsTo':str,'display':[par,tcParDescr], "replace":par, "group":"#TCPAR", "title":tcParDescr});
          }
       }
 

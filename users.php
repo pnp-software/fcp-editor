@@ -186,7 +186,7 @@
    echo "<table border=0 cellspacing=1 cellpadding=5 bgcolor=silver>";
    echo "<tr><td>ZIP file for upload:</td><td bgcolor=white><input type=file name=zip style='padding:0;'></td></tr>";
    echo "<tr><td>Create database name:</td><td bgcolor=white><input type=text name=dbname placeholder='For example: SCOS_1_2' style='padding: 5px; width: 250px;'></td></tr>";
-   echo "<tr><td valign=top>Import instructions:</td><td bgcolor=white><textarea cols=80 rows=9 name=instructions style='padding: 5px;'>";
+   echo "<tr><td valign=top>Import instructions:</td><td bgcolor=white><textarea cols=100 rows=9 name=instructions style='padding: 5px;'>";
    echo "ccf: CCF_CNAME=1, CCF_DESCR=2, CCF_DESCR2=3, CCF_TYPE=7, CCF_STYPE=8, CCF_NNAME=21, CCF_NDESCR=22\n";
    echo "cdf: CDF_CNAME=1, CDF_GRPSIZE=6, CDF_PNAME=7\n";
    echo "cpc: CPC_PNAME=1, CPC_DESCR=2, CPC_PAFREF=11, CPC_NNAME=16, CPC_NDESCR=17\n";
