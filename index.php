@@ -153,7 +153,7 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
    background-color: #fff;
 }
 .autocomplete table { width: 100%; }
-.autocomplete tr td { padding: 0 4px 0 4px; color: black; cursor: default; font-size: 11px; white-space: nowrap; border-left: 1px solid #aaa; }
+.autocomplete tr td { padding: 0 4px 0 4px; color: black; cursor: default; font-size: 11px; white-space: nowrap; border-left: 1px solid #aaa; max-width: 300px; overflow: hidden; text-overflow: ellipsis; }
 .autocomplete tr td:first-child { border-left: 0; }
 .autocomplete tr td:last-child { padding-right: 20px; }
 .autocomplete tr:hover td { background-color: #6599FF; color: #fff; }

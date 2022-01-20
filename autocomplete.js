@@ -4,6 +4,29 @@ function init_autocomplete()
 {
    g.autocomplete_processed={};
 
+   // defined column names of parameters
+   var columns=
+   {
+      tmPacketName:"NNAME",
+      tmPacketDescr:"NDESCR",
+      tmParName:"NNAME",
+      tmParDescr:"NDESCR",
+      tcName:"NNAME",
+      tcDescr:"NDESCR",
+      tcParName:"NNAME",
+      tcParDescr:"NDESCR",
+   }
+
+   // local function defined only in scope of init_autocomplete()
+   // return value from obj given by colname, replacing 'rm' string by a space
+   function col(obj,colname,rm)
+   {
+      var ret=obj[colname];
+      if (rm) ret=ret.replaceAll(rm,' ');
+      return ret;
+   }
+
+
    for (var ix in g.autocomplete)
    {
       var res=[];
@@ -14,30 +37,31 @@ function init_autocomplete()
       {
          row=list.TM[i];
 
-         // TM(x,y)_spid
-         str="#TM("+row.TYPE+","+row.STYPE+"):"+row.SPID;
-         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',row.DESCR,row.SPID], "replace":str, "group":"#TM", "title":row.DESCR});
+
+         // TM(x,y)
+         str="#TM("+row.TYPE+","+row.STYPE+"):"+col(row,columns.tmPacketName);
+         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',col(row,columns.tmPacketDescr,'_'),col(row,columns.tmPacketName)], "replace":str, "group":"#TM", "title":col(row,columns.tmPacketDescr,'_')});
 
          // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
          for(j=0; j<row.params.length; j++)
          {
             if (row.params[j].PID==null)
             {
-               par='#TMPAR:'+row.params[j].DESCR;
-               res.push({'belongsTo':str,'display':[par,row.params[j].NAME], "replace":par, "group":"#TMPAR", "title":row.params[j].NAME});
+               par='#TMPAR:'+col(row.params[j],columns.tmParName);
+               res.push({'belongsTo':str,'display':[par,col(row.params[j],columns.tmParDescr,'_')], "replace":par, "group":"#TMPAR", "title":col(row.params[j],columns.tmParDescr,'_')});
             }
             else
             {
-               par='#HK:'+row.params[j].DESCR;
-               res.push({'belongsTo':str,'display':[par,row.params[j].NAME], "replace":par, "group":"#HK", "title":row.params[j].NAME});
+               par='#HK:'+col(row.params[j],columns.tmParName);
+               res.push({'belongsTo':str,'display':[par,col(row.params[j],columns.tmParDescr,'_')], "replace":par, "group":"#HK", "title":col(row.params[j],columns.tmParDescr,'_')});
             }
          }
 
          // Find matching #EID ... TM where TYPE=5
          if (row.TYPE==5)
          {
-            str='#EID:'+row.DESCR;
-            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",row.DESCR,row.SPID], "replace":str, "group":"#EID", "title":row.DESCR});
+            str="#EID("+row.TYPE+","+row.STYPE+"):"+col(row,columns.tmPacketName);
+            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",col(row,columns.tmPacketDescr,'_'),col(row,columns.tmPacketName)], "replace":str, "group":"#EID", "title":col(row,columns.tmPacketDescr,'_')});
          }
       }
 
@@ -46,14 +70,14 @@ function init_autocomplete()
          row=list.TC[i];
 
          // TC(x,y)_cname
-         str="#TC("+row.TYPE+","+row.STYPE+"):"+row.CNAME;
-         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',row.DESCR,row.CNAME], "replace":str, "group":"#TC", "title":row.DESCR});
+         str="#TC("+row.TYPE+","+row.STYPE+"):"+col(row,columns.tcName);
+         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',col(row,columns.tcDescr,'_'),col(row,columns.tcName)], "replace":str, "group":"#TC", "title":col(row,columns.tcDescr,'_')});
 
          // TCPar, such as PAR_PROP_PARAM_STR_LENGT
          for(j=0; j<row.params.length; j++)
          {
-            par='#TCPAR:'+row.params[j].DESCR;
-            res.push({'belongsTo':str,'display':[par,row.params[j].PNAME], "replace":par, "group":"#TCPAR", "title":row.params[j].PNAME});
+            par='#TCPAR:'+col(row.params[j],columns.tcParName);
+            res.push({'belongsTo':str,'display':[par,col(row.params[j],columns.tcParDescr,'_')], "replace":par, "group":"#TCPAR", "title":col(row.params[j],columns.tcParDescr,'_')});
          }
       }
 
