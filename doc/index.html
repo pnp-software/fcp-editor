@@ -117,18 +117,22 @@ This online help focuses on the FCP-specific features of the FCP Editor.
         
         <p>The upload of the SCOS tables as a zip file can only be done by the <code>example</code> user.
         The <code>example</code> user is configured in the editor's configuration file <code>config_user.php</code>.
-        The <code>example</code> user uploads the SCOS database by logging at: 
+        The <code>example</code> user uploads the SCOS database by visiting: 
         <code>http://www.yourdomain.com/fcp-editor/users.php</code>. 
         The figure shows the upload page. The user must specify the position within the csv
         tables of the SCOS parameters used by the editor. The editor proposes a default
         configuration but users can edit this default.
         
+        <p>The NNAME and NDESCR fields in the table are non-standard (i.e. they are not defined by the SCOS
+        standard). The NNAME field represents a "nice name" and is a varchar(64). 
+        The NDESCR field represents a "nice description" and is a text field with unlimited length. 
+        The "nice name" must be unique.
+        
            <div class="pull-left" style="margin-bottom: 30px;">
               <img src="ScosDbUpload.png" class="pull-left">
            </div>
         <br clear=all>
-        
-        
+
         
         
         <h2 id=autocompletion>Auto-Completion Facility</h2>
@@ -177,8 +181,19 @@ This online help focuses on the FCP-specific features of the FCP Editor.
            </div>
         <br clear=all>
         
-        
-        
+        The auto-completion lists take the form of tables with three columns. 
+        The users selects an entry from the list and the entry is displayed 
+        as a hyperlink with a tooltip. 
+        Hence, for each item in an autocompletion list, one must define:
+        <ul>
+        <li>The content of the three columns in the autocompletion table</li>
+        <li>The text which is displayed when an autocompletion entry is selected 
+        by the user</li>
+        <li>The text in the tooltip</li>
+        </ul>
+        The mapping from the SCOS fields to the above elementd is done in
+        <code>autocomplete.js</code>.
+    
         
         <h2 id=customization>Customization</h2>
         <p>The FCP Editor back-end is implemented in <code>PHP</code> and the front-end is
