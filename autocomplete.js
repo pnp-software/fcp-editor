@@ -21,7 +21,7 @@ function init_autocomplete()
    // return value from obj given by colname, replacing 'rm' string by a space
    function col(obj,colname,rm)
    {
-      var ret=row[colname];
+      var ret=obj[colname];
       if (rm) ret=ret.replace(rm,' ');
       return ret;
    }
