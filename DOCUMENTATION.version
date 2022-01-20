@@ -6,3 +6,9 @@ v1.0.0
 * Added facilities for uploading MIB tables
 * Improved on-line help
 
+v1.2.0
+* License change to MIT
+* Print status for scos tables import
+
+v1.3.0
+* Added handling of NNAME and NDESCR fields
