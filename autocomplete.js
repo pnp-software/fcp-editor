@@ -22,7 +22,7 @@ function init_autocomplete()
    function col(obj,colname,rm)
    {
       var ret=obj[colname];
-      if (rm) ret=ret.replace(rm,' ');
+      if (rm) ret=ret.replaceAll(rm,' ');
       return ret;
    }
 
