@@ -4,49 +4,64 @@ function init_autocomplete()
 {
    g.autocomplete_processed={};
 
+   // defined column names of parameters
+   var columns=
+   {
+      tmPacketName:"NNAME",
+      tmPacketDescr:"NDESCR",
+      tmParName:"NNAME",
+      tmParDescr:"NDESCR",
+      tcName:"NNAME",
+      tcDescr:"NDESCR",
+      tcParName:"NNAME",
+      tcParDescr:"NDESCR",
+   }
+
+   // local function defined only in scope of init_autocomplete()
+   // return value from obj given by colname, replacing 'rm' string by a space
+   function col(obj,colname,rm)
+   {
+      var ret=row[colname];
+      if (rm) ret=ret.replace(rm,' ');
+      return ret;
+   }
+
+
    for (var ix in g.autocomplete)
    {
       var res=[];
       var str,par,i,j,row;
-      var tmPacketName,tmPacketDescr;
-      var tmParName,tmParDescr;
-      var tcName, tcDescr;
-      var tcParName, tcParDescr;
       var list=g.autocomplete[ix];
 
       for(i=0; i<list.TM.length; i++)
       {
          row=list.TM[i];
 
+
          // TM(x,y)
-         tmPacketName=row.NNAME;
-         tmPacketDescr=row.NDESCR.replace(/_/g," ");
-         str="#TM("+row.TYPE+","+row.STYPE+"):"+tmPacketName;
-         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',tmPacketDescr,tmPacketName], "replace":str, "group":"#TM", "title":tmPacketDescr});
+         str="#TM("+row.TYPE+","+row.STYPE+"):"+col(row,columns.tmPacketName);
+         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',col(row,columns.tmPacketDescr,'_'),col(row,columns.tmPacketName)], "replace":str, "group":"#TM", "title":col(row,columns.tmPacketDescr,'_')});
 
          // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
          for(j=0; j<row.params.length; j++)
          {
-            tmParName=row.params[j].NNAME;
-            tmParDescr=row.params[j].NDESCR.replace(/_/g," ");
-
             if (row.params[j].PID==null)
             {
-               par='#TMPAR:'+tmParName;
-               res.push({'belongsTo':str,'display':[par,tmParDescr], "replace":par, "group":"#TMPAR", "title":tmParDescr});
+               par='#TMPAR:'+col(row.params[j],columns.tmParName);
+               res.push({'belongsTo':str,'display':[par,col(row.params[j],columns.tmParDescr,'_')], "replace":par, "group":"#TMPAR", "title":col(row.params[j],columns.tmParDescr,'_')});
             }
             else
             {
-               par='#HK:'+tmParName;
-               res.push({'belongsTo':str,'display':[par,tmParDescr], "replace":par, "group":"#HK", "title":tmParDescr});
+               par='#HK:'+col(row.params[j],columns.tmParName);
+               res.push({'belongsTo':str,'display':[par,col(row.params[j],columns.tmParDescr,'_')], "replace":par, "group":"#HK", "title":col(row.params[j],columns.tmParDescr,'_')});
             }
          }
 
          // Find matching #EID ... TM where TYPE=5
          if (row.TYPE==5)
          {
-            str="#EID("+row.TYPE+","+row.STYPE+"):"+tmPacketName;
-            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",tmPacketDescr,tmPacketName], "replace":str, "group":"#EID", "title":tmPacketDescr});
+            str="#EID("+row.TYPE+","+row.STYPE+"):"+col(row,columns.tmPacketName);
+            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",col(row,columns.tmPacketDescr,'_'),col(row,columns.tmPacketName)], "replace":str, "group":"#EID", "title":col(row,columns.tmPacketDescr,'_')});
          }
       }
 
@@ -55,18 +70,14 @@ function init_autocomplete()
          row=list.TC[i];
 
          // TC(x,y)_cname
-         tcName=row.NNAME;
-         tcDescr=row.NDESCR.replace(/_/g," ");
-         str="#TC("+row.TYPE+","+row.STYPE+"):"+tcName;
-         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',tcDescr,tcName], "replace":str, "group":"#TC", "title":tcDescr});
+         str="#TC("+row.TYPE+","+row.STYPE+"):"+col(row,columns.tcName);
+         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',col(row,columns.tcDescr,'_'),col(row,columns.tcName)], "replace":str, "group":"#TC", "title":col(row,columns.tcDescr,'_')});
 
          // TCPar, such as PAR_PROP_PARAM_STR_LENGT
          for(j=0; j<row.params.length; j++)
          {
-            tcParName=row.params[j].NNAME;
-            tcParDescr=row.params[j].NDESCR.replace(/_/g," ");
-            par='#TCPAR:'+tcParName;
-            res.push({'belongsTo':str,'display':[par,tcParDescr], "replace":par, "group":"#TCPAR", "title":tcParDescr});
+            par='#TCPAR:'+col(row.params[j],columns.tcParName);
+            res.push({'belongsTo':str,'display':[par,col(row.params[j],columns.tcParDescr,'_')], "replace":par, "group":"#TCPAR", "title":col(row.params[j],columns.tcParDescr,'_')});
          }
       }
 
