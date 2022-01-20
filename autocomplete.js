@@ -8,36 +8,53 @@ function init_autocomplete()
    {
       var res=[];
       var str,par,i,j,row;
+      var tmPacketName,tmPacketDescr,tmPacketDescrShort;
+      var tmParName,tmParDescr,tmParDescr_short;
+      var tcName, tcDescr, TcDescrShort;
+      var tcParName, tcParDescr, tcParDescrShort;
       var list=g.autocomplete[ix];
 
       for(i=0; i<list.TM.length; i++)
       {
          row=list.TM[i];
 
-         // TM(x,y)_spid
-         str="#TM("+row.TYPE+","+row.STYPE+"):"+row.SPID;
-         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',row.DESCR,row.SPID], "replace":str, "group":"#TM", "title":row.DESCR});
+         // TM(x,y)
+         tmPacketName=row.NNAME;
+         tmPacketDescr=row.NDESCR.replace(/_/g," ");
+         str="#TM("+row.TYPE+","+row.STYPE+"):"+tmPacketName;
+         if (tmPacketDescr.length>64)
+            tmPacketDescrShort=tmPacketDescr.substring(0,64).concat("...");
+         else
+            tmPacketDescrShort=tmPacketDescr;
+         res.push({'display':['#TM('+row.TYPE+','+row.STYPE+')',tmPacketDescrShort,tmPacketName], "replace":str, "group":"#TM", "title":tmPacketDescr});
 
          // HKpar, like ADC_TEMPOH4A or nOfFuncExec_4
          for(j=0; j<row.params.length; j++)
          {
+            tmParName=row.params[j].NNAME;
+            tmParDescr=row.params[j].NDESCR.replace(/_/g," ");
+            if (tmParDescr.length>64)
+                tmParDescrShort=tmParDescr.substring(0,64).concat("...");
+            else
+                tmParDescrShort=tmParDescr;
+			
             if (row.params[j].PID==null)
             {
-               par='#TMPAR:'+row.params[j].DESCR;
-               res.push({'belongsTo':str,'display':[par,row.params[j].NAME], "replace":par, "group":"#TMPAR", "title":row.params[j].NAME});
+               par='#TMPAR:'+tmParName;
+               res.push({'belongsTo':str,'display':[par,tmParDescrShort], "replace":par, "group":"#TMPAR", "title":tmParDescr});
             }
             else
             {
-               par='#HK:'+row.params[j].DESCR;
-               res.push({'belongsTo':str,'display':[par,row.params[j].NAME], "replace":par, "group":"#HK", "title":row.params[j].NAME});
+               par='#HK:'+tmParName;
+               res.push({'belongsTo':str,'display':[par,tmParDescrShort], "replace":par, "group":"#HK", "title":tmParDescr});
             }
          }
 
          // Find matching #EID ... TM where TYPE=5
          if (row.TYPE==5)
          {
-            str='#EID:'+row.DESCR;
-            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",row.DESCR,row.SPID], "replace":str, "group":"#EID", "title":row.DESCR});
+            str="#EID("+row.TYPE+","+row.STYPE+"):"+tmPacketName;
+            res.push({'display':["#EID("+row.TYPE+","+row.STYPE+")",tmPacketDescrShort,tmPacketName], "replace":str, "group":"#EID", "title":tmPacketDescr});
          }
       }
 
@@ -46,14 +63,26 @@ function init_autocomplete()
          row=list.TC[i];
 
          // TC(x,y)_cname
-         str="#TC("+row.TYPE+","+row.STYPE+"):"+row.CNAME;
-         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',row.DESCR,row.CNAME], "replace":str, "group":"#TC", "title":row.DESCR});
+         tcName=row.NNAME;
+         tcDescr=row.NDESCR.replace(/_/g," ");
+         str="#TC("+row.TYPE+","+row.STYPE+"):"+tcName;
+         if (tcDescr.length>64)
+            tcDescrShort=tcDescr.substring(0,64).concat("...");
+         else
+            tcDescrShort=tcDescr;
+         res.push({'display':['#TC('+row.TYPE+','+row.STYPE+')',tcDescrShort,tcName], "replace":str, "group":"#TC", "title":tcDescr});
 
          // TCPar, such as PAR_PROP_PARAM_STR_LENGT
          for(j=0; j<row.params.length; j++)
          {
-            par='#TCPAR:'+row.params[j].DESCR;
-            res.push({'belongsTo':str,'display':[par,row.params[j].PNAME], "replace":par, "group":"#TCPAR", "title":row.params[j].PNAME});
+            tcParName=row.params[j].NNAME;
+            tcParDescr=row.params[j].NDESCR.replace(/_/g," ");
+            if (tcParDescr.length>64)
+                tcParDescrShort=tcParDescr.substring(0,64).concat("...");
+            else
+                tcParDescrShort=tcParDescr;
+            par='#TCPAR:'+tcParName;
+            res.push({'belongsTo':str,'display':[par,tcParDescrShort], "replace":par, "group":"#TCPAR", "title":tcParDescr});
          }
       }
 

@@ -108,12 +108,16 @@
          $dbs[]=$db;
 
          // create tables
-         execQuery("CREATE TABLE ".$db.".ccf (CCF_CNAME varchar(255) NOT NULL,CCF_DESCR varchar(255) NOT NULL,CCF_DESCR2 varchar(255) DEFAULT NULL,CCF_TYPE int(11) DEFAULT NULL,CCF_STYPE int(11) DEFAULT NULL,PRIMARY KEY (CCF_CNAME))");
+         execQuery("CREATE TABLE ".$db.".ccf (CCF_CNAME varchar(255) NOT NULL,CCF_DESCR varchar(255) NOT NULL,CCF_DESCR2 varchar(255) DEFAULT NULL,
+                                              CCF_TYPE int(11) DEFAULT NULL,CCF_STYPE int(11) DEFAULT NULL,CCF_NNAME varchar(64),CCF_NDESCR text,PRIMARY KEY (CCF_CNAME))");
          execQuery("CREATE TABLE ".$db.".cdf (CDF_CNAME varchar(255) NOT NULL,CDF_GRPSIZE int(255) DEFAULT NULL,CDF_PNAME varchar(255) DEFAULT NULL)");
-         execQuery("CREATE TABLE ".$db.".cpc (CPC_PNAME varchar(255) NOT NULL,CPC_DESCR varchar(255) DEFAULT NULL,CPC_PAFREF varchar(255) DEFAULT NULL,PRIMARY KEY (CPC_PNAME))");
+         execQuery("CREATE TABLE ".$db.".cpc (CPC_PNAME varchar(255) NOT NULL,CPC_DESCR varchar(255) DEFAULT NULL,CPC_PAFREF varchar(255) DEFAULT NULL,
+                                              CPC_NNAME varchar(64),CPC_NDESCR text,PRIMARY KEY (CPC_PNAME))");
          execQuery("CREATE TABLE ".$db.".pas (PAS_NUMBR varchar(255) NOT NULL,PAS_ALTXT varchar(255) NOT NULL,PAS_ALVAL varchar(255) NOT NULL,PRIMARY KEY (PAS_NUMBR,PAS_ALVAL))");
-         execQuery("CREATE TABLE ".$db.".pcf (PCF_NAME varchar(255) NOT NULL,PCF_DESCR varchar(255) DEFAULT NULL,PCF_PID double DEFAULT NULL,PRIMARY KEY (PCF_NAME))");
-         execQuery("CREATE TABLE ".$db.".pid (PID_TYPE int(11) NOT NULL,PID_STYPE int(11) NOT NULL,PID_SPID int(11) NOT NULL,PID_DESCR varchar(255) DEFAULT NULL,PRIMARY KEY (PID_TYPE,PID_STYPE,PID_SPID),KEY PID_SPID (PID_SPID))");
+         execQuery("CREATE TABLE ".$db.".pcf (PCF_NAME varchar(255) NOT NULL,PCF_DESCR varchar(255) DEFAULT NULL,PCF_PID double DEFAULT NULL,
+                                              PCF_NNAME varchar(64),PCF_NDESCR text,PRIMARY KEY (PCF_NAME))");
+         execQuery("CREATE TABLE ".$db.".pid (PID_TYPE int(11) NOT NULL,PID_STYPE int(11) NOT NULL,PID_SPID int(11) NOT NULL,PID_DESCR varchar(255) DEFAULT NULL,
+                                              PID_NNAME varchar(64),PID_NDESCR text,PRIMARY KEY (PID_TYPE,PID_STYPE,PID_SPID),KEY PID_SPID (PID_SPID))");
          execQuery("CREATE TABLE ".$db.".plf (PLF_NAME varchar(255) NOT NULL,PLF_SPID int(11) NOT NULL,PRIMARY KEY (PLF_NAME,PLF_SPID))");
 
          // import files one by one
@@ -178,17 +182,17 @@
    echo "<form id=uploadform method=post action=\"".htmlspecialchars($_SERVER['PHP_SELF'])."\" enctype='multipart/form-data'>";
    echo "<input type=hidden name=ac value=import>";
    if (!class_exists("ZipArchive")) echo "<i>Warning: your PHP installation seems to be missing ZipArchive, please install it and refresh this page.<br>Example installation command: sudo apt-get install php-zip</i>";
-   echo "Upload new database by uploading ZIP file with CSV data:<br><br>";
+   echo "Upload new database by uploading ZIP file with CSV data (may take several minutes):<br><br>";
    echo "<table border=0 cellspacing=1 cellpadding=5 bgcolor=silver>";
    echo "<tr><td>ZIP file for upload:</td><td bgcolor=white><input type=file name=zip style='padding:0;'></td></tr>";
    echo "<tr><td>Create database name:</td><td bgcolor=white><input type=text name=dbname placeholder='For example: SCOS_1_2' style='padding: 5px; width: 250px;'></td></tr>";
    echo "<tr><td valign=top>Import instructions:</td><td bgcolor=white><textarea cols=80 rows=9 name=instructions style='padding: 5px;'>";
-   echo "ccf: CCF_CNAME=1, CCF_DESCR=2, CCF_DESCR2=3, CCF_TYPE=7, CCF_STYPE=8\n";
+   echo "ccf: CCF_CNAME=1, CCF_DESCR=2, CCF_DESCR2=3, CCF_TYPE=7, CCF_STYPE=8, CCF_NNAME=21, CCF_NDESCR=22\n";
    echo "cdf: CDF_CNAME=1, CDF_GRPSIZE=6, CDF_PNAME=7\n";
-   echo "cpc: CPC_PNAME=1, CPC_DESCR=2, CPC_PAFREF=11\n";
+   echo "cpc: CPC_PNAME=1, CPC_DESCR=2, CPC_PAFREF=11, CPC_NNAME=16, CPC_NDESCR=17\n";
    echo "pas: PAS_NUMBR=1, PAS_ALTXT=2, PAS_ALVAL=3\n";
-   echo "pcf: PCF_NAME=1, PCF_DESCR=2, PCF_PID=3\n";
-   echo "pid: PID_TYPE=1, PID_STYPE=2, PID_SPID=6, PID_DESCR=7\n";
+   echo "pcf: PCF_NAME=1, PCF_DESCR=2, PCF_PID=3, PCF_NNAME=24, PCF_NDESCR=25\n";
+   echo "pid: PID_TYPE=1, PID_STYPE=2, PID_SPID=6, PID_DESCR=7, PID_NNAME=16, PID_NDESCR=17\n";
    echo "plf: PLF_NAME=1, PLF_SPID=2\n";
    echo "</textarea></td></tr>";
    echo "<tr><td></td><td bgcolor=white><input type=submit value='Start upload' id=uploadbtn><img id=waitimage src=img/wait32.gif style='display: none; position: absolute; margin: 4px;'></td></tr>";
