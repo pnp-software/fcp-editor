@@ -83,6 +83,7 @@ $(document).ready(function(){
 
    $(document).on('click','.checkall',selectall);
    $(document).on('click','.projectbox blockquote',projectExpand);
+   $(document).on('click','.loadnewwindow',function(){ var id=$(this).data('loaddocumentid'); window_open('#'+id,'w'+id); });
 
    $('#globvaraddbtn').click(function(){global_variable_add(this);});
    $('#orderqmarkbtn').click(function(){openHelp('options');});
@@ -154,6 +155,9 @@ $(document).ready(function(){
    $('#idMapEditBtn').click(function(){idMapEditShow();});
    $("#idMapEdit").bind('mousewheel DOMMouseScroll', function(e) { e.stopPropagation(); });
    $("#idMapSaveBtn").click(saveIDmapBtnClick);
+
+   // check csos database for saved files
+   $("#checkSCOSbtn").click(checkSCOSbtnClick);
 
    // style file input
    $("#importfile").filestyle({input: false, buttonText: "&nbsp;Choose JSON file for import"});

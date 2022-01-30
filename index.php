@@ -224,6 +224,8 @@ tspan a:hover { fill: #ff0000; }
 .tagfilter { margin-right: 520px; }
 .projsel { margin-right: 500px; }
 
+.loadnewwindow { color: blue; cursor: pointer; }
+
 @media (max-width: 1300px) {
    .thumbnail, .thumbnail img { width: 300px;  }
    .previewcontainer {  margin-right: 350px; }
@@ -727,6 +729,16 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
                          <div style='margin-left: 20px; margin-bottom: 20px;'>
                            <button class="btn" type="button" id=printsvgbtn><i class='icon-print'></i> &nbsp;Print</button>
                          </div>
+
+                       <div id=checkSCOSmenu>
+                       <div class="hrline"></div>
+                       <blockquote>Check SCOS version compatibility in saved diagrams:</blockquote>
+                         <div style='margin-left: 20px; margin-bottom: 20px; line-height: 30px;'>
+                           <select id=checkSCOSsel style='outline: none;'></select>
+                           <button class="btn" style="position: relative; top: -5px;" type="button" id=checkSCOSbtn><i class='icon-align-left'></i> &nbsp;List incompatible diagrams</button>
+                           <br><div id=checkSCOSlist></div>
+                         </div>
+                       </div>
 
                        <div class="hrline"></div>
                        <blockquote>Edit values which are assigned to transition identifiers:</blockquote>

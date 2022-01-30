@@ -728,7 +728,11 @@ function init_autocomplete_list()
    var options=[];
    for (var i in g.autocomplete) options.push(i);
    options=options.sort(naturalSort).reverse();
-   if (options.length==0) $('#autocompleteList').hide();
-   else $('#epropAutocomplete').html( '<option><option>'+options.join('<option>'));
+   if (options.length==0) { $('#autocompleteList').hide(); $('#checkSCOS').hide(); }
+   else
+   {
+      $('#epropAutocomplete').html( '<option><option>'+options.join('<option>'));
+      $('#checkSCOSsel').html( '<option><option>'+options.join('<option>'));
+   }
    if (g.fwprop.autocomplete) $('#epropAutocomplete').val(g.fwprop.autocomplete);
 }
