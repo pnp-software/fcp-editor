@@ -261,5 +261,5 @@ function checkSCOSbtnClick()
    }
 
    if (html=='') $('#checkSCOSlist').html("All saved documents seem to be compatible with the selected SCOS database "+tgt);
-   else $('#checkSCOSlist').html("The following documents contain autocompleted entries which are no longer available in the selected SCOS database "+tgt+":<br>"+html);
+   else $('#checkSCOSlist').html("The following documents contain some SCOS References which are not valid in the selected database "+tgt+":<br>"+html);
 }
