@@ -156,7 +156,7 @@ $(document).ready(function(){
    $("#idMapEdit").bind('mousewheel DOMMouseScroll', function(e) { e.stopPropagation(); });
    $("#idMapSaveBtn").click(saveIDmapBtnClick);
 
-   // check csos database for saved files
+   // check SCOS database for saved files
    $("#checkSCOSbtn").click(checkSCOSbtnClick);
 
    // style file input

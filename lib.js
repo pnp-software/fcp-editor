@@ -1143,6 +1143,26 @@
    }
 
 
+   // get all strings in object, optionally filtered by regular expression
+   function object_strings(obj,regex)
+   {
+      if (typeof regex == "undefined") regex='.*';
+      var reg=new RegExp('('+regex+')','g');
+      var list=[];
+      var r;
+      for (var i in obj)
+      {
+         if (typeof obj[i] == "object") list=list.concat(object_strings(obj[i],regex));
+
+         if (typeof obj[i] == "string")
+            while((r=reg.exec(obj[i])) !== null)
+               list.push(r[1]);
+      }
+      return list;
+   }
+
+
+
    function clone(obj)
    {
        if (obj instanceof Array)

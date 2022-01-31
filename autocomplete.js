@@ -234,7 +234,7 @@ function autocomplete_do(r)
 
 function checkSCOSbtnClick()
 {
-   var current,i,j,k;
+   var i,j,k;
    var html='';
    var tgt=$('#checkSCOSsel').val();
    var target=g.autocomplete_processed[tgt];
@@ -244,21 +244,7 @@ function checkSCOSbtnClick()
    // go thru all files
    for (i=0; i<g.knownFiles.length; i++)
    {
-      // see which file has which CSOS
-      current=g.knownFiles[i].fwdata.globals.fwprop.autocomplete;
-
-      var res=[];
-      var cnt=0;
-
-      var list=g.autocomplete_processed[current];
-      if (list)
-      {
-         // just go through the serialized json text of each file, it is easier than parsing state/connection properties individually
-         for(j=0; j<list.length; j++)
-            if (g.knownFiles[i].fwprop.match(list[j].replace))
-               res.push(list[j].replace);
-      }
-
+      var res=array_unique(object_strings(g.knownFiles[i].fwdata,'#(TC[(]|TM[(]|HK:|EID:|TMPAR:|TCPAR:)[^\\s]+'));
       if (res.length==0) continue;
 
       // go through all autocompletes we found, and check if there is a one which is not found in target
