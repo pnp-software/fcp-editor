@@ -145,7 +145,7 @@ function autocompleteTooltips(tspans)
          var title=autocompleteTitle(words[j]);
          if (title) words[j]="<a data-title=\""+htmlspecialchars(title)+"\">"+words[j]+"</a>";
       }
-      $(tspans[i]).html(words.join('&nbsp;').replace(/(&nbsp;)+/g,'&nbsp;'));
+      $(tspans[i]).html(words.join('&nbsp;'));
    }
 }
 
