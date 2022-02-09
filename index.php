@@ -341,7 +341,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
       <div id=globvar>
          <div>
            <div class='form-inline globrow' style='margin-bottom: 5px;'>
-             <select class='input-mini globvartype' style='width: 85px;'><option>int<option>short<option>long<option>char<option>uint<option>ushort<option>ulong<option>uchar<option>double<option>float<option>string</select><input type=text class='input-small globvarname' placeholder='variable name' data-filter="varname" style='width: 107px;' data-enter="global_variable_add"><input type=text placeholder='=value' class='input-mini globvarvalue' data-filter="number" data-enter="global_variable_add">
+             <select class='input-mini globvartype' style='width: 85px;'><option>int<option>short<option>long<option>char<option>uint<option>ushort<option>ulong<option>uchar<option>double<option>float<option>string</select><input type=text class='input-small globvarname' placeholder='variable name' data-filter="varname" style='width: 107px;' data-enter="global_variable_add"><input type=text placeholder='=value' class='input-mini globvarvalue' data-enter="global_variable_add">
              <button class='btn btn-success' style='height: 30px;' id=globvaraddbtn><i class='icon-plus icon-white' style='margin-bottom: 2px;'></i></button>
            </div>
          </div>

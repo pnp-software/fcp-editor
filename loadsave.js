@@ -718,6 +718,7 @@ function showMenu(active,remember)
    if (active=='#files') { thumbPreview(g.internalID || g.lastpreviewID); scrollHovered(); }
    if (active=='#saveas') thumbPreview(g.internalID || g.lastpreviewID);
    if (active=='#import') updateIDmapEdit();
+   $('#checkSCOSlist').html('');
 
    modalSetheight();
 }
