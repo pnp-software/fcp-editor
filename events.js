@@ -7,6 +7,10 @@ function timer()
 
 $(document).ready(function(){
 
+   // chrome is stupid and autocompletes our fields for unknown reason.
+   // force them back to empty values one second after page loads
+   setTimeout(function(){ $("#globvar").find('input').each(function(ix,el){$(el).val($(el).val())})},1000);
+
    init_autocomplete();
    setInterval(timer,1000); // refresh list of saved files in 60-second interval
    load_saved_files_list(); // initialize saved files list
