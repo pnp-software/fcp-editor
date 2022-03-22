@@ -1150,6 +1150,7 @@
       var reg=new RegExp('('+regex+')','g');
       var list=[];
       var r;
+      if (typeof obj == "string") obj=[obj];
       for (var i in obj)
       {
          if (typeof obj[i] == "object") list=list.concat(object_strings(obj[i],regex));

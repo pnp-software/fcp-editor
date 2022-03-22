@@ -231,35 +231,3 @@ function autocomplete_do(r)
    autocompleteHide();
 }
 
-
-function checkSCOSbtnClick()
-{
-   var i,j,k;
-   var html='';
-   var tgt=$('#checkSCOSsel').val();
-   var target=g.autocomplete_processed[tgt];
-   $('#checkSCOSlist').html('');
-   if (typeof target == "undefined") return;
-
-   // go thru all files
-   for (i=0; i<g.knownFiles.length; i++)
-   {
-      var res=array_unique(object_strings(g.knownFiles[i].fwdata,'#(TC[(]|TM[(]|HK:|EID:|TMPAR:|TCPAR:)[^\\s]+'));
-      if (res.length==0) continue;
-
-      // go through all autocompletes we found, and check if there is a one which is not found in target
-      for (j=0; j<res.length; j++)
-      {
-         var found=0;
-         for (k=0; k<target.length; k++)
-            if (target[k].replace==res[j])
-               { found=1; break; }
-         if (found==0) break;
-      }
-
-      if (found==0) html+='<li>'+g.knownFiles[i].name+(g.knownFiles[i].id!=g.internalID?' - <span class=loadnewwindow data-loaddocumentid='+g.knownFiles[i].id+'>edit</span>':'')+'</li>';
-   }
-
-   if (html=='') $('#checkSCOSlist').html("All saved documents seem to be compatible with the selected SCOS database "+tgt);
-   else $('#checkSCOSlist').html("The following documents contain some SCOS References which are not valid in the selected database "+tgt+":<br>"+html);
-}

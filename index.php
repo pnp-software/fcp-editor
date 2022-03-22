@@ -64,6 +64,7 @@ html, body, td, pre { -webkit-touch-callout: none; -webkit-user-select: none; -k
    padding: 10px;
    cursor: pointer;
 }
+.alertbox hr { border-top: 1px solid #eed3d7; }
 .alertboxcontainer
 {
    position: fixed; top: -200px; left: 50%; margin-left: -200px; width: 400px;
@@ -301,6 +302,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 <script type="text/javascript" src="history.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="loadsave.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="autocomplete.js<?php echo $rev; ?>"></script>
+<script type="text/javascript" src="checks.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="tabs.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="actions.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="offline.js<?php echo $rev; ?>"></script>

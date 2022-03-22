@@ -222,7 +222,7 @@
    function msg(text, type, hideInterval) // type={error,info,success,warning}; auto hide in seconds, negative value means no autohide
    {
       clearMsgTimeout();
-      if (!text) $('.alertboxcontainer').css('top','');
+      if (!text) $('.alertboxcontainer').css('top',(-1*$('.alertboxcontainer').height()-200)+'px');
       else
       {
          $('.alertboxcontainer').css({'top':'0px', 'z-index': ''});

@@ -106,7 +106,7 @@ $(document).ready(function(){
    $('#noteconnectbtn').click(function(){historyAdd(); addNoteConnector();});
    $('#toolbartbl').click(function(){propSuggestHide();});
    $('#toolbaropenbutton').click(function(){if (g.lastmenu.match(/code/)) g.lastmenu='#presets'; modalDialog(g.lastmenu); setTimeout(load_saved_files_list,400); });
-   $('#toolbarcheckbutton').click(function(){ msg('Not implemented yet'); });
+   $('#toolbarcheckbutton').click(function(){ toolbarCheck(); });
    $('#historybutton').click(function(){historyUndo();});
    $('#selfconnect').click(function(){historyAddPrepare(); selfConnect(); historyAddFinish(); refreshToolbars();});
    $('#deletebutton').click(function(){deleteKeyPressed();});
