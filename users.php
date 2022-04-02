@@ -125,6 +125,7 @@
          {
             $status[$table]="<span style='color:red'>not found!</span>"; // initial value
 
+            // get data from dat file to array $data
             $data=[];
             for($i=0;$i<$z->numFiles;$i++)
             {
@@ -132,9 +133,24 @@
                if (basename($filepath)==$table.".dat") { $data=preg_split("{(\r*\n)+}",$z->getFromName($filepath)); $status[$table]=$filepath; break; }
             }
 
+            // remove empty rows
             $data=array_filter($data);
             if (count($data)==0) continue;
 
+            // ignore import columns which do not exist in database
+            foreach($instructions[$table] as $col=>$ix)
+            {
+               $ex=execQuery("SHOW COLUMNS FROM ".$db.".".$table." LIKE '".$col."'");
+               if (mysqli_num_rows($ex)<1) unset($instructions[$table][$col]);
+            }
+
+            // if no valid columns are found, skip
+            if (count($instructions[$table])<1) { $status[$table].=" ... skipped due to missing valid columns in import instructions"; continue; }
+
+            $buffer=[];
+
+            // split each line to columns for import
+            // and get values of columns which will be imported
             foreach($data as $line)
             {
                $set=[];
@@ -142,11 +158,19 @@
                foreach($instructions[$table] as $col=>$ix)
                {
                   $val=$line[$ix-1]; if ($val=='') $val="NULL"; else $val="\"".mysqli_escape($val)."\"";
-                  $ex=execQuery("SHOW COLUMNS FROM ".$db.".".$table." LIKE '".$col."'"); $ex=count(mysqli_fetch_assoc($ex))?TRUE:FALSE;
-                  if ($ex) $set[]=$col."=".$val;
+                  $set[]=$val;
                }
-               if (count($set)>0) execQuery("INSERT IGNORE INTO ".$db.".".$table." SET ".join(",",$set));
+
+               $buffer[]="(".join(",",$set).")";
+               if (count($buffer)>2000)
+               {
+                  execQuery("INSERT IGNORE INTO ".$db.".".$table." (".join(",",array_keys($instructions[$table])).") VALUES ".join(",",$buffer));
+                  $buffer=[];
+               }
             }
+
+            if (count($buffer)>0) // flush remaining buffer if any
+               execQuery("INSERT IGNORE INTO ".$db.".".$table." (".join(",",array_keys($instructions[$table])).") VALUES ".join(",",$buffer));
 
             $status[$table].=" ... ".count($data)." entries imported OK";
          }
