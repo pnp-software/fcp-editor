@@ -1,4 +1,6 @@
 <?php
+   ob_start('ob_gzhandler');
+
    require('version.php');
    require_once('inc_db.php');
    require_once('inc_lib.php');
