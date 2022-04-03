@@ -195,6 +195,67 @@ This online help focuses on the FCP-specific features of the FCP Editor.
         <code>autocomplete.js</code>.
     
         
+        <h2 id=singleModelCheck>Single Model Check</h2>
+        <p>Models created by the FCP Editor will probably need to be processed 
+        by a script to create an executable test sequence or flight procedure. 
+        In order to facilitate the development of such a script, it is useful 
+        to define some rules on how the model should be built and it is useful 
+        to have these rules verified automatically.
+        For this purpose, the editor provides the "Check Function" 
+        (second icon from the top in the banner at the left of the editor screen).
+        
+        <p>The rules against which the check is performed are defined in 
+        file <code>checks.js</code>. A small number of default rules is
+        pre-defined but users can create new rules to fit their needs.
+        The pre-defined rules are:
+            
+        <ul>
+        <li><strong>Rule 1</strong>: All references to SCOS items in the 
+        text fields of the model (i.e. all strings starting with: 
+        "#TC(...", or "#TM(,...", or "#HK:...", or "#EID:...", or 
+        "TMPAR:...", or "TCPAR:...") must be valid with respect to the 
+        SCOS database selected for the model.</li>
+        <li><strong>Rule 2</strong>: Deleted</li>
+        <li><strong>Rule 3</strong>: If the Action Description of a node 
+        contains a reference to a telecommand "TC(...", it cannot contain 
+        references to any other SCOS element</li>
+        <li><strong>Rule 4</strong>: If the Action Descriotion of a node 
+        contains a reference to a telecommand "TC(...", then the Notes field 
+        attached to that node can only contain #TCPAR references which 
+        belong to that telecommand.</li>
+        <li><strong>Rule 5</strong>: It is not legal for the Guard 
+        Description of a control flow to hold a reference to a t
+        elecommand "#TC..."</li>
+        <li><strong>Rule 6</strong>: Deleted</li>
+        <li><strong>Rule 7</strong>: If an Action Description or a Guard 
+        Description contains a reference to an Event Packet "#EID:...", 
+        then it cannot hold any other SCOS reference</li>
+        <li><strong>Rule 8</strong>: If an Action Description or a Guard 
+        Description contains a reference to one or more housekeeping 
+        parameters "#HK:...", then the only other SCOS reference it may 
+        contain is one telemetry packet reference "TM(..." and that packet 
+        must contain all the referenced HK parameters. Note that a 
+        housekeeping parameter may be contained in several telemetry 
+        packets. This rule is illustrated in the figure below which shows 
+        a node which references two HK parameters and one HK packet. The 
+        two HK parameters must be in the same TM packet.</li>
+        </ul>
+
+
+        <h2 id=databaseCheck>SCOS Database Check</h2>
+        <p>Each FCP Model is created with reference to a specific SCOS database
+        instance (the name of the database instance is an attribute of
+        the model).
+        When the SCOS database is updated, there is a need to check which
+        models contain SCOS references which have become invalid.
+        This check can be done by selecting the "Files" option on the
+        banner at the left of the editor and then navigating to the bottom
+        of the pop-up modal to perform the SCOS compatibility check.
+        The check scans all models in the user repository and lists those
+        which contain SCOS references which are no longer valid with
+        respect to a given SCOS database.
+
+
         <h2 id=customization>Customization</h2>
         <p>The FCP Editor back-end is implemented in <code>PHP</code> and the front-end is
         implemented in <code>javascript</code>.
@@ -206,9 +267,8 @@ This online help focuses on the FCP-specific features of the FCP Editor.
         <li>Extension of auto-completion mechanism to handle other kinds of
             items (e.g. service 1 failure codes or calibration curves for
             TC parameters)</li>
-        <li>Implementation of model check functions (e.g. to verify 
-            consistency with a SCOS Database version or to enforce
-            project specific conventions on the definition of PUS items)</li>
+        <li>Update of model check function to meet project-specific needs</li>
+        <li>Definiton of additional model attributes</li>
         </ul>
         
         
