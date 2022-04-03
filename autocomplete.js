@@ -188,6 +188,9 @@ function textareaAutocomplete(t)
    // show autocomplete suggestions in a popup
    var html='';
    var cols=0;
+   g.autocomplete_timer_id++; // this effectively cancels all previous updates to the html of autocomplete table
+   pop.html("<table cellspacing=0 id=autocompletecontent></table>");
+   var buffer=[];
 
    for(i=0; i<matching.length; i++) { cols=Math.max(cols,matching[i].display.length + (matching[i].belongsTo?1:0) ); }
 
@@ -196,9 +199,26 @@ function textareaAutocomplete(t)
       var td=''; for(j=0; j<matching[i].display.length; j++) td+="<td>"+(matching[i].display[j]||'')+"</td>";
       if (matching[i].belongsTo) { td+="<td>in: "+matching[i].belongsTo+"</td>"; j++; }
       td+='<td></td>'.repeat(Math.max(0,cols-j));
-      html+="<tr data-autocomplete='"+matching[i].replace+"'>"+td+"</tr>";
+      buffer.push("<tr data-autocomplete='"+matching[i].replace+"'>"+td+"</tr>");
    }
-   pop.html("<table cellspacing=0>"+html+"</table>");
+
+   // push first rows of table immediately, to avoid flickering
+   var html=buffer.splice(0,100).join("");
+   $('#autocompletecontent').append(html);
+
+   // schedule other rows to background processing so it doesn't block UI
+   // If another autocomplete event is fired, all previously scheduled
+   // timers will simply do nothing due to incremented timer_id
+   i=0;
+   while(buffer.length>0)
+   {
+      var html=buffer.splice(0,100).join("");
+      (function(html,timer_id){setTimeout(function(){
+         if (timer_id!=g.autocomplete_timer_id) return;
+         $('#autocompletecontent').append(html);
+      },i*100);})(html,g.autocomplete_timer_id);
+      i++;
+   }
 
    pop.css('top',$(t).offset().top+h).css('right',$(window).width()-$(t).offset().left-$(t).width()-14);
    pop.css('max-height',($(window).height()-$(t).offset().top-h-20)+'px');

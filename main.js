@@ -89,6 +89,7 @@
    g.last_saved_state=""; // holds export data string of previously saved state
    g.username=""; // username of currently signed in user, is updated after login
    g.userID=0; // id of currently signed in user, is updated after login
+   g.autocomplete_timer_id=0; // each autocomplete attempt triggers increase of this value and cancels all previous timers
 
    msg("Welcome to FCP editor.<br>You may start by opening an example<br>using Files menu on the left.", 'success', 10);
    historyClear();
