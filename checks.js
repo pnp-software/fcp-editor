@@ -317,6 +317,12 @@ function toolbarCheck()
 
    if (errs.length>0) { res.errs=errs; result.push(res); res={}; errs=[]; }
 
+   if (result.length==0)
+   {
+      msg('No rule violations found','ok');
+      return [];
+   }
+
    var output=[];
    for (i=0; i<result.length; i++)
    {
