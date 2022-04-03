@@ -12,3 +12,10 @@ v1.2.0
 
 v1.3.0
 * Added handling of NNAME and NDESCR fields
+
+v1.4.0
+* Added syntactical check on FCP model
+* Added global check on consistency of all models with a given SCOS database
+* Modified MIB file upload to make it faster
+* Fixed bugs in definition of names of inpput variables
+
