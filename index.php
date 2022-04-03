@@ -742,6 +742,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
                          </div>
                        </div>
 
+                       <div style='display: none;'>
                        <div class="hrline"></div>
                        <blockquote>Edit values which are assigned to transition identifiers:</blockquote>
                          <div style='margin-left: 20px; margin-bottom: 20px;'>
@@ -749,6 +750,7 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
                            <textarea style='width: 90%; height: 200px;' class=hidden id=idMapEdit></textarea><br>
                            <button class="btn btn-success hidden" type="button" id=idMapSaveBtn><i class='icon-ok icon-white'></i> &nbsp;Save</button>
                          </div>
+                       </div>
 
                        <div style='display: none;'>
                        <div class="hrline"></div>
