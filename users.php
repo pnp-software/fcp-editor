@@ -215,7 +215,7 @@
    echo "cdf: CDF_CNAME=1, CDF_GRPSIZE=6, CDF_PNAME=7\n";
    echo "cpc: CPC_PNAME=1, CPC_DESCR=2, CPC_PAFREF=11, CPC_NNAME=16, CPC_NDESCR=17\n";
    echo "pas: PAS_NUMBR=1, PAS_ALTXT=2, PAS_ALVAL=3\n";
-   echo "pcf: PCF_NAME=1, PCF_DESCR=2, PCF_PID=3, PCF_NNAME=24, PCF_NDESCR=25\n";
+   echo "pcf: PCF_NAME=1, PCF_DESCR=2, PCF_PID=3, PCF_NNAME=23, PCF_NDESCR=24\n";
    echo "pid: PID_TYPE=1, PID_STYPE=2, PID_SPID=6, PID_DESCR=7, PID_NNAME=16, PID_NDESCR=17\n";
    echo "plf: PLF_NAME=1, PLF_SPID=2\n";
    echo "</textarea></td></tr>";
