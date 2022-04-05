@@ -17,7 +17,7 @@ A public installation of the FCP Editor is available [here](https://www.pnp-soft
 The editor is an open and free software project. If you want to contribute, please [contact us](https://pnp-software.com/#contact-us).
 
 ## Licence
-The FCP Editor is made available under the terms of the [GPLv3](http://www.gnu.org/licenses/gpl-3.0.en.html) licence but it also includes components made available under the Apache v2, MIT, CC, and GPL licences. See [here](https://github.com/pnp-software/fcp-editor/blob/master/DOCUMENTATION.licenses) for details.
+The FCP Editor is made available under the terms of the MIT licence (see above) but it also includes components made available under the Apache v2, MIT, CC, and GPL licences. See [here](https://github.com/pnp-software/fcp-editor/blob/master/DOCUMENTATION.licenses) for details.
 
 ## Ownership
 The owner of the editor is [P&P Software GmbH](https://pnp-software.com/).
