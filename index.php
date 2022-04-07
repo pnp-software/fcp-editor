@@ -854,6 +854,9 @@ div,p { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 <!-- instead of bluring all input/textarea/select elements, we will just focus this hidden one. This operation is way more lighter on CPU -->
 <textarea id=blurator style='position: absolute; top:1px; left:1px; width: 1px; height: 1px; opacity: 0; z-index: 100'></textarea>
 
+
 <script type="text/javascript" src="events.js<?php echo $rev; ?>"></script>
 <script type="text/javascript" src="main.js<?php echo $rev; ?>"></script>
+<script> msg("Loading, wait please...", 'info', 1000); </script>
 <script type="text/javascript" src="vars.php<?php echo $rev; ?>"></script>
+<script> msg("Welcome to FCP editor.<br>You may start by opening an example<br>using Files menu on the left.", "success", 10); </script>
