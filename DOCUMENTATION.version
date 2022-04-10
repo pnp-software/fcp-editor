@@ -19,3 +19,5 @@ v1.4.0
 * Modified MIB file upload to make it faster
 * Fixed bugs in definition of names of inpput variables
 
+v1.4.1
+* Added "wait loading..." message
