@@ -206,6 +206,7 @@ tspan a:hover { fill: #ff0000; }
 .itemname { border: 1px solid white; padding: 3px; padding-left: 10px; margin-left: -11px; cursor: pointer;  margin-right: 500px; }
 .saveasdlg { margin-right: 500px; }
 .itemname:hover, .itemnamehover { background-color: #e7f3ff; border-color: #b9d5f1;}
+#savelist .itemname:hover, #savelist .itemnamehover  { background-color: #ffe7e7; border-color: #f1b9b9; }
 .hrline { height: 1px; margin-left: 0px; border-bottom: 1px dashed #eee; margin-bottom: 20px; margin-right: 500px; }
 .modalperc { width: 80% }
 .modlabel { font-size: 24.5px; font-weight: bold; }
