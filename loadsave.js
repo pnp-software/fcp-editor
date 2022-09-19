@@ -27,9 +27,10 @@ function saveAs(overwrite, commit)
 
    if (el && isEmpty(overwrite))
    {
+      var nameIsTheSame=g.fwprop.smName==name;
       $("#modalq").click();
       $('#modalq').fadeTo(200,1);
-      $('#modalqw').html('File already exists. Overwrite?<br><br>'+name+'<br><br><button class="btn btn-success" id=overwriteyes><i class="icon-ok icon-white"></i> Overwrite</button> <button class=btn id=overwriteno>Cancel</button>');
+      $('#modalqw').html('File already exists. Overwrite?<br><br><b>'+name+'</b><br><br><button class="btn btn-'+(nameIsTheSame?"success":"danger")+'" id=overwriteyes><i class="icon-ok icon-white"></i> Overwrite</button> <button class=btn id=overwriteno>Cancel</button>'+(nameIsTheSame?"":"<br><div style='font-size: 12px; color: red; margin-top: 5px;'>Warning, saving as different name</div>"));
       $('#overwriteyes').click(function(){modalqDestroy(); saveAs(true, commit);});
       $('#overwriteno').click(function(){modalqDestroy();});
       return;
